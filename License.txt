@@ -1,0 +1,2 @@
+The code included in this project is licensed under the GNU General Public License v3.0. 
+The datasets included in this project are licensed under the CC-BY-4.0 license.
