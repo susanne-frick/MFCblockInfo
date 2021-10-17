@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^analysis_scripts$
+^simulation$
+^plots$

@@ -1,0 +1,3752 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+06/23/2020   2:05 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: TIRT MT;
+
+  DATA: FILE IS 'study1_data_180831.dat';
+
+  VARIABLE:
+  NAMES ARE
+  study id_all bft QUESTNNR n_dates n_pers_dates n_travel
+  n_parties n_facebook n_fb_log gpa smoke n_cig alc intell
+  facebook sport blood charity job instrument social_year
+  extreme_sport punctual lifesat major_new major_groups BFI01
+  BFI02 BFI03 BFI04 BFI05 BFI06 BFI07 BFI08 BFI09 BFI10 BFI11
+  BFI12 BFI13 BFI14 BFI15 BFI16 BFI17 BFI18 BFI19 BFI20 BFI21
+  BFI22 BFI23 BFI24 BFI25 BFI26 BFI27 BFI28 BFI29 BFI30 BFI31
+  BFI32 BFI33 BFI34 BFI35 BFI36 BFI37 BFI38 BFI39 BFI40 BFI41
+  BFI42 DT01 DT02 DT03 DT04 DT05 DT06 DT07 DT08 DT09 DT10
+  DT11 DT12 DT13 DT14 DT15 DT16 DT17 DT18 DT19 DT20 DT21 DT22
+  DT23 DT24 DT25 DT26 DT27 NA01 NA02 NA03 NA04 NA05 NA06 NA07
+  NA08 NA09 NA10 NA11 NA12 NA13 NA14 NA15 NA16 NA17 NA18 MA01
+  MA02 MA03 MA04 MA05 MA06 MA07 MA08 MA09 MA10 MA11 MA12 MA13
+  MA14 MA15 MA16 MA17 MA18 MA19 MA20 PS01 PS02 PS03 PS04 PS05
+  PS06 PS07 PS08 PS09 PS10 PS11 PS12 PS13 PS14 PS15 PS16 PS17
+  PS18 PS19 PS20 PS21 PS22 PS23 PS24 PS25 PS26 PS27 PS28 PS29
+  PS30 PS31 HR01 HR02 HR03 HR04 HR05 HR06 HR07 HR08 HR09 HR10
+  HR11 HR12 HR13 HR14 HR15 HR16 HR17 HR18 HR19 HR20 HR21 HR22
+  HR23 HR24 HR25 HR26 HR27 HR28 HR29 HR30 HR31 HR32 HR33 HR34
+  HR35 HR36 HR37 HR38 HR39 HR40 HR41 HR42 HR43 HR44 HR45 HR46
+  HR47 HR48 HR49 HR50 HR51 HR52 HR53 HR54 HR55 HR56 HR57 HR58
+  HR59 HR60 LS01 LS02 LS03 LS04 LS05 MTi01i02 MTi01i03
+  MTi02i03 MTi04i05 MTi04i06 MTi05i06 MTi07i08 MTi07i09
+  MTi08i09 MTi10i11 MTi10i12 MTi11i12 MTi13i14 MTi13i15
+  MTi14i15 MTi16i17 MTi16i18 MTi17i18 MTi19i20 MTi19i21
+  MTi20i21 MTi22i23 MTi22i24 MTi23i24 MTi25i26 MTi25i27
+  MTi26i27 MTi28i29 MTi28i30 MTi29i30 MTi31i32 MTi31i33
+  MTi32i33 MTi34i35 MTi34i36 MTi35i36 MTi37i38 MTi37i39
+  MTi38i39 MTi40i41 MTi40i42 MTi41i42 MTi43i44 MTi43i45
+  MTi44i45 MTi46i47 MTi46i48 MTi47i48 MTi49i50 MTi49i51
+  MTi50i51 MTi52i53 MTi52i54 MTi53i54 MTi55i56 MTi55i57
+  MTi56i57 MTi58i59 MTi58i60 MTi59i60 RS01 RS02 RS03 RS04
+  RS05 RS06 RS07 RS08 RS09 RS10 RS11 RS12 RS13 RS14 RS15 RS16
+  RS17 RS18 RS19 RS20 RS21 RS22 RS23 RS24 RS25 RS26 RS27 RS28
+  RS29 RS30 RS31 RS32 RS33 RS34 RS35 RS36 RS37 RS38 RS39 RS40
+  RS41 RS42 RS43 RS44 RS45 RS46 RS47 RS48 RS49 RS50 RS51 RS52
+  RS53 RS54 RS55 RS56 RS57 RS58 RS59 RS60 HMi01i02 HMi01i03
+  HMi02i03 HMi04i05 HMi04i06 HMi05i06 HMi07i08 HMi07i09
+  HMi08i09 HMi10i11 HMi10i12 HMi11i12 HMi13i14 HMi13i15
+  HMi14i15 HMi16i17 HMi16i18 HMi17i18 HMi19i20 HMi19i21
+  HMi20i21 HMi22i23 HMi22i24 HMi23i24 HMi25i26 HMi25i27
+  HMi26i27 HMi28i29 HMi28i30 HMi29i30 HMi31i32 HMi31i33
+  HMi32i33 HMi34i35 HMi34i36 HMi35i36 HMi37i38 HMi37i39
+  HMi38i39 HMi40i41 HMi40i42 HMi41i42 HMi43i44 HMi43i45
+  HMi44i45 HMi46i47 HMi46i48 HMi47i48 HMi49i50 HMi49i51
+  HMi50i51 HMi52i53 HMi52i54 HMi53i54 HMi55i56 HMi55i57
+  HMi56i57 HMi58i59 HMi58i60 HMi59i60;
+
+
+  USEVARIABLES ARE
+  MTi01i02-MTi59i60;
+
+  MISSING ARE ALL (-99);
+
+  CATEGORICAL ARE ALL;
+
+  IDVARIABLE = id_all;
+  USEOBSERVATIONS= (bft == 1); !only bft-matched;
+
+  ANALYSIS:
+  ESTIMATOR = ULSMV;
+  PARAMETERIZATION = theta;
+  PROCESSORS = 4;
+
+  MODEL:
+  bft_fc_n BY
+  MTi01i02*1 (MT_L01)
+  MTi01i03*1 (MT_L01)
+  MTi04i06*-1 (MT_L06_n)
+  MTi05i06*-1 (MT_L06_n)
+  MTi07i09*-1 (MT_L09_n)
+  MTi08i09*-1 (MT_L09_n)
+  MTi10i12*-1 (MT_L12_n)
+  MTi11i12*-1 (MT_L12_n)
+  MTi13i14*-1 (MT_L13)
+  MTi13i15*-1 (MT_L13)
+  MTi22i23*-1 (MT_L22)
+  MTi22i24*-1 (MT_L22)
+  MTi25i27*1 (MT_L27_n)
+  MTi26i27*1 (MT_L27_n)
+  MTi28i29*1 (MT_L29_n)
+  MTi29i30*-1 (MT_L29)
+  MTi31i32*1 (MT_L32_n)
+  MTi32i33*-1 (MT_L32)
+  MTi34i35*-1 (MT_L34)
+  MTi34i36*-1 (MT_L34)
+  MTi37i39*1 (MT_L39_n)
+  MTi38i39*1 (MT_L39_n)
+  MTi40i41*-1 (MT_L40)
+  MTi40i42*-1 (MT_L40)
+  MTi43i44*-1 (MT_L43)
+  MTi43i45*-1 (MT_L43)
+  MTi46i47*1 (MT_L47_n)
+  MTi47i48*-1 (MT_L47)
+  MTi49i50*1 (MT_L50_n)
+  MTi50i51*-1 (MT_L50)
+  MTi55i57*1 (MT_L57_n)
+  MTi56i57*1 (MT_L57_n);
+
+  bft_fc_e BY
+  MTi01i02*1 (MT_L02_n)
+  MTi02i03*-1 (MT_L02)
+  MTi04i05*1 (MT_L05_n)
+  MTi05i06*-1 (MT_L05)
+  MTi07i08*-1 (MT_L07)
+  MTi07i09*-1 (MT_L07)
+  MTi10i11*-1 (MT_L11_n)
+  MTi11i12*1 (MT_L11)
+  MTi13i14*-1 (MT_L14_n)
+  MTi14i15*1 (MT_L14)
+  MTi16i18*-1 (MT_L18_n)
+  MTi17i18*-1 (MT_L18_n)
+  MTi19i20*1 (MT_L20_n)
+  MTi20i21*-1 (MT_L20)
+  MTi28i29*1 (MT_L28)
+  MTi28i30*1 (MT_L28)
+  MTi31i33*-1 (MT_L33_n)
+  MTi32i33*-1 (MT_L33_n)
+  MTi34i35*-1 (MT_L35_n)
+  MTi35i36*1 (MT_L35)
+  MTi49i50*1 (MT_L49)
+  MTi49i51*1 (MT_L49)
+  MTi52i53*1 (MT_L52)
+  MTi52i54*1 (MT_L52)
+  MTi58i60*-1 (MT_L60_n)
+  MTi59i60*-1 (MT_L60_n);
+
+  bft_fc_o BY
+  MTi10i11*-1 (MT_L10)
+  MTi10i12*-1 (MT_L10)
+  MTi13i15*-1 (MT_L15_n)
+  MTi14i15*-1 (MT_L15_n)
+  MTi16i17*1 (MT_L17_n)
+  MTi17i18*-1 (MT_L17)
+  MTi19i21*-1 (MT_L21_n)
+  MTi20i21*-1 (MT_L21_n)
+  MTi22i23*-1 (MT_L23_n)
+  MTi23i24*1 (MT_L23)
+  MTi37i38*1 (MT_L37)
+  MTi37i39*1 (MT_L37)
+  MTi40i42*-1 (MT_L42_n)
+  MTi41i42*-1 (MT_L42_n)
+  MTi43i44*-1 (MT_L44_n)
+  MTi44i45*1 (MT_L44)
+  MTi46i48*-1 (MT_L48_n)
+  MTi47i48*-1 (MT_L48_n)
+  MTi52i53*1 (MT_L53_n)
+  MTi53i54*-1 (MT_L53);
+
+  bft_fc_a BY
+  MTi01i03*1 (MT_L03_n)
+  MTi02i03*1 (MT_L03_n)
+  MTi04i05*-1 (MT_L04)
+  MTi04i06*-1 (MT_L04)
+  MTi16i17*-1 (MT_L16)
+  MTi16i18*-1 (MT_L16)
+  MTi22i24*-1 (MT_L24_n)
+  MTi23i24*-1 (MT_L24_n)
+  MTi25i26*1 (MT_L25)
+  MTi25i27*1 (MT_L25)
+  MTi55i56*1 (MT_L55)
+  MTi55i57*1 (MT_L55)
+  MTi58i59*-1 (MT_L59_n)
+  MTi59i60*1 (MT_L59);
+
+  bft_fc_c BY
+  MTi07i08*1 (MT_L08_n)
+  MTi08i09*-1 (MT_L08)
+  MTi19i20*1 (MT_L19)
+  MTi19i21*1 (MT_L19)
+  MTi25i26*-1 (MT_L26_n)
+  MTi26i27*1 (MT_L26)
+  MTi28i30*-1 (MT_L30_n)
+  MTi29i30*-1 (MT_L30_n)
+  MTi31i32*1 (MT_L31)
+  MTi31i33*1 (MT_L31)
+  MTi34i36*-1 (MT_L36_n)
+  MTi35i36*-1 (MT_L36_n)
+  MTi37i38*-1 (MT_L38_n)
+  MTi38i39*1 (MT_L38)
+  MTi40i41*-1 (MT_L41_n)
+  MTi41i42*1 (MT_L41)
+  MTi43i45*-1 (MT_L45_n)
+  MTi44i45*-1 (MT_L45_n)
+  MTi46i47*1 (MT_L46)
+  MTi46i48*1 (MT_L46)
+  MTi49i51*-1 (MT_L51_n)
+  MTi50i51*-1 (MT_L51_n)
+  MTi52i54*-1 (MT_L54_n)
+  MTi53i54*-1 (MT_L54_n)
+  MTi55i56*-1 (MT_L56_n)
+  MTi56i57*1 (MT_L56)
+  MTi58i59*1 (MT_L58)
+  MTi58i60*1 (MT_L58);
+
+  ! means for all traits are set to 0
+  [bft_fc_n@0]; [bft_fc_e@0]; [bft_fc_o@0]; [bft_fc_a@0]; [bft_fc_c@0];
+
+  ! variances for all traits are set to 1
+  bft_fc_n@1; bft_fc_e@1; bft_fc_o@1; bft_fc_a@1; bft_fc_c@1;
+
+  ! starting values for correlations between traits are set to 0
+  bft_fc_n WITH bft_fc_e*0;
+  bft_fc_n WITH bft_fc_o*0;
+  bft_fc_n WITH bft_fc_a*0;
+  bft_fc_n WITH bft_fc_c*0;
+  bft_fc_e WITH bft_fc_o*0;
+  bft_fc_e WITH bft_fc_a*0;
+  bft_fc_e WITH bft_fc_c*0;
+  bft_fc_o WITH bft_fc_a*0;
+  bft_fc_o WITH bft_fc_c*0;
+  bft_fc_a WITH bft_fc_c*0;
+
+  ! declare uniquenesses and set their starting values
+  MTi01i02*2 (MT_e01e02);
+  MTi01i03*2 (MT_e01e03);
+  MTi02i03*2 (MT_e02e03);
+  MTi04i05*2 (MT_e04e05);
+  MTi04i06*2 (MT_e04e06);
+  MTi05i06*2 (MT_e05e06);
+  MTi07i08*2 (MT_e07e08);
+  MTi07i09*2 (MT_e07e09);
+  MTi08i09*2 (MT_e08e09);
+  MTi10i11*2 (MT_e10e11);
+  MTi10i12*2 (MT_e10e12);
+  MTi11i12*2 (MT_e11e12);
+  MTi13i14*2 (MT_e13e14);
+  MTi13i15*2 (MT_e13e15);
+  MTi14i15*2 (MT_e14e15);
+  MTi16i17*2 (MT_e16e17);
+  MTi16i18*2 (MT_e16e18);
+  MTi17i18*2 (MT_e17e18);
+  MTi19i20*2 (MT_e19e20);
+  MTi19i21*2 (MT_e19e21);
+  MTi20i21*2 (MT_e20e21);
+  MTi22i23*2 (MT_e22e23);
+  MTi22i24*2 (MT_e22e24);
+  MTi23i24*2 (MT_e23e24);
+  MTi25i26*2 (MT_e25e26);
+  MTi25i27*2 (MT_e25e27);
+  MTi26i27*2 (MT_e26e27);
+  MTi28i29*2 (MT_e28e29);
+  MTi28i30*2 (MT_e28e30);
+  MTi29i30*2 (MT_e29e30);
+  MTi31i32*2 (MT_e31e32);
+  MTi31i33*2 (MT_e31e33);
+  MTi32i33*2 (MT_e32e33);
+  MTi34i35*2 (MT_e34e35);
+  MTi34i36*2 (MT_e34e36);
+  MTi35i36*2 (MT_e35e36);
+  MTi37i38*2 (MT_e37e38);
+  MTi37i39*2 (MT_e37e39);
+  MTi38i39*2 (MT_e38e39);
+  MTi40i41*2 (MT_e40e41);
+  MTi40i42*2 (MT_e40e42);
+  MTi41i42*2 (MT_e41e42);
+  MTi43i44*2 (MT_e43e44);
+  MTi43i45*2 (MT_e43e45);
+  MTi44i45*2 (MT_e44e45);
+  MTi46i47*2 (MT_e46e47);
+  MTi46i48*2 (MT_e46e48);
+  MTi47i48*2 (MT_e47e48);
+  MTi49i50*2 (MT_e49e50);
+  MTi49i51*2 (MT_e49e51);
+  MTi50i51*2 (MT_e50e51);
+  MTi52i53*2 (MT_e52e53);
+  MTi52i54*2 (MT_e52e54);
+  MTi53i54*2 (MT_e53e54);
+  MTi55i56*2 (MT_e55e56);
+  MTi55i57*2 (MT_e55e57);
+  MTi56i57*2 (MT_e56e57);
+  MTi58i59*2 (MT_e58e59);
+  MTi58i60*2 (MT_e58e60);
+  MTi59i60*2 (MT_e59e60);
+
+  ! declare correlated uniquenesses and set their starting values
+  MTi01i02 WITH MTi01i03*1 (MT_e01);
+  MTi01i02 WITH MTi02i03*-1 (MT_e02_n);
+  MTi01i03 WITH MTi02i03*1 (MT_e03);
+  MTi04i05 WITH MTi04i06*1 (MT_e04);
+  MTi04i05 WITH MTi05i06*-1 (MT_e05_n);
+  MTi04i06 WITH MTi05i06*1 (MT_e06);
+  MTi07i08 WITH MTi07i09*1 (MT_e07);
+  MTi07i08 WITH MTi08i09*-1 (MT_e08_n);
+  MTi07i09 WITH MTi08i09*1 (MT_e09);
+  MTi10i11 WITH MTi10i12*1 (MT_e10);
+  MTi10i11 WITH MTi11i12*-1 (MT_e11_n);
+  MTi10i12 WITH MTi11i12*1 (MT_e12);
+  MTi13i14 WITH MTi13i15*1 (MT_e13);
+  MTi13i14 WITH MTi14i15*-1 (MT_e14_n);
+  MTi13i15 WITH MTi14i15*1 (MT_e15);
+  MTi16i17 WITH MTi16i18*1 (MT_e16);
+  MTi16i17 WITH MTi17i18*-1 (MT_e17_n);
+  MTi16i18 WITH MTi17i18*1 (MT_e18);
+  MTi19i20 WITH MTi19i21*1 (MT_e19);
+  MTi19i20 WITH MTi20i21*-1 (MT_e20_n);
+  MTi19i21 WITH MTi20i21*1 (MT_e21);
+  MTi22i23 WITH MTi22i24*1 (MT_e22);
+  MTi22i23 WITH MTi23i24*-1 (MT_e23_n);
+  MTi22i24 WITH MTi23i24*1 (MT_e24);
+  MTi25i26 WITH MTi25i27*1 (MT_e25);
+  MTi25i26 WITH MTi26i27*-1 (MT_e26_n);
+  MTi25i27 WITH MTi26i27*1 (MT_e27);
+  MTi28i29 WITH MTi28i30*1 (MT_e28);
+  MTi28i29 WITH MTi29i30*-1 (MT_e29_n);
+  MTi28i30 WITH MTi29i30*1 (MT_e30);
+  MTi31i32 WITH MTi31i33*1 (MT_e31);
+  MTi31i32 WITH MTi32i33*-1 (MT_e32_n);
+  MTi31i33 WITH MTi32i33*1 (MT_e33);
+  MTi34i35 WITH MTi34i36*1 (MT_e34);
+  MTi34i35 WITH MTi35i36*-1 (MT_e35_n);
+  MTi34i36 WITH MTi35i36*1 (MT_e36);
+  MTi37i38 WITH MTi37i39*1 (MT_e37);
+  MTi37i38 WITH MTi38i39*-1 (MT_e38_n);
+  MTi37i39 WITH MTi38i39*1 (MT_e39);
+  MTi40i41 WITH MTi40i42*1 (MT_e40);
+  MTi40i41 WITH MTi41i42*-1 (MT_e41_n);
+  MTi40i42 WITH MTi41i42*1 (MT_e42);
+  MTi43i44 WITH MTi43i45*1 (MT_e43);
+  MTi43i44 WITH MTi44i45*-1 (MT_e44_n);
+  MTi43i45 WITH MTi44i45*1 (MT_e45);
+  MTi46i47 WITH MTi46i48*1 (MT_e46);
+  MTi46i47 WITH MTi47i48*-1 (MT_e47_n);
+  MTi46i48 WITH MTi47i48*1 (MT_e48);
+  MTi49i50 WITH MTi49i51*1 (MT_e49);
+  MTi49i50 WITH MTi50i51*-1 (MT_e50_n);
+  MTi49i51 WITH MTi50i51*1 (MT_e51);
+  MTi52i53 WITH MTi52i54*1 (MT_e52);
+  MTi52i53 WITH MTi53i54*-1 (MT_e53_n);
+  MTi52i54 WITH MTi53i54*1 (MT_e54);
+  MTi55i56 WITH MTi55i57*1 (MT_e55);
+  MTi55i56 WITH MTi56i57*-1 (MT_e56_n);
+  MTi55i57 WITH MTi56i57*1 (MT_e57);
+  MTi58i59 WITH MTi58i60*1 (MT_e58);
+  MTi58i59 WITH MTi59i60*-1 (MT_e59_n);
+  MTi58i60 WITH MTi59i60*1 (MT_e60);
+
+  !declare intercepts
+  [MTi01i02$1*] (I01I02);
+  [MTi01i03$1*] (I01I03);
+  [MTi02i03$1*] (I02I03);
+  [MTi04i05$1*] (I04I05);
+  [MTi04i06$1*] (I04I06);
+  [MTi05i06$1*] (I05I06);
+  [MTi07i08$1*] (I07I08);
+  [MTi07i09$1*] (I07I09);
+  [MTi08i09$1*] (I08I09);
+  [MTi10i11$1*] (I10I11);
+  [MTi10i12$1*] (I10I12);
+  [MTi11i12$1*] (I11I12);
+  [MTi13i14$1*] (I13I14);
+  [MTi13i15$1*] (I13I15);
+  [MTi14i15$1*] (I14I15);
+  [MTi16i17$1*] (I16I17);
+  [MTi16i18$1*] (I16I18);
+  [MTi17i18$1*] (I17I18);
+  [MTi19i20$1*] (I19I20);
+  [MTi19i21$1*] (I19I21);
+  [MTi20i21$1*] (I20I21);
+  [MTi22i23$1*] (I22I23);
+  [MTi22i24$1*] (I22I24);
+  [MTi23i24$1*] (I23I24);
+  [MTi25i26$1*] (I25I26);
+  [MTi25i27$1*] (I25I27);
+  [MTi26i27$1*] (I26I27);
+  [MTi28i29$1*] (I28I29);
+  [MTi28i30$1*] (I28I30);
+  [MTi29i30$1*] (I29I30);
+  [MTi31i32$1*] (I31I32);
+  [MTi31i33$1*] (I31I33);
+  [MTi32i33$1*] (I32I33);
+  [MTi34i35$1*] (I34I35);
+  [MTi34i36$1*] (I34I36);
+  [MTi35i36$1*] (I35I36);
+  [MTi37i38$1*] (I37I38);
+  [MTi37i39$1*] (I37I39);
+  [MTi38i39$1*] (I38I39);
+  [MTi40i41$1*] (I40I41);
+  [MTi40i42$1*] (I40I42);
+  [MTi41i42$1*] (I41I42);
+  [MTi43i44$1*] (I43I44);
+  [MTi43i45$1*] (I43I45);
+  [MTi44i45$1*] (I44I45);
+  [MTi46i47$1*] (I46I47);
+  [MTi46i48$1*] (I46I48);
+  [MTi47i48$1*] (I47I48);
+  [MTi49i50$1*] (I49I50);
+  [MTi49i51$1*] (I49I51);
+  [MTi50i51$1*] (I50I51);
+  [MTi52i53$1*] (I52I53);
+  [MTi52i54$1*] (I52I54);
+  [MTi53i54$1*] (I53I54);
+  [MTi55i56$1*] (I55I56);
+  [MTi55i57$1*] (I55I57);
+  [MTi56i57$1*] (I56I57);
+  [MTi58i59$1*] (I58I59);
+  [MTi58i60$1*] (I58I60);
+  [MTi59i60$1*] (I59I60);
+
+  MODEL CONSTRAINT:
+
+  ! factor loadings relating to the same item are equal in absolute magnitude
+  MT_L02_n = -MT_L02;
+  MT_L05_n = -MT_L05;
+  MT_L08_n = -MT_L08;
+  MT_L11_n = -MT_L11;
+  MT_L14_n = -MT_L14;
+  MT_L17_n = -MT_L17;
+  MT_L20_n = -MT_L20;
+  MT_L23_n = -MT_L23;
+  MT_L26_n = -MT_L26;
+  MT_L29_n = -MT_L29;
+  MT_L32_n = -MT_L32;
+  MT_L35_n = -MT_L35;
+  MT_L38_n = -MT_L38;
+  MT_L41_n = -MT_L41;
+  MT_L44_n = -MT_L44;
+  MT_L47_n = -MT_L47;
+  MT_L50_n = -MT_L50;
+  MT_L53_n = -MT_L53;
+  MT_L56_n = -MT_L56;
+  MT_L59_n = -MT_L59;
+
+  ! pair's uniqueness is equal to the sum of 2 utility uniquenesses
+  MT_e01e02 = MT_e01 - MT_e02_n;
+  MT_e01e03 = MT_e01 + MT_e03;
+  MT_e02e03 = -MT_e02_n + MT_e03;
+  MT_e04e05 = MT_e04 - MT_e05_n;
+  MT_e04e06 = MT_e04 + MT_e06;
+  MT_e05e06 = -MT_e05_n + MT_e06;
+  MT_e07e08 = MT_e07 - MT_e08_n;
+  MT_e07e09 = MT_e07 + MT_e09;
+  MT_e08e09 = -MT_e08_n + MT_e09;
+  MT_e10e11 = MT_e10 - MT_e11_n;
+  MT_e10e12 = MT_e10 + MT_e12;
+  MT_e11e12 = -MT_e11_n + MT_e12;
+  MT_e13e14 = MT_e13 - MT_e14_n;
+  MT_e13e15 = MT_e13 + MT_e15;
+  MT_e14e15 = -MT_e14_n + MT_e15;
+  MT_e16e17 = MT_e16 - MT_e17_n;
+  MT_e16e18 = MT_e16 + MT_e18;
+  MT_e17e18 = -MT_e17_n + MT_e18;
+  MT_e19e20 = MT_e19 - MT_e20_n;
+  MT_e19e21 = MT_e19 + MT_e21;
+  MT_e20e21 = -MT_e20_n + MT_e21;
+  MT_e22e23 = MT_e22 - MT_e23_n;
+  MT_e22e24 = MT_e22 + MT_e24;
+  MT_e23e24 = -MT_e23_n + MT_e24;
+  MT_e25e26 = MT_e25 - MT_e26_n;
+  MT_e25e27 = MT_e25 + MT_e27;
+  MT_e26e27 = -MT_e26_n + MT_e27;
+  MT_e28e29 = MT_e28 - MT_e29_n;
+  MT_e28e30 = MT_e28 + MT_e30;
+  MT_e29e30 = -MT_e29_n + MT_e30;
+  MT_e31e32 = MT_e31 - MT_e32_n;
+  MT_e31e33 = MT_e31 + MT_e33;
+  MT_e32e33 = -MT_e32_n + MT_e33;
+  MT_e34e35 = MT_e34 - MT_e35_n;
+  MT_e34e36 = MT_e34 + MT_e36;
+  MT_e35e36 = -MT_e35_n + MT_e36;
+  MT_e37e38 = MT_e37 - MT_e38_n;
+  MT_e37e39 = MT_e37 + MT_e39;
+  MT_e38e39 = -MT_e38_n + MT_e39;
+  MT_e40e41 = MT_e40 - MT_e41_n;
+  MT_e40e42 = MT_e40 + MT_e42;
+  MT_e41e42 = -MT_e41_n + MT_e42;
+  MT_e43e44 = MT_e43 - MT_e44_n;
+  MT_e43e45 = MT_e43 + MT_e45;
+  MT_e44e45 = -MT_e44_n + MT_e45;
+  MT_e46e47 = MT_e46 - MT_e47_n;
+  MT_e46e48 = MT_e46 + MT_e48;
+  MT_e47e48 = -MT_e47_n + MT_e48;
+  MT_e49e50 = MT_e49 - MT_e50_n;
+  MT_e49e51 = MT_e49 + MT_e51;
+  MT_e50e51 = -MT_e50_n + MT_e51;
+  MT_e52e53 = MT_e52 - MT_e53_n;
+  MT_e52e54 = MT_e52 + MT_e54;
+  MT_e53e54 = -MT_e53_n + MT_e54;
+  MT_e55e56 = MT_e55 - MT_e56_n;
+  MT_e55e57 = MT_e55 + MT_e57;
+  MT_e56e57 = -MT_e56_n + MT_e57;
+  MT_e58e59 = MT_e58 - MT_e59_n;
+  MT_e58e60 = MT_e58 + MT_e60;
+  MT_e59e60 = -MT_e59_n + MT_e60;
+
+  ! fix one uniquness per block for identification
+  MT_e01=1;
+  MT_e04=1;
+  MT_e07=1;
+  MT_e10=1;
+  MT_e13=1;
+  MT_e16=1;
+  MT_e19=1;
+  MT_e22=1;
+  MT_e25=1;
+  MT_e28=1;
+  MT_e31=1;
+  MT_e34=1;
+  MT_e37=1;
+  MT_e40=1;
+  MT_e43=1;
+  MT_e46=1;
+  MT_e49=1;
+  MT_e52=1;
+  MT_e55=1;
+  MT_e58=1;
+
+    !constrain intercepts
+  I01I02 = I01I03 - I02I03;
+  I04I05 = I04I06 - I05I06;
+  I07I08 = I07I09 - I08I09;
+  I10I11 = I10I12 - I11I12;
+  I13I14 = I13I15 - I14I15;
+  I16I17 = I16I18 - I17I18;
+  I19I20 = I19I21 - I20I21;
+  I22I23 = I22I24 - I23I24;
+  I25I26 = I25I27 - I26I27;
+  I28I29 = I28I30 - I29I30;
+  I31I32 = I31I33 - I32I33;
+  I34I35 = I34I36 - I35I36;
+  I37I38 = I37I39 - I38I39;
+  I40I41 = I40I42 - I41I42;
+  I43I44 = I43I45 - I44I45;
+  I46I47 = I46I48 - I47I48;
+  I49I50 = I49I51 - I50I51;
+  I52I53 = I52I54 - I53I54;
+  I55I56 = I55I57 - I56I57;
+  I58I59 = I58I60 - I59I60;
+
+  OUTPUT:
+  sampstat standardized;
+
+
+  SAVEDATA:  ! trait scores for individuals are estimated and saved in a file
+  FILE IS 'scores_MT_int.dat';
+  SAVE = FSCORES;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+TIRT MT;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         592
+
+Number of dependent variables                                   60
+Number of independent variables                                  0
+Number of continuous latent variables                            5
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   MTI01I02    MTI01I03    MTI02I03    MTI04I05    MTI04I06    MTI05I06
+   MTI07I08    MTI07I09    MTI08I09    MTI10I11    MTI10I12    MTI11I12
+   MTI13I14    MTI13I15    MTI14I15    MTI16I17    MTI16I18    MTI17I18
+   MTI19I20    MTI19I21    MTI20I21    MTI22I23    MTI22I24    MTI23I24
+   MTI25I26    MTI25I27    MTI26I27    MTI28I29    MTI28I30    MTI29I30
+   MTI31I32    MTI31I33    MTI32I33    MTI34I35    MTI34I36    MTI35I36
+   MTI37I38    MTI37I39    MTI38I39    MTI40I41    MTI40I42    MTI41I42
+   MTI43I44    MTI43I45    MTI44I45    MTI46I47    MTI46I48    MTI47I48
+   MTI49I50    MTI49I51    MTI50I51    MTI52I53    MTI52I54    MTI53I54
+   MTI55I56    MTI55I57    MTI56I57    MTI58I59    MTI58I60    MTI59I60
+
+Continuous latent variables
+   BFT_FC_N    BFT_FC_E    BFT_FC_O    BFT_FC_A    BFT_FC_C
+
+Variables with special functions
+
+  ID variable           ID_ALL
+
+Estimator                                                    ULSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             THETA
+Link                                                        PROBIT
+
+Input data file(s)
+  study1_data_180831.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            25
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              MTI01I02      MTI01I03      MTI02I03      MTI04I05      MTI04I06
+              ________      ________      ________      ________      ________
+ MTI01I02       0.997
+ MTI01I03       0.995         0.997
+ MTI02I03       0.995         0.995         0.995
+ MTI04I05       0.992         0.993         0.992         0.993
+ MTI04I06       0.992         0.992         0.992         0.992         0.992
+ MTI05I06       0.995         0.993         0.993         0.992         0.992
+ MTI07I08       0.993         0.993         0.992         0.990         0.988
+ MTI07I09       0.993         0.993         0.992         0.990         0.988
+ MTI08I09       0.993         0.993         0.992         0.990         0.988
+ MTI10I11       0.997         0.997         0.995         0.993         0.992
+ MTI10I12       0.997         0.997         0.995         0.993         0.992
+ MTI11I12       0.997         0.997         0.995         0.993         0.992
+ MTI13I14       0.993         0.993         0.992         0.990         0.988
+ MTI13I15       0.993         0.993         0.992         0.990         0.988
+ MTI14I15       0.993         0.993         0.992         0.990         0.988
+ MTI16I17       0.995         0.995         0.993         0.992         0.990
+ MTI16I18       0.995         0.995         0.993         0.992         0.990
+ MTI17I18       0.997         0.997         0.995         0.993         0.992
+ MTI19I20       0.995         0.995         0.993         0.992         0.990
+ MTI19I21       0.995         0.995         0.993         0.992         0.990
+ MTI20I21       0.997         0.997         0.995         0.993         0.992
+ MTI22I23       0.993         0.993         0.992         0.990         0.988
+ MTI22I24       0.993         0.993         0.992         0.990         0.988
+ MTI23I24       0.993         0.993         0.992         0.990         0.988
+ MTI25I26       0.997         0.997         0.995         0.993         0.992
+ MTI25I27       0.997         0.997         0.995         0.993         0.992
+ MTI26I27       0.997         0.997         0.995         0.993         0.992
+ MTI28I29       0.995         0.993         0.993         0.990         0.990
+ MTI28I30       0.995         0.995         0.993         0.992         0.990
+ MTI29I30       0.995         0.993         0.993         0.990         0.990
+ MTI31I32       0.992         0.992         0.990         0.988         0.986
+ MTI31I33       0.993         0.993         0.992         0.990         0.988
+ MTI32I33       0.992         0.992         0.990         0.988         0.986
+ MTI34I35       0.992         0.992         0.990         0.988         0.986
+ MTI34I36       0.993         0.993         0.992         0.990         0.988
+ MTI35I36       0.993         0.993         0.992         0.990         0.988
+ MTI37I38       0.993         0.993         0.992         0.990         0.988
+ MTI37I39       0.993         0.993         0.992         0.990         0.988
+ MTI38I39       0.995         0.995         0.993         0.992         0.990
+ MTI40I41       0.997         0.995         0.995         0.992         0.992
+ MTI40I42       0.995         0.995         0.993         0.992         0.990
+ MTI41I42       0.995         0.993         0.993         0.990         0.990
+ MTI43I44       0.992         0.992         0.990         0.988         0.986
+ MTI43I45       0.993         0.993         0.992         0.990         0.988
+ MTI44I45       0.992         0.992         0.990         0.988         0.986
+ MTI46I47       0.990         0.990         0.988         0.986         0.985
+ MTI46I48       0.992         0.992         0.990         0.988         0.986
+ MTI47I48       0.993         0.993         0.992         0.990         0.988
+ MTI49I50       0.995         0.995         0.993         0.992         0.990
+ MTI49I51       0.995         0.995         0.993         0.992         0.990
+ MTI50I51       0.995         0.995         0.993         0.992         0.990
+ MTI52I53       0.995         0.995         0.993         0.992         0.990
+ MTI52I54       0.995         0.995         0.993         0.992         0.990
+ MTI53I54       0.995         0.995         0.993         0.992         0.990
+ MTI55I56       0.995         0.995         0.993         0.992         0.990
+ MTI55I57       0.995         0.995         0.993         0.992         0.990
+ MTI56I57       0.995         0.995         0.993         0.992         0.990
+ MTI58I59       0.997         0.997         0.995         0.993         0.992
+ MTI58I60       0.995         0.995         0.993         0.992         0.990
+ MTI59I60       0.995         0.995         0.993         0.992         0.990
+
+
+           Covariance Coverage
+              MTI05I06      MTI07I08      MTI07I09      MTI08I09      MTI10I11
+              ________      ________      ________      ________      ________
+ MTI05I06       0.995
+ MTI07I08       0.992         0.997
+ MTI07I09       0.992         0.997         0.997
+ MTI08I09       0.992         0.997         0.997         0.997
+ MTI10I11       0.995         0.995         0.995         0.995         0.998
+ MTI10I12       0.995         0.995         0.995         0.995         0.998
+ MTI11I12       0.995         0.995         0.995         0.995         0.998
+ MTI13I14       0.992         0.992         0.992         0.992         0.995
+ MTI13I15       0.992         0.992         0.992         0.992         0.995
+ MTI14I15       0.992         0.992         0.992         0.992         0.995
+ MTI16I17       0.993         0.995         0.995         0.995         0.997
+ MTI16I18       0.993         0.995         0.995         0.995         0.997
+ MTI17I18       0.995         0.997         0.997         0.997         0.998
+ MTI19I20       0.993         0.995         0.995         0.995         0.997
+ MTI19I21       0.993         0.995         0.995         0.995         0.997
+ MTI20I21       0.995         0.997         0.997         0.997         0.998
+ MTI22I23       0.992         0.992         0.992         0.992         0.995
+ MTI22I24       0.992         0.992         0.992         0.992         0.995
+ MTI23I24       0.992         0.992         0.992         0.992         0.995
+ MTI25I26       0.995         0.995         0.995         0.995         0.998
+ MTI25I27       0.995         0.995         0.995         0.995         0.998
+ MTI26I27       0.995         0.995         0.995         0.995         0.998
+ MTI28I29       0.993         0.992         0.992         0.992         0.995
+ MTI28I30       0.993         0.993         0.993         0.993         0.997
+ MTI29I30       0.993         0.992         0.992         0.992         0.995
+ MTI31I32       0.990         0.992         0.992         0.992         0.993
+ MTI31I33       0.992         0.993         0.993         0.993         0.995
+ MTI32I33       0.990         0.992         0.992         0.992         0.993
+ MTI34I35       0.990         0.990         0.990         0.990         0.993
+ MTI34I36       0.992         0.992         0.992         0.992         0.995
+ MTI35I36       0.992         0.992         0.992         0.992         0.995
+ MTI37I38       0.992         0.993         0.993         0.993         0.995
+ MTI37I39       0.992         0.993         0.993         0.993         0.995
+ MTI38I39       0.993         0.995         0.995         0.995         0.997
+ MTI40I41       0.995         0.993         0.993         0.993         0.997
+ MTI40I42       0.993         0.993         0.993         0.993         0.997
+ MTI41I42       0.993         0.992         0.992         0.992         0.995
+ MTI43I44       0.990         0.990         0.990         0.990         0.993
+ MTI43I45       0.992         0.992         0.992         0.992         0.995
+ MTI44I45       0.990         0.990         0.990         0.990         0.993
+ MTI46I47       0.988         0.988         0.988         0.988         0.992
+ MTI46I48       0.990         0.990         0.990         0.990         0.993
+ MTI47I48       0.992         0.992         0.992         0.992         0.995
+ MTI49I50       0.993         0.995         0.995         0.995         0.997
+ MTI49I51       0.993         0.995         0.995         0.995         0.997
+ MTI50I51       0.993         0.995         0.995         0.995         0.997
+ MTI52I53       0.993         0.993         0.993         0.993         0.997
+ MTI52I54       0.993         0.993         0.993         0.993         0.997
+ MTI53I54       0.993         0.993         0.993         0.993         0.997
+ MTI55I56       0.993         0.993         0.993         0.993         0.997
+ MTI55I57       0.993         0.993         0.993         0.993         0.997
+ MTI56I57       0.993         0.993         0.993         0.993         0.997
+ MTI58I59       0.995         0.997         0.997         0.997         0.998
+ MTI58I60       0.993         0.995         0.995         0.995         0.997
+ MTI59I60       0.993         0.995         0.995         0.995         0.997
+
+
+           Covariance Coverage
+              MTI10I12      MTI11I12      MTI13I14      MTI13I15      MTI14I15
+              ________      ________      ________      ________      ________
+ MTI10I12       0.998
+ MTI11I12       0.998         0.998
+ MTI13I14       0.995         0.995         0.995
+ MTI13I15       0.995         0.995         0.995         0.995
+ MTI14I15       0.995         0.995         0.995         0.995         0.995
+ MTI16I17       0.997         0.997         0.993         0.993         0.993
+ MTI16I18       0.997         0.997         0.993         0.993         0.993
+ MTI17I18       0.998         0.998         0.995         0.995         0.995
+ MTI19I20       0.997         0.997         0.993         0.993         0.993
+ MTI19I21       0.997         0.997         0.993         0.993         0.993
+ MTI20I21       0.998         0.998         0.995         0.995         0.995
+ MTI22I23       0.995         0.995         0.992         0.992         0.992
+ MTI22I24       0.995         0.995         0.992         0.992         0.992
+ MTI23I24       0.995         0.995         0.992         0.992         0.992
+ MTI25I26       0.998         0.998         0.995         0.995         0.995
+ MTI25I27       0.998         0.998         0.995         0.995         0.995
+ MTI26I27       0.998         0.998         0.995         0.995         0.995
+ MTI28I29       0.995         0.995         0.992         0.992         0.992
+ MTI28I30       0.997         0.997         0.993         0.993         0.993
+ MTI29I30       0.995         0.995         0.992         0.992         0.992
+ MTI31I32       0.993         0.993         0.990         0.990         0.990
+ MTI31I33       0.995         0.995         0.992         0.992         0.992
+ MTI32I33       0.993         0.993         0.990         0.990         0.990
+ MTI34I35       0.993         0.993         0.992         0.992         0.992
+ MTI34I36       0.995         0.995         0.993         0.993         0.993
+ MTI35I36       0.995         0.995         0.993         0.993         0.993
+ MTI37I38       0.995         0.995         0.992         0.992         0.992
+ MTI37I39       0.995         0.995         0.992         0.992         0.992
+ MTI38I39       0.997         0.997         0.993         0.993         0.993
+ MTI40I41       0.997         0.997         0.993         0.993         0.993
+ MTI40I42       0.997         0.997         0.993         0.993         0.993
+ MTI41I42       0.995         0.995         0.992         0.992         0.992
+ MTI43I44       0.993         0.993         0.990         0.990         0.990
+ MTI43I45       0.995         0.995         0.992         0.992         0.992
+ MTI44I45       0.993         0.993         0.990         0.990         0.990
+ MTI46I47       0.992         0.992         0.988         0.988         0.988
+ MTI46I48       0.993         0.993         0.990         0.990         0.990
+ MTI47I48       0.995         0.995         0.992         0.992         0.992
+ MTI49I50       0.997         0.997         0.993         0.993         0.993
+ MTI49I51       0.997         0.997         0.993         0.993         0.993
+ MTI50I51       0.997         0.997         0.993         0.993         0.993
+ MTI52I53       0.997         0.997         0.993         0.993         0.993
+ MTI52I54       0.997         0.997         0.993         0.993         0.993
+ MTI53I54       0.997         0.997         0.993         0.993         0.993
+ MTI55I56       0.997         0.997         0.993         0.993         0.993
+ MTI55I57       0.997         0.997         0.993         0.993         0.993
+ MTI56I57       0.997         0.997         0.993         0.993         0.993
+ MTI58I59       0.998         0.998         0.995         0.995         0.995
+ MTI58I60       0.997         0.997         0.993         0.993         0.993
+ MTI59I60       0.997         0.997         0.993         0.993         0.993
+
+
+           Covariance Coverage
+              MTI16I17      MTI16I18      MTI17I18      MTI19I20      MTI19I21
+              ________      ________      ________      ________      ________
+ MTI16I17       0.998
+ MTI16I18       0.998         0.998
+ MTI17I18       0.998         0.998         1.000
+ MTI19I20       0.998         0.998         0.998         0.998
+ MTI19I21       0.998         0.998         0.998         0.998         0.998
+ MTI20I21       0.998         0.998         1.000         0.998         0.998
+ MTI22I23       0.993         0.993         0.995         0.993         0.993
+ MTI22I24       0.993         0.993         0.995         0.993         0.993
+ MTI23I24       0.993         0.993         0.995         0.993         0.993
+ MTI25I26       0.997         0.997         0.998         0.997         0.997
+ MTI25I27       0.997         0.997         0.998         0.997         0.997
+ MTI26I27       0.997         0.997         0.998         0.997         0.997
+ MTI28I29       0.993         0.993         0.995         0.993         0.993
+ MTI28I30       0.995         0.995         0.997         0.995         0.995
+ MTI29I30       0.993         0.993         0.995         0.993         0.993
+ MTI31I32       0.992         0.992         0.993         0.992         0.992
+ MTI31I33       0.993         0.993         0.995         0.993         0.993
+ MTI32I33       0.992         0.992         0.993         0.992         0.992
+ MTI34I35       0.992         0.992         0.993         0.992         0.992
+ MTI34I36       0.993         0.993         0.995         0.993         0.993
+ MTI35I36       0.993         0.993         0.995         0.993         0.993
+ MTI37I38       0.995         0.995         0.997         0.995         0.995
+ MTI37I39       0.995         0.995         0.997         0.995         0.995
+ MTI38I39       0.997         0.997         0.998         0.997         0.997
+ MTI40I41       0.995         0.995         0.997         0.995         0.995
+ MTI40I42       0.995         0.995         0.997         0.995         0.995
+ MTI41I42       0.993         0.993         0.995         0.993         0.993
+ MTI43I44       0.992         0.992         0.993         0.992         0.992
+ MTI43I45       0.993         0.993         0.995         0.993         0.993
+ MTI44I45       0.992         0.992         0.993         0.992         0.992
+ MTI46I47       0.990         0.990         0.992         0.990         0.990
+ MTI46I48       0.992         0.992         0.993         0.992         0.992
+ MTI47I48       0.993         0.993         0.995         0.993         0.993
+ MTI49I50       0.997         0.997         0.998         0.997         0.997
+ MTI49I51       0.997         0.997         0.998         0.997         0.997
+ MTI50I51       0.997         0.997         0.998         0.997         0.997
+ MTI52I53       0.995         0.995         0.997         0.995         0.995
+ MTI52I54       0.995         0.995         0.997         0.995         0.995
+ MTI53I54       0.995         0.995         0.997         0.995         0.995
+ MTI55I56       0.995         0.995         0.997         0.995         0.995
+ MTI55I57       0.995         0.995         0.997         0.995         0.995
+ MTI56I57       0.995         0.995         0.997         0.995         0.995
+ MTI58I59       0.998         0.998         1.000         0.998         0.998
+ MTI58I60       0.997         0.997         0.998         0.997         0.997
+ MTI59I60       0.997         0.997         0.998         0.997         0.997
+
+
+           Covariance Coverage
+              MTI20I21      MTI22I23      MTI22I24      MTI23I24      MTI25I26
+              ________      ________      ________      ________      ________
+ MTI20I21       1.000
+ MTI22I23       0.995         0.995
+ MTI22I24       0.995         0.995         0.995
+ MTI23I24       0.995         0.995         0.995         0.995
+ MTI25I26       0.998         0.995         0.995         0.995         0.998
+ MTI25I27       0.998         0.995         0.995         0.995         0.998
+ MTI26I27       0.998         0.995         0.995         0.995         0.998
+ MTI28I29       0.995         0.992         0.992         0.992         0.995
+ MTI28I30       0.997         0.993         0.993         0.993         0.997
+ MTI29I30       0.995         0.992         0.992         0.992         0.995
+ MTI31I32       0.993         0.992         0.992         0.992         0.993
+ MTI31I33       0.995         0.992         0.992         0.992         0.995
+ MTI32I33       0.993         0.992         0.992         0.992         0.993
+ MTI34I35       0.993         0.992         0.992         0.992         0.993
+ MTI34I36       0.995         0.993         0.993         0.993         0.995
+ MTI35I36       0.995         0.992         0.992         0.992         0.995
+ MTI37I38       0.997         0.992         0.992         0.992         0.995
+ MTI37I39       0.997         0.992         0.992         0.992         0.995
+ MTI38I39       0.998         0.993         0.993         0.993         0.997
+ MTI40I41       0.997         0.993         0.993         0.993         0.997
+ MTI40I42       0.997         0.993         0.993         0.993         0.997
+ MTI41I42       0.995         0.992         0.992         0.992         0.995
+ MTI43I44       0.993         0.990         0.990         0.990         0.993
+ MTI43I45       0.995         0.992         0.992         0.992         0.995
+ MTI44I45       0.993         0.990         0.990         0.990         0.993
+ MTI46I47       0.992         0.988         0.988         0.988         0.992
+ MTI46I48       0.993         0.990         0.990         0.990         0.993
+ MTI47I48       0.995         0.992         0.992         0.992         0.995
+ MTI49I50       0.998         0.993         0.993         0.993         0.997
+ MTI49I51       0.998         0.993         0.993         0.993         0.997
+ MTI50I51       0.998         0.993         0.993         0.993         0.997
+ MTI52I53       0.997         0.993         0.993         0.993         0.997
+ MTI52I54       0.997         0.993         0.993         0.993         0.997
+ MTI53I54       0.997         0.993         0.993         0.993         0.997
+ MTI55I56       0.997         0.993         0.993         0.993         0.997
+ MTI55I57       0.997         0.993         0.993         0.993         0.997
+ MTI56I57       0.997         0.993         0.993         0.993         0.997
+ MTI58I59       1.000         0.995         0.995         0.995         0.998
+ MTI58I60       0.998         0.993         0.993         0.993         0.997
+ MTI59I60       0.998         0.993         0.993         0.993         0.997
+
+
+           Covariance Coverage
+              MTI25I27      MTI26I27      MTI28I29      MTI28I30      MTI29I30
+              ________      ________      ________      ________      ________
+ MTI25I27       0.998
+ MTI26I27       0.998         0.998
+ MTI28I29       0.995         0.995         0.995
+ MTI28I30       0.997         0.997         0.995         0.997
+ MTI29I30       0.995         0.995         0.995         0.995         0.995
+ MTI31I32       0.993         0.993         0.990         0.992         0.990
+ MTI31I33       0.995         0.995         0.992         0.993         0.992
+ MTI32I33       0.993         0.993         0.990         0.992         0.990
+ MTI34I35       0.993         0.993         0.990         0.992         0.990
+ MTI34I36       0.995         0.995         0.992         0.993         0.992
+ MTI35I36       0.995         0.995         0.992         0.993         0.992
+ MTI37I38       0.995         0.995         0.992         0.993         0.992
+ MTI37I39       0.995         0.995         0.992         0.993         0.992
+ MTI38I39       0.997         0.997         0.993         0.995         0.993
+ MTI40I41       0.997         0.997         0.995         0.995         0.995
+ MTI40I42       0.997         0.997         0.993         0.995         0.993
+ MTI41I42       0.995         0.995         0.993         0.993         0.993
+ MTI43I44       0.993         0.993         0.990         0.992         0.990
+ MTI43I45       0.995         0.995         0.992         0.993         0.992
+ MTI44I45       0.993         0.993         0.990         0.992         0.990
+ MTI46I47       0.992         0.992         0.988         0.990         0.988
+ MTI46I48       0.993         0.993         0.990         0.992         0.990
+ MTI47I48       0.995         0.995         0.992         0.993         0.992
+ MTI49I50       0.997         0.997         0.993         0.995         0.993
+ MTI49I51       0.997         0.997         0.993         0.995         0.993
+ MTI50I51       0.997         0.997         0.993         0.995         0.993
+ MTI52I53       0.997         0.997         0.993         0.995         0.993
+ MTI52I54       0.997         0.997         0.993         0.995         0.993
+ MTI53I54       0.997         0.997         0.993         0.995         0.993
+ MTI55I56       0.997         0.997         0.993         0.995         0.993
+ MTI55I57       0.997         0.997         0.993         0.995         0.993
+ MTI56I57       0.997         0.997         0.993         0.995         0.993
+ MTI58I59       0.998         0.998         0.995         0.997         0.995
+ MTI58I60       0.997         0.997         0.993         0.995         0.993
+ MTI59I60       0.997         0.997         0.993         0.995         0.993
+
+
+           Covariance Coverage
+              MTI31I32      MTI31I33      MTI32I33      MTI34I35      MTI34I36
+              ________      ________      ________      ________      ________
+ MTI31I32       0.993
+ MTI31I33       0.993         0.995
+ MTI32I33       0.993         0.993         0.993
+ MTI34I35       0.990         0.990         0.990         0.993
+ MTI34I36       0.992         0.992         0.992         0.993         0.995
+ MTI35I36       0.990         0.992         0.990         0.993         0.993
+ MTI37I38       0.990         0.992         0.990         0.990         0.992
+ MTI37I39       0.990         0.992         0.990         0.990         0.992
+ MTI38I39       0.992         0.993         0.992         0.992         0.993
+ MTI40I41       0.992         0.993         0.992         0.992         0.993
+ MTI40I42       0.992         0.993         0.992         0.992         0.993
+ MTI41I42       0.990         0.992         0.990         0.990         0.992
+ MTI43I44       0.988         0.990         0.988         0.988         0.990
+ MTI43I45       0.990         0.992         0.990         0.990         0.992
+ MTI44I45       0.988         0.990         0.988         0.988         0.990
+ MTI46I47       0.986         0.988         0.986         0.986         0.988
+ MTI46I48       0.988         0.990         0.988         0.988         0.990
+ MTI47I48       0.990         0.992         0.990         0.990         0.992
+ MTI49I50       0.992         0.993         0.992         0.992         0.993
+ MTI49I51       0.992         0.993         0.992         0.992         0.993
+ MTI50I51       0.992         0.993         0.992         0.992         0.993
+ MTI52I53       0.992         0.993         0.992         0.992         0.993
+ MTI52I54       0.992         0.993         0.992         0.992         0.993
+ MTI53I54       0.992         0.993         0.992         0.992         0.993
+ MTI55I56       0.993         0.995         0.993         0.992         0.993
+ MTI55I57       0.993         0.995         0.993         0.992         0.993
+ MTI56I57       0.993         0.995         0.993         0.992         0.993
+ MTI58I59       0.993         0.995         0.993         0.993         0.995
+ MTI58I60       0.992         0.993         0.992         0.992         0.993
+ MTI59I60       0.992         0.993         0.992         0.992         0.993
+
+
+           Covariance Coverage
+              MTI35I36      MTI37I38      MTI37I39      MTI38I39      MTI40I41
+              ________      ________      ________      ________      ________
+ MTI35I36       0.995
+ MTI37I38       0.992         0.997
+ MTI37I39       0.992         0.997         0.997
+ MTI38I39       0.993         0.997         0.997         0.998
+ MTI40I41       0.993         0.993         0.993         0.995         0.997
+ MTI40I42       0.993         0.993         0.993         0.995         0.995
+ MTI41I42       0.992         0.992         0.992         0.993         0.995
+ MTI43I44       0.990         0.992         0.992         0.993         0.992
+ MTI43I45       0.992         0.993         0.993         0.995         0.993
+ MTI44I45       0.990         0.992         0.992         0.993         0.992
+ MTI46I47       0.988         0.990         0.990         0.990         0.990
+ MTI46I48       0.990         0.992         0.992         0.992         0.992
+ MTI47I48       0.992         0.992         0.992         0.993         0.993
+ MTI49I50       0.993         0.995         0.995         0.997         0.995
+ MTI49I51       0.993         0.995         0.995         0.997         0.995
+ MTI50I51       0.993         0.995         0.995         0.997         0.995
+ MTI52I53       0.993         0.993         0.993         0.995         0.995
+ MTI52I54       0.993         0.993         0.993         0.995         0.995
+ MTI53I54       0.993         0.993         0.993         0.995         0.995
+ MTI55I56       0.993         0.993         0.993         0.995         0.995
+ MTI55I57       0.993         0.993         0.993         0.995         0.995
+ MTI56I57       0.993         0.993         0.993         0.995         0.995
+ MTI58I59       0.995         0.997         0.997         0.998         0.997
+ MTI58I60       0.993         0.995         0.995         0.997         0.995
+ MTI59I60       0.993         0.995         0.995         0.997         0.995
+
+
+           Covariance Coverage
+              MTI40I42      MTI41I42      MTI43I44      MTI43I45      MTI44I45
+              ________      ________      ________      ________      ________
+ MTI40I42       0.997
+ MTI41I42       0.995         0.995
+ MTI43I44       0.992         0.990         0.993
+ MTI43I45       0.993         0.992         0.993         0.995
+ MTI44I45       0.992         0.990         0.993         0.993         0.993
+ MTI46I47       0.992         0.990         0.988         0.990         0.988
+ MTI46I48       0.992         0.990         0.990         0.992         0.990
+ MTI47I48       0.995         0.993         0.992         0.993         0.992
+ MTI49I50       0.995         0.993         0.992         0.993         0.992
+ MTI49I51       0.995         0.993         0.992         0.993         0.992
+ MTI50I51       0.995         0.993         0.992         0.993         0.992
+ MTI52I53       0.995         0.993         0.992         0.993         0.992
+ MTI52I54       0.995         0.993         0.992         0.993         0.992
+ MTI53I54       0.995         0.993         0.992         0.993         0.992
+ MTI55I56       0.995         0.993         0.992         0.993         0.992
+ MTI55I57       0.995         0.993         0.992         0.993         0.992
+ MTI56I57       0.995         0.993         0.992         0.993         0.992
+ MTI58I59       0.997         0.995         0.993         0.995         0.993
+ MTI58I60       0.995         0.993         0.992         0.993         0.992
+ MTI59I60       0.995         0.993         0.992         0.993         0.992
+
+
+           Covariance Coverage
+              MTI46I47      MTI46I48      MTI47I48      MTI49I50      MTI49I51
+              ________      ________      ________      ________      ________
+ MTI46I47       0.992
+ MTI46I48       0.992         0.993
+ MTI47I48       0.992         0.992         0.995
+ MTI49I50       0.990         0.992         0.993         0.998
+ MTI49I51       0.990         0.992         0.993         0.998         0.998
+ MTI50I51       0.990         0.992         0.993         0.998         0.998
+ MTI52I53       0.990         0.992         0.993         0.995         0.995
+ MTI52I54       0.990         0.992         0.993         0.995         0.995
+ MTI53I54       0.990         0.992         0.993         0.995         0.995
+ MTI55I56       0.990         0.992         0.993         0.995         0.995
+ MTI55I57       0.990         0.992         0.993         0.995         0.995
+ MTI56I57       0.990         0.992         0.993         0.995         0.995
+ MTI58I59       0.992         0.993         0.995         0.998         0.998
+ MTI58I60       0.990         0.992         0.993         0.997         0.997
+ MTI59I60       0.990         0.992         0.993         0.997         0.997
+
+
+           Covariance Coverage
+              MTI50I51      MTI52I53      MTI52I54      MTI53I54      MTI55I56
+              ________      ________      ________      ________      ________
+ MTI50I51       0.998
+ MTI52I53       0.995         0.997
+ MTI52I54       0.995         0.997         0.997
+ MTI53I54       0.995         0.997         0.997         0.997
+ MTI55I56       0.995         0.995         0.995         0.995         0.997
+ MTI55I57       0.995         0.995         0.995         0.995         0.997
+ MTI56I57       0.995         0.995         0.995         0.995         0.997
+ MTI58I59       0.998         0.997         0.997         0.997         0.997
+ MTI58I60       0.997         0.995         0.995         0.995         0.995
+ MTI59I60       0.997         0.995         0.995         0.995         0.995
+
+
+           Covariance Coverage
+              MTI55I57      MTI56I57      MTI58I59      MTI58I60      MTI59I60
+              ________      ________      ________      ________      ________
+ MTI55I57       0.997
+ MTI56I57       0.997         0.997
+ MTI58I59       0.997         0.997         1.000
+ MTI58I60       0.995         0.995         0.998         0.998
+ MTI59I60       0.995         0.995         0.998         0.998         0.998
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    MTI01I02
+      Category 1    0.336          198.000
+      Category 2    0.664          392.000
+    MTI01I03
+      Category 1    0.361          213.000
+      Category 2    0.639          377.000
+    MTI02I03
+      Category 1    0.538          317.000
+      Category 2    0.462          272.000
+    MTI04I05
+      Category 1    0.697          410.000
+      Category 2    0.303          178.000
+    MTI04I06
+      Category 1    0.429          252.000
+      Category 2    0.571          335.000
+    MTI05I06
+      Category 1    0.275          162.000
+      Category 2    0.725          427.000
+    MTI07I08
+      Category 1    0.483          285.000
+      Category 2    0.517          305.000
+    MTI07I09
+      Category 1    0.342          202.000
+      Category 2    0.658          388.000
+    MTI08I09
+      Category 1    0.388          229.000
+      Category 2    0.612          361.000
+    MTI10I11
+      Category 1    0.638          377.000
+      Category 2    0.362          214.000
+    MTI10I12
+      Category 1    0.723          427.000
+      Category 2    0.277          164.000
+    MTI11I12
+      Category 1    0.535          316.000
+      Category 2    0.465          275.000
+    MTI13I14
+      Category 1    0.487          287.000
+      Category 2    0.513          302.000
+    MTI13I15
+      Category 1    0.718          423.000
+      Category 2    0.282          166.000
+    MTI14I15
+      Category 1    0.693          408.000
+      Category 2    0.307          181.000
+    MTI16I17
+      Category 1    0.281          166.000
+      Category 2    0.719          425.000
+    MTI16I18
+      Category 1    0.445          263.000
+      Category 2    0.555          328.000
+    MTI17I18
+      Category 1    0.689          408.000
+      Category 2    0.311          184.000
+    MTI19I20
+      Category 1    0.381          225.000
+      Category 2    0.619          366.000
+    MTI19I21
+      Category 1    0.443          262.000
+      Category 2    0.557          329.000
+    MTI20I21
+      Category 1    0.546          323.000
+      Category 2    0.454          269.000
+    MTI22I23
+      Category 1    0.557          328.000
+      Category 2    0.443          261.000
+    MTI22I24
+      Category 1    0.448          264.000
+      Category 2    0.552          325.000
+    MTI23I24
+      Category 1    0.368          217.000
+      Category 2    0.632          372.000
+    MTI25I26
+      Category 1    0.428          253.000
+      Category 2    0.572          338.000
+    MTI25I27
+      Category 1    0.421          249.000
+      Category 2    0.579          342.000
+    MTI26I27
+      Category 1    0.497          294.000
+      Category 2    0.503          297.000
+    MTI28I29
+      Category 1    0.482          284.000
+      Category 2    0.518          305.000
+    MTI28I30
+      Category 1    0.410          242.000
+      Category 2    0.590          348.000
+    MTI29I30
+      Category 1    0.394          232.000
+      Category 2    0.606          357.000
+    MTI31I32
+      Category 1    0.427          251.000
+      Category 2    0.573          337.000
+    MTI31I33
+      Category 1    0.348          205.000
+      Category 2    0.652          384.000
+    MTI32I33
+      Category 1    0.347          204.000
+      Category 2    0.653          384.000
+    MTI34I35
+      Category 1    0.352          207.000
+      Category 2    0.648          381.000
+    MTI34I36
+      Category 1    0.392          231.000
+      Category 2    0.608          358.000
+    MTI35I36
+      Category 1    0.499          294.000
+      Category 2    0.501          295.000
+    MTI37I38
+      Category 1    0.331          195.000
+      Category 2    0.669          395.000
+    MTI37I39
+      Category 1    0.434          256.000
+      Category 2    0.566          334.000
+    MTI38I39
+      Category 1    0.624          369.000
+      Category 2    0.376          222.000
+    MTI40I41
+      Category 1    0.454          268.000
+      Category 2    0.546          322.000
+    MTI40I42
+      Category 1    0.415          245.000
+      Category 2    0.585          345.000
+    MTI41I42
+      Category 1    0.440          259.000
+      Category 2    0.560          330.000
+    MTI43I44
+      Category 1    0.636          374.000
+      Category 2    0.364          214.000
+    MTI43I45
+      Category 1    0.406          239.000
+      Category 2    0.594          350.000
+    MTI44I45
+      Category 1    0.294          173.000
+      Category 2    0.706          415.000
+    MTI46I47
+      Category 1    0.363          213.000
+      Category 2    0.637          374.000
+    MTI46I48
+      Category 1    0.327          192.000
+      Category 2    0.673          396.000
+    MTI47I48
+      Category 1    0.453          267.000
+      Category 2    0.547          322.000
+    MTI49I50
+      Category 1    0.541          320.000
+      Category 2    0.459          271.000
+    MTI49I51
+      Category 1    0.508          300.000
+      Category 2    0.492          291.000
+    MTI50I51
+      Category 1    0.459          271.000
+      Category 2    0.541          320.000
+    MTI52I53
+      Category 1    0.531          313.000
+      Category 2    0.469          277.000
+    MTI52I54
+      Category 1    0.536          316.000
+      Category 2    0.464          274.000
+    MTI53I54
+      Category 1    0.512          302.000
+      Category 2    0.488          288.000
+    MTI55I56
+      Category 1    0.444          262.000
+      Category 2    0.556          328.000
+    MTI55I57
+      Category 1    0.261          154.000
+      Category 2    0.739          436.000
+    MTI56I57
+      Category 1    0.317          187.000
+      Category 2    0.683          403.000
+    MTI58I59
+      Category 1    0.520          308.000
+      Category 2    0.480          284.000
+    MTI58I60
+      Category 1    0.347          205.000
+      Category 2    0.653          386.000
+    MTI59I60
+      Category 1    0.255          151.000
+      Category 2    0.745          440.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI01I02      MTI01I03      MTI02I03      MTI04I05      MTI04I06
+              ________      ________      ________      ________      ________
+               -0.425        -0.356         0.096         0.517        -0.178
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI05I06      MTI07I08      MTI07I09      MTI08I09      MTI10I11
+              ________      ________      ________      ________      ________
+               -0.598        -0.042        -0.406        -0.284         0.353
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI10I12      MTI11I12      MTI13I14      MTI13I15      MTI14I15
+              ________      ________      ________      ________      ________
+                0.590         0.087        -0.032         0.577         0.504
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI16I17      MTI16I18      MTI17I18      MTI19I20      MTI19I21
+              ________      ________      ________      ________      ________
+               -0.580        -0.138         0.494        -0.304        -0.143
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI20I21      MTI22I23      MTI22I24      MTI23I24      MTI25I26
+              ________      ________      ________      ________      ________
+                0.115         0.143        -0.130        -0.336        -0.181
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI25I27      MTI26I27      MTI28I29      MTI28I30      MTI29I30
+              ________      ________      ________      ________      ________
+               -0.199        -0.006        -0.045        -0.227        -0.269
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI31I32      MTI31I33      MTI32I33      MTI34I35      MTI34I36
+              ________      ________      ________      ________      ________
+               -0.184        -0.391        -0.394        -0.380        -0.274
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI35I36      MTI37I38      MTI37I39      MTI38I39      MTI40I41
+              ________      ________      ________      ________      ________
+               -0.002        -0.439        -0.166         0.317        -0.115
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI40I42      MTI41I42      MTI43I44      MTI43I45      MTI44I45
+              ________      ________      ________      ________      ________
+               -0.214        -0.152         0.348        -0.238        -0.541
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI46I47      MTI46I48      MTI47I48      MTI49I50      MTI49I51
+              ________      ________      ________      ________      ________
+               -0.351        -0.450        -0.117         0.104         0.019
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI50I51      MTI52I53      MTI52I54      MTI53I54      MTI55I56
+              ________      ________      ________      ________      ________
+               -0.104         0.077         0.089         0.030        -0.141
+
+
+           MEANS/INTERCEPTS/THRESHOLDS
+              MTI55I57      MTI56I57      MTI58I59      MTI58I60      MTI59I60
+              ________      ________      ________      ________      ________
+               -0.640        -0.476         0.051        -0.394        -0.657
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI01I02      MTI01I03      MTI02I03      MTI04I05      MTI04I06
+              ________      ________      ________      ________      ________
+ MTI01I02
+ MTI01I03       0.589
+ MTI02I03      -0.477         0.429
+ MTI04I05       0.114         0.107         0.061
+ MTI04I06      -0.138        -0.128         0.085         0.436
+ MTI05I06      -0.250        -0.231         0.038        -0.479         0.583
+ MTI07I08      -0.140        -0.186        -0.047        -0.155        -0.064
+ MTI07I09      -0.244        -0.106         0.072         0.027         0.241
+ MTI08I09       0.035         0.111         0.124         0.196         0.291
+ MTI10I11      -0.153        -0.069        -0.004        -0.121        -0.028
+ MTI10I12      -0.219         0.043         0.149         0.137         0.360
+ MTI11I12       0.035         0.140         0.176         0.203         0.224
+ MTI13I14      -0.314        -0.068         0.150        -0.220         0.257
+ MTI13I15      -0.206        -0.065         0.209         0.056         0.195
+ MTI14I15       0.049        -0.006         0.082         0.206        -0.043
+ MTI16I17      -0.067        -0.105         0.023         0.059         0.153
+ MTI16I18      -0.158        -0.061         0.153         0.018         0.069
+ MTI17I18      -0.150         0.057         0.102        -0.061        -0.047
+ MTI19I20       0.243         0.076        -0.161         0.258         0.030
+ MTI19I21      -0.080        -0.068         0.003         0.097         0.029
+ MTI20I21      -0.285        -0.117         0.195        -0.170        -0.015
+ MTI22I23      -0.142        -0.181         0.049         0.068         0.285
+ MTI22I24      -0.125        -0.442        -0.263        -0.077         0.214
+ MTI23I24       0.126        -0.124        -0.294        -0.083        -0.165
+ MTI25I26       0.095         0.396         0.268         0.178        -0.189
+ MTI25I27       0.306         0.513         0.196         0.122        -0.200
+ MTI26I27       0.189         0.168        -0.067         0.057        -0.052
+ MTI28I29       0.249         0.040        -0.167         0.014        -0.278
+ MTI28I30       0.161         0.194         0.100         0.085        -0.009
+ MTI29I30       0.048         0.058         0.221         0.099         0.202
+ MTI31I32       0.040         0.016        -0.152        -0.086        -0.330
+ MTI31I33      -0.102        -0.077        -0.074        -0.139        -0.035
+ MTI32I33      -0.289        -0.053         0.133        -0.159         0.317
+ MTI34I35      -0.107         0.235         0.273        -0.022         0.110
+ MTI34I36      -0.041         0.137         0.229         0.113         0.172
+ MTI35I36       0.123         0.023        -0.100         0.104         0.096
+ MTI37I38      -0.138        -0.105        -0.066         0.030         0.040
+ MTI37I39       0.037        -0.069        -0.235        -0.142        -0.082
+ MTI38I39       0.177         0.059        -0.122        -0.104        -0.118
+ MTI40I41      -0.199        -0.216        -0.035        -0.006         0.091
+ MTI40I42      -0.291        -0.339         0.048         0.066         0.227
+ MTI41I42      -0.084        -0.081         0.036        -0.029         0.016
+ MTI43I44      -0.185        -0.140         0.116        -0.085         0.280
+ MTI43I45      -0.078         0.044         0.047        -0.018         0.144
+ MTI44I45       0.115         0.124        -0.083         0.116        -0.113
+ MTI46I47       0.335         0.052        -0.186         0.012        -0.166
+ MTI46I48       0.042        -0.038         0.016         0.085        -0.044
+ MTI47I48      -0.280        -0.216         0.154         0.038         0.205
+ MTI49I50       0.410         0.219        -0.261         0.118        -0.134
+ MTI49I51       0.263         0.103        -0.152         0.173        -0.061
+ MTI50I51      -0.137        -0.048         0.128         0.014         0.113
+ MTI52I53       0.345         0.104        -0.125         0.206        -0.096
+ MTI52I54       0.161        -0.022        -0.057         0.209        -0.049
+ MTI53I54      -0.165        -0.168         0.008        -0.013         0.184
+ MTI55I56       0.186         0.140        -0.078         0.026        -0.292
+ MTI55I57       0.315         0.194        -0.144        -0.064        -0.430
+ MTI56I57       0.193         0.080        -0.070         0.033         0.016
+ MTI58I59      -0.197        -0.238        -0.013         0.085         0.420
+ MTI58I60      -0.212        -0.283        -0.029        -0.089         0.130
+ MTI59I60       0.027         0.042         0.028        -0.253        -0.318
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI05I06      MTI07I08      MTI07I09      MTI08I09      MTI10I11
+              ________      ________      ________      ________      ________
+ MTI07I08       0.182
+ MTI07I09       0.257         0.514
+ MTI08I09       0.119        -0.630         0.344
+ MTI10I11       0.018         0.433         0.250        -0.200
+ MTI10I12       0.170        -0.160         0.359         0.360         0.317
+ MTI11I12       0.133        -0.523         0.023         0.530        -0.631
+ MTI13I14       0.325         0.103         0.291         0.054         0.168
+ MTI13I15       0.199        -0.075         0.257         0.377         0.119
+ MTI14I15      -0.128        -0.238        -0.101         0.190         0.020
+ MTI16I17       0.126        -0.083        -0.008         0.024        -0.103
+ MTI16I18       0.071         0.189         0.198        -0.088         0.266
+ MTI17I18      -0.028         0.292         0.208        -0.111         0.335
+ MTI19I20      -0.271        -0.314        -0.246         0.087        -0.110
+ MTI19I21      -0.012         0.050        -0.010        -0.077         0.251
+ MTI20I21       0.228         0.392         0.230        -0.188         0.403
+ MTI22I23       0.293        -0.126         0.148         0.334        -0.131
+ MTI22I24       0.302         0.035         0.121         0.088         0.086
+ MTI23I24      -0.072         0.201        -0.057        -0.247         0.187
+ MTI25I26      -0.174        -0.091        -0.068         0.186        -0.119
+ MTI25I27      -0.213        -0.038        -0.099        -0.088        -0.033
+ MTI26I27      -0.100         0.130        -0.098        -0.187         0.062
+ MTI28I29      -0.367        -0.290        -0.276        -0.055        -0.316
+ MTI28I30      -0.084        -0.415        -0.088         0.307        -0.435
+ MTI29I30       0.250        -0.244         0.118         0.423        -0.343
+ MTI31I32      -0.267         0.195        -0.130        -0.375         0.299
+ MTI31I33       0.087         0.446         0.179        -0.299         0.398
+ MTI32I33       0.388         0.428         0.354        -0.034         0.247
+ MTI34I35       0.220        -0.065         0.245         0.215         0.127
+ MTI34I36       0.086        -0.338         0.051         0.386        -0.288
+ MTI35I36      -0.043        -0.329        -0.120         0.250        -0.336
+ MTI37I38      -0.007         0.004         0.097         0.162        -0.233
+ MTI37I39       0.053         0.192        -0.085        -0.317         0.007
+ MTI38I39      -0.015         0.262        -0.139        -0.439         0.204
+ MTI40I41       0.135        -0.128         0.135         0.290        -0.261
+ MTI40I42       0.148         0.095         0.240         0.140         0.138
+ MTI41I42      -0.005         0.186        -0.032        -0.220         0.372
+ MTI43I44       0.244         0.094         0.360         0.436         0.121
+ MTI43I45       0.210        -0.177         0.252         0.388        -0.308
+ MTI44I45      -0.094        -0.245        -0.165         0.035        -0.328
+ MTI46I47      -0.128         0.198        -0.173        -0.290         0.203
+ MTI46I48      -0.122         0.168        -0.029        -0.083         0.368
+ MTI47I48       0.084         0.020         0.152         0.214         0.183
+ MTI49I50      -0.346        -0.410        -0.410         0.051        -0.146
+ MTI49I51      -0.195        -0.392        -0.156         0.342        -0.343
+ MTI50I51       0.161         0.025         0.257         0.333        -0.194
+ MTI52I53      -0.247        -0.267        -0.290         0.049        -0.220
+ MTI52I54      -0.131        -0.256        -0.227         0.188        -0.264
+ MTI53I54       0.177        -0.052         0.102         0.187        -0.107
+ MTI55I56      -0.245        -0.092        -0.023         0.122        -0.181
+ MTI55I57      -0.340         0.001        -0.008        -0.105        -0.043
+ MTI56I57      -0.153         0.145         0.001        -0.106         0.126
+ MTI58I59       0.287         0.130         0.187        -0.042         0.317
+ MTI58I60       0.195         0.364         0.256        -0.245         0.359
+ MTI59I60      -0.005         0.408         0.176        -0.287         0.308
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI10I12      MTI11I12      MTI13I14      MTI13I15      MTI14I15
+              ________      ________      ________      ________      ________
+ MTI11I12       0.540
+ MTI13I14       0.350         0.139
+ MTI13I15       0.482         0.304         0.348
+ MTI14I15       0.190         0.187        -0.625         0.514
+ MTI16I17       0.063         0.102        -0.089        -0.017         0.118
+ MTI16I18       0.053        -0.202         0.028         0.016        -0.037
+ MTI17I18      -0.001        -0.271         0.128         0.058        -0.118
+ MTI19I20       0.074         0.128        -0.065         0.060         0.195
+ MTI19I21       0.178        -0.068         0.146         0.428         0.310
+ MTI20I21       0.118        -0.226         0.193         0.372         0.221
+ MTI22I23       0.262         0.294         0.094         0.313         0.146
+ MTI22I24       0.026        -0.142        -0.061         0.081        -0.004
+ MTI23I24      -0.272        -0.396        -0.207        -0.291        -0.182
+ MTI25I26       0.016         0.159        -0.057         0.017         0.071
+ MTI25I27      -0.025        -0.056        -0.209        -0.112         0.056
+ MTI26I27      -0.106        -0.235        -0.104        -0.131        -0.084
+ MTI28I29      -0.195         0.167        -0.361        -0.241         0.157
+ MTI28I30      -0.035         0.472        -0.237        -0.003         0.212
+ MTI29I30       0.176         0.519         0.072         0.176         0.117
+ MTI31I32      -0.325        -0.475        -0.002        -0.260        -0.100
+ MTI31I33      -0.160        -0.502         0.290        -0.126        -0.402
+ MTI32I33       0.180        -0.130         0.527         0.184        -0.345
+ MTI34I35       0.262         0.208         0.245         0.243        -0.007
+ MTI34I36       0.231         0.469         0.057         0.225         0.094
+ MTI35I36       0.036         0.334        -0.197        -0.029         0.171
+ MTI37I38       0.103         0.228         0.055        -0.038        -0.117
+ MTI37I39      -0.127        -0.171        -0.062        -0.371        -0.318
+ MTI38I39      -0.171        -0.398        -0.041        -0.190        -0.125
+ MTI40I41       0.295         0.333         0.152         0.230        -0.062
+ MTI40I42       0.224         0.090         0.216         0.468         0.151
+ MTI41I42      -0.106        -0.324         0.069         0.259         0.293
+ MTI43I44       0.232         0.041         0.138         0.345         0.020
+ MTI43I45       0.187         0.376         0.110         0.174         0.030
+ MTI44I45      -0.015         0.227        -0.127        -0.179         0.026
+ MTI46I47      -0.235        -0.338        -0.213        -0.222        -0.011
+ MTI46I48       0.103        -0.214        -0.004         0.260         0.216
+ MTI47I48       0.332         0.216         0.144         0.531         0.341
+ MTI49I50      -0.170         0.093        -0.304        -0.159         0.112
+ MTI49I51       0.106         0.413        -0.122        -0.055         0.021
+ MTI50I51       0.272         0.391         0.104         0.198        -0.039
+ MTI52I53      -0.191         0.153        -0.536        -0.302         0.287
+ MTI52I54      -0.066         0.262        -0.466        -0.090         0.275
+ MTI53I54       0.138         0.256         0.028         0.262         0.105
+ MTI55I56      -0.167         0.083        -0.145        -0.196        -0.005
+ MTI55I57      -0.139        -0.072        -0.071        -0.191        -0.134
+ MTI56I57       0.130        -0.038         0.102         0.050         0.027
+ MTI58I59       0.182        -0.146         0.201         0.203         0.013
+ MTI58I60      -0.014        -0.397         0.143         0.003        -0.124
+ MTI59I60      -0.172        -0.402         0.030        -0.257        -0.210
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI16I17      MTI16I18      MTI17I18      MTI19I20      MTI19I21
+              ________      ________      ________      ________      ________
+ MTI16I18       0.359
+ MTI17I18      -0.758         0.337
+ MTI19I20       0.115        -0.181        -0.160
+ MTI19I21      -0.058         0.004         0.080         0.513
+ MTI20I21      -0.131         0.275         0.277        -0.397         0.584
+ MTI22I23       0.205        -0.067        -0.196        -0.006         0.087
+ MTI22I24       0.126         0.058         0.037        -0.023        -0.041
+ MTI23I24      -0.148         0.038         0.238         0.023        -0.079
+ MTI25I26      -0.063        -0.036        -0.124        -0.058        -0.152
+ MTI25I27      -0.230        -0.105         0.019         0.095        -0.023
+ MTI26I27      -0.106        -0.060         0.054         0.136         0.138
+ MTI28I29      -0.123        -0.210        -0.039         0.209        -0.125
+ MTI28I30       0.181        -0.084        -0.206         0.091        -0.351
+ MTI29I30       0.217        -0.049        -0.260        -0.028        -0.252
+ MTI31I32      -0.233         0.158         0.350         0.018         0.231
+ MTI31I33      -0.199         0.261         0.366        -0.252         0.190
+ MTI32I33      -0.051         0.121         0.251        -0.164         0.175
+ MTI34I35       0.001         0.196         0.123        -0.181         0.036
+ MTI34I36       0.093        -0.078        -0.259        -0.074        -0.247
+ MTI35I36       0.138        -0.219        -0.322         0.106        -0.339
+ MTI37I38       0.128        -0.048        -0.150        -0.154        -0.234
+ MTI37I39       0.033        -0.031         0.042        -0.016        -0.081
+ MTI38I39      -0.007         0.000         0.111         0.055         0.176
+ MTI40I41       0.144        -0.126        -0.261        -0.128        -0.192
+ MTI40I42       0.038        -0.077        -0.020        -0.036         0.328
+ MTI41I42      -0.100         0.109         0.177         0.076         0.489
+ MTI43I44       0.020         0.081         0.043        -0.063         0.077
+ MTI43I45      -0.001        -0.017        -0.041        -0.178        -0.302
+ MTI44I45       0.014        -0.010        -0.016        -0.143        -0.418
+ MTI46I47      -0.128        -0.051         0.096         0.176         0.289
+ MTI46I48      -0.152         0.051         0.159         0.199         0.582
+ MTI47I48      -0.063        -0.027         0.017        -0.064         0.314
+ MTI49I50      -0.022        -0.253        -0.149         0.374        -0.136
+ MTI49I51       0.045        -0.299        -0.269         0.168        -0.289
+ MTI50I51       0.035        -0.015        -0.068        -0.233        -0.250
+ MTI52I53       0.086        -0.116        -0.209         0.217        -0.142
+ MTI52I54       0.164        -0.184        -0.282         0.115        -0.210
+ MTI53I54       0.062        -0.074        -0.201        -0.138        -0.036
+ MTI55I56      -0.011        -0.162        -0.118        -0.120        -0.364
+ MTI55I57      -0.022        -0.090        -0.003         0.127        -0.003
+ MTI56I57       0.060        -0.006         0.054         0.289         0.308
+ MTI58I59       0.094         0.171         0.116         0.042         0.322
+ MTI58I60      -0.019         0.208         0.249        -0.070         0.189
+ MTI59I60      -0.182         0.161         0.313        -0.229         0.005
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI20I21      MTI22I23      MTI22I24      MTI23I24      MTI25I26
+              ________      ________      ________      ________      ________
+ MTI22I23      -0.100
+ MTI22I24       0.028         0.492
+ MTI23I24       0.115        -0.678         0.309
+ MTI25I26      -0.096        -0.135        -0.386        -0.159
+ MTI25I27      -0.083        -0.303        -0.368         0.042         0.613
+ MTI26I27       0.052        -0.173         0.072         0.258        -0.467
+ MTI28I29      -0.330        -0.104        -0.079         0.083         0.151
+ MTI28I30      -0.361         0.084        -0.108        -0.123         0.317
+ MTI29I30      -0.155         0.227        -0.001        -0.255         0.311
+ MTI31I32       0.243        -0.382        -0.060         0.310        -0.134
+ MTI31I33       0.403        -0.275        -0.009         0.211        -0.114
+ MTI32I33       0.334         0.164         0.107        -0.079        -0.107
+ MTI34I35       0.101         0.117        -0.206        -0.288         0.304
+ MTI34I36      -0.237         0.163        -0.193        -0.331         0.549
+ MTI35I36      -0.364         0.100        -0.003        -0.150         0.239
+ MTI37I38      -0.215         0.236        -0.026        -0.241        -0.017
+ MTI37I39       0.003        -0.104         0.078         0.147        -0.263
+ MTI38I39       0.200        -0.276         0.003         0.344        -0.178
+ MTI40I41      -0.084         0.357         0.136        -0.172         0.131
+ MTI40I42       0.394         0.305         0.266        -0.116        -0.074
+ MTI41I42       0.560        -0.128         0.081         0.103        -0.162
+ MTI43I44       0.149         0.278         0.161        -0.116        -0.003
+ MTI43I45      -0.195         0.285         0.115        -0.187         0.267
+ MTI44I45      -0.279         0.045        -0.040        -0.049         0.269
+ MTI46I47       0.067        -0.192        -0.046         0.210        -0.198
+ MTI46I48       0.481        -0.106        -0.053         0.070        -0.220
+ MTI47I48       0.469         0.172         0.069        -0.174        -0.046
+ MTI49I50      -0.523        -0.080        -0.052         0.087         0.041
+ MTI49I51      -0.547         0.121        -0.013        -0.117         0.192
+ MTI50I51      -0.055         0.231        -0.002        -0.200         0.281
+ MTI52I53      -0.381        -0.199        -0.146         0.038         0.138
+ MTI52I54      -0.418         0.117        -0.042        -0.099         0.211
+ MTI53I54      -0.078         0.273         0.058        -0.275         0.113
+ MTI55I56      -0.193        -0.201        -0.122         0.121         0.363
+ MTI55I57      -0.053        -0.278        -0.102         0.223         0.056
+ MTI56I57       0.071        -0.129        -0.006         0.092        -0.242
+ MTI58I59       0.264         0.323         0.235        -0.129        -0.427
+ MTI58I60       0.355         0.000         0.184         0.101        -0.348
+ MTI59I60       0.286        -0.394        -0.099         0.292         0.009
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI25I27      MTI26I27      MTI28I29      MTI28I30      MTI29I30
+              ________      ________      ________      ________      ________
+ MTI26I27       0.412
+ MTI28I29       0.215         0.045
+ MTI28I30       0.065        -0.287         0.614
+ MTI29I30      -0.114        -0.376        -0.175         0.670
+ MTI31I32       0.160         0.334         0.064        -0.396        -0.532
+ MTI31I33       0.055         0.251        -0.310        -0.595        -0.427
+ MTI32I33      -0.138        -0.015        -0.579        -0.437        -0.036
+ MTI34I35       0.082        -0.282        -0.115         0.082         0.181
+ MTI34I36      -0.003        -0.580         0.040         0.554         0.616
+ MTI35I36      -0.041        -0.377         0.168         0.586         0.545
+ MTI37I38      -0.166        -0.195        -0.014         0.258         0.231
+ MTI37I39       0.001         0.200         0.060        -0.023        -0.155
+ MTI38I39       0.221         0.447        -0.001        -0.384        -0.394
+ MTI40I41      -0.261        -0.392         0.014         0.357         0.356
+ MTI40I42      -0.298        -0.131        -0.173        -0.133         0.081
+ MTI41I42      -0.001         0.169        -0.136        -0.421        -0.305
+ MTI43I44      -0.240        -0.076        -0.315        -0.160         0.162
+ MTI43I45      -0.208        -0.465        -0.101         0.376         0.533
+ MTI44I45       0.004        -0.317         0.251         0.538         0.382
+ MTI46I47       0.321         0.569         0.045        -0.384        -0.490
+ MTI46I48       0.060         0.352        -0.015        -0.428        -0.425
+ MTI47I48      -0.276        -0.309        -0.190        -0.150         0.076
+ MTI49I50       0.184         0.223         0.461         0.299        -0.004
+ MTI49I51       0.031        -0.164         0.357         0.576         0.365
+ MTI50I51      -0.184        -0.454        -0.096         0.370         0.439
+ MTI52I53       0.129        -0.005         0.274         0.318         0.211
+ MTI52I54      -0.048        -0.274         0.228         0.410         0.360
+ MTI53I54      -0.156        -0.364         0.028         0.174         0.239
+ MTI55I56       0.184        -0.194         0.171         0.413         0.243
+ MTI55I57       0.289         0.228         0.113         0.116         0.044
+ MTI56I57       0.090         0.420        -0.016        -0.244        -0.235
+ MTI58I59      -0.265         0.115        -0.239        -0.403        -0.236
+ MTI58I60      -0.073         0.230        -0.179        -0.430        -0.243
+ MTI59I60       0.120         0.047        -0.046        -0.226        -0.252
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI31I32      MTI31I33      MTI32I33      MTI34I35      MTI34I36
+              ________      ________      ________      ________      ________
+ MTI31I33       0.757
+ MTI32I33      -0.060         0.608
+ MTI34I35      -0.140        -0.055         0.262
+ MTI34I36      -0.524        -0.405        -0.140         0.462
+ MTI35I36      -0.409        -0.454        -0.322        -0.387         0.639
+ MTI37I38      -0.388        -0.294         0.065        -0.002         0.309
+ MTI37I39       0.100         0.154         0.004        -0.261        -0.220
+ MTI38I39       0.574         0.531         0.018        -0.249        -0.524
+ MTI40I41      -0.513        -0.368        -0.070         0.006         0.384
+ MTI40I42      -0.077        -0.008         0.201        -0.003         0.097
+ MTI41I42       0.444         0.334         0.158        -0.071        -0.339
+ MTI43I44      -0.149         0.080         0.310         0.136         0.055
+ MTI43I45      -0.449        -0.291         0.174         0.216         0.476
+ MTI44I45      -0.215        -0.392        -0.289         0.072         0.399
+ MTI46I47       0.425         0.234        -0.012        -0.191        -0.532
+ MTI46I48       0.339         0.182         0.044        -0.145        -0.449
+ MTI47I48      -0.137        -0.087         0.132         0.106         0.116
+ MTI49I50       0.055        -0.227        -0.442        -0.200         0.002
+ MTI49I51      -0.390        -0.541        -0.339        -0.040         0.349
+ MTI50I51      -0.559        -0.398         0.033         0.208         0.487
+ MTI52I53      -0.037        -0.353        -0.498        -0.262         0.171
+ MTI52I54      -0.230        -0.466        -0.485        -0.154         0.339
+ MTI53I54      -0.234        -0.120        -0.024         0.090         0.235
+ MTI55I56      -0.064        -0.200        -0.266        -0.117         0.275
+ MTI55I57       0.148        -0.008        -0.150        -0.071         0.002
+ MTI56I57       0.200         0.139         0.108        -0.012        -0.307
+ MTI58I59       0.119         0.242         0.303         0.026        -0.267
+ MTI58I60       0.257         0.417         0.355        -0.041        -0.442
+ MTI59I60       0.275         0.398         0.166         0.081        -0.230
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI35I36      MTI37I38      MTI37I39      MTI38I39      MTI40I41
+              ________      ________      ________      ________      ________
+ MTI37I38       0.390
+ MTI37I39       0.052         0.539
+ MTI38I39      -0.389        -0.721         0.196
+ MTI40I41       0.338         0.405         0.002        -0.459
+ MTI40I42       0.005         0.026        -0.098        -0.115         0.462
+ MTI41I42      -0.357        -0.507        -0.117         0.378        -0.642
+ MTI43I44      -0.063        -0.053        -0.283        -0.137         0.063
+ MTI43I45       0.338         0.215        -0.203        -0.408         0.309
+ MTI44I45       0.391         0.248         0.098        -0.203         0.229
+ MTI46I47      -0.390        -0.176         0.166         0.381        -0.439
+ MTI46I48      -0.430        -0.282        -0.153         0.314        -0.340
+ MTI47I48      -0.072        -0.062        -0.244        -0.153         0.121
+ MTI49I50       0.266        -0.040        -0.071        -0.002        -0.216
+ MTI49I51       0.500         0.431        -0.091        -0.513         0.352
+ MTI50I51       0.372         0.517        -0.086        -0.637         0.590
+ MTI52I53       0.454         0.014        -0.062        -0.057        -0.160
+ MTI52I54       0.539         0.136        -0.104        -0.289         0.148
+ MTI53I54       0.196         0.193        -0.131        -0.261         0.282
+ MTI55I56       0.368         0.204         0.009        -0.176         0.138
+ MTI55I57       0.102         0.018         0.088         0.188        -0.133
+ MTI56I57      -0.276        -0.129         0.089         0.252        -0.217
+ MTI58I59      -0.261        -0.048         0.013         0.093        -0.080
+ MTI58I60      -0.376        -0.092         0.204         0.287        -0.188
+ MTI59I60      -0.255        -0.221         0.128         0.352        -0.164
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI40I42      MTI41I42      MTI43I44      MTI43I45      MTI44I45
+              ________      ________      ________      ________      ________
+ MTI41I42       0.388
+ MTI43I44       0.236         0.067
+ MTI43I45       0.077        -0.283         0.425
+ MTI44I45      -0.206        -0.341        -0.540         0.532
+ MTI46I47      -0.123         0.314        -0.102        -0.472        -0.292
+ MTI46I48       0.274         0.638         0.060        -0.309        -0.361
+ MTI47I48       0.556         0.385         0.217         0.208        -0.155
+ MTI49I50      -0.225        -0.071        -0.106        -0.090         0.082
+ MTI49I51      -0.150        -0.534         0.028         0.352         0.240
+ MTI50I51       0.084        -0.481         0.258         0.511         0.176
+ MTI52I53      -0.298        -0.150        -0.090         0.048         0.257
+ MTI52I54      -0.060        -0.275        -0.112         0.253         0.345
+ MTI53I54       0.167        -0.174         0.163         0.348         0.119
+ MTI55I56      -0.083        -0.255        -0.173         0.251         0.357
+ MTI55I57      -0.130        -0.109        -0.072        -0.043         0.059
+ MTI56I57       0.027         0.179         0.049        -0.293        -0.298
+ MTI58I59       0.143         0.194         0.158        -0.177        -0.302
+ MTI58I60       0.130         0.254         0.103        -0.281        -0.321
+ MTI59I60       0.041         0.165        -0.055        -0.132        -0.105
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI46I47      MTI46I48      MTI47I48      MTI49I50      MTI49I51
+              ________      ________      ________      ________      ________
+ MTI46I48       0.743
+ MTI47I48      -0.350         0.367
+ MTI49I50       0.252        -0.004        -0.307
+ MTI49I51      -0.174        -0.240        -0.067         0.645
+ MTI50I51      -0.482        -0.351         0.192        -0.452         0.390
+ MTI52I53       0.009        -0.210        -0.168         0.407         0.255
+ MTI52I54      -0.185        -0.237         0.081         0.341         0.440
+ MTI53I54      -0.239        -0.067         0.212        -0.075         0.250
+ MTI55I56      -0.101        -0.172        -0.083         0.055         0.313
+ MTI55I57       0.170         0.042        -0.216         0.222         0.115
+ MTI56I57       0.271         0.342        -0.067         0.109        -0.166
+ MTI58I59       0.163         0.332         0.127        -0.231        -0.318
+ MTI58I60       0.224         0.263         0.021        -0.182        -0.392
+ MTI59I60       0.105         0.091        -0.030        -0.140        -0.243
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI50I51      MTI52I53      MTI52I54      MTI53I54      MTI55I56
+              ________      ________      ________      ________      ________
+ MTI52I53      -0.065
+ MTI52I54       0.178         0.602
+ MTI53I54       0.265        -0.397         0.493
+ MTI55I56       0.229         0.286         0.318         0.109
+ MTI55I57      -0.192         0.134         0.061        -0.140         0.415
+ MTI56I57      -0.343        -0.022        -0.312        -0.296        -0.533
+ MTI58I59      -0.173        -0.200        -0.269        -0.076        -0.519
+ MTI58I60      -0.266        -0.318        -0.430        -0.179        -0.445
+ MTI59I60      -0.204        -0.204        -0.294        -0.184         0.127
+
+
+           CORRELATION MATRIX (WITH VARIANCES ON THE DIAGONAL)
+              MTI55I57      MTI56I57      MTI58I59      MTI58I60      MTI59I60
+              ________      ________      ________      ________      ________
+ MTI56I57       0.549
+ MTI58I59      -0.327         0.242
+ MTI58I60      -0.192         0.225         0.743
+ MTI59I60       0.218         0.064        -0.283         0.431
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     WARNING:  THE RESIDUAL COVARIANCE MATRIX (THETA) IS NOT POSITIVE DEFINITE.
+     THIS COULD INDICATE A NEGATIVE VARIANCE/RESIDUAL VARIANCE FOR AN OBSERVED
+     VARIABLE, A CORRELATION GREATER OR EQUAL TO ONE BETWEEN TWO OBSERVED
+     VARIABLES, OR A LINEAR DEPENDENCY AMONG MORE THAN TWO OBSERVED VARIABLES.
+     CHECK THE RESULTS SECTION FOR MORE INFORMATION.
+     PROBLEM INVOLVING VARIABLE MTI02I03.
+
+
+     THE MODEL CONTAINS A NON-ZERO CORRELATION BETWEEN DEPENDENT VARIABLES.
+     SUCH CORRELATIONS ARE IGNORED IN THE COMPUTATION OF THE FACTOR SCORES.
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                      150
+
+Chi-Square Test of Model Fit
+
+          Value                           2932.966*
+          Degrees of Freedom                  1680
+          P-Value                           0.0000
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.035
+          90 Percent C.I.                    0.033  0.038
+          Probability RMSEA <= .05           1.000
+
+CFI/TLI
+
+          CFI                                0.850
+          TLI                                0.842
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                          10138.532
+          Degrees of Freedom                  1770
+          P-Value                           0.0000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ BFT_FC_N BY
+    MTI01I02           0.740      0.120      6.161      0.000
+    MTI01I03           0.740      0.120      6.161      0.000
+    MTI04I06          -0.711      0.109     -6.503      0.000
+    MTI05I06          -0.711      0.109     -6.503      0.000
+    MTI07I09          -0.659      0.096     -6.843      0.000
+    MTI08I09          -0.659      0.096     -6.843      0.000
+    MTI10I12          -0.859      0.120     -7.155      0.000
+    MTI11I12          -0.859      0.120     -7.155      0.000
+    MTI13I14          -1.267      0.280     -4.524      0.000
+    MTI13I15          -1.267      0.280     -4.524      0.000
+    MTI22I23          -0.965      0.138     -7.008      0.000
+    MTI22I24          -0.965      0.138     -7.008      0.000
+    MTI25I27           0.485      0.077      6.314      0.000
+    MTI26I27           0.485      0.077      6.314      0.000
+    MTI28I29           0.583      0.098      5.965      0.000
+    MTI29I30          -0.583      0.098     -5.965      0.000
+    MTI31I32           0.575      0.076      7.521      0.000
+    MTI32I33          -0.575      0.076     -7.521      0.000
+    MTI34I35          -0.562      0.096     -5.822      0.000
+    MTI34I36          -0.562      0.096     -5.822      0.000
+    MTI37I39           0.361      0.061      5.956      0.000
+    MTI38I39           0.361      0.061      5.956      0.000
+    MTI40I41          -0.515      0.087     -5.952      0.000
+    MTI40I42          -0.515      0.087     -5.952      0.000
+    MTI43I44          -0.684      0.115     -5.929      0.000
+    MTI43I45          -0.684      0.115     -5.929      0.000
+    MTI46I47           0.581      0.084      6.912      0.000
+    MTI47I48          -0.581      0.084     -6.912      0.000
+    MTI49I50           0.630      0.091      6.945      0.000
+    MTI50I51          -0.630      0.091     -6.945      0.000
+    MTI55I57           0.236      0.155      1.529      0.126
+    MTI56I57           0.236      0.155      1.529      0.126
+
+ BFT_FC_E BY
+    MTI01I02           0.401      0.092      4.364      0.000
+    MTI02I03          -0.401      0.092     -4.364      0.000
+    MTI04I05           0.386      0.086      4.487      0.000
+    MTI05I06          -0.386      0.086     -4.487      0.000
+    MTI07I08          -0.608      0.094     -6.446      0.000
+    MTI07I09          -0.608      0.094     -6.446      0.000
+    MTI10I11          -1.030      0.136     -7.554      0.000
+    MTI11I12           1.030      0.136      7.554      0.000
+    MTI13I14          -1.204      0.280     -4.298      0.000
+    MTI14I15           1.204      0.280      4.298      0.000
+    MTI16I18          -0.610      0.095     -6.412      0.000
+    MTI17I18          -0.610      0.095     -6.412      0.000
+    MTI19I20           0.851      0.109      7.783      0.000
+    MTI20I21          -0.851      0.109     -7.783      0.000
+    MTI28I29           0.802      0.124      6.456      0.000
+    MTI28I30           0.802      0.124      6.456      0.000
+    MTI31I33          -1.010      0.144     -7.027      0.000
+    MTI32I33          -1.010      0.144     -7.027      0.000
+    MTI34I35          -0.214      0.097     -2.213      0.027
+    MTI35I36           0.214      0.097      2.213      0.027
+    MTI49I50           0.792      0.117      6.773      0.000
+    MTI49I51           0.792      0.117      6.773      0.000
+    MTI52I53           0.762      0.106      7.182      0.000
+    MTI52I54           0.762      0.106      7.182      0.000
+    MTI58I60          -0.558      0.107     -5.190      0.000
+    MTI59I60          -0.558      0.107     -5.190      0.000
+
+ BFT_FC_O BY
+    MTI10I11          -0.344      0.094     -3.647      0.000
+    MTI10I12          -0.344      0.094     -3.647      0.000
+    MTI13I15          -1.414      0.326     -4.332      0.000
+    MTI14I15          -1.414      0.326     -4.332      0.000
+    MTI16I17           0.150      0.096      1.564      0.118
+    MTI17I18          -0.150      0.096     -1.564      0.118
+    MTI19I21          -1.010      0.122     -8.291      0.000
+    MTI20I21          -1.010      0.122     -8.291      0.000
+    MTI22I23           0.078      0.102      0.770      0.441
+    MTI23I24          -0.078      0.102     -0.770      0.441
+    MTI37I38           0.074      0.074      1.010      0.312
+    MTI37I39           0.074      0.074      1.010      0.312
+    MTI40I42          -0.721      0.106     -6.783      0.000
+    MTI41I42          -0.721      0.106     -6.783      0.000
+    MTI43I44          -0.378      0.117     -3.245      0.001
+    MTI44I45           0.378      0.117      3.245      0.001
+    MTI46I48          -0.717      0.103     -6.995      0.000
+    MTI47I48          -0.717      0.103     -6.995      0.000
+    MTI52I53           0.426      0.089      4.814      0.000
+    MTI53I54          -0.426      0.089     -4.814      0.000
+
+ BFT_FC_A BY
+    MTI01I03           0.624      0.114      5.473      0.000
+    MTI02I03           0.624      0.114      5.473      0.000
+    MTI04I05           0.054      0.098      0.550      0.582
+    MTI04I06           0.054      0.098      0.550      0.582
+    MTI16I17           0.254      0.086      2.969      0.003
+    MTI16I18           0.254      0.086      2.969      0.003
+    MTI22I24          -0.904      0.140     -6.442      0.000
+    MTI23I24          -0.904      0.140     -6.442      0.000
+    MTI25I26           0.011      0.088      0.123      0.902
+    MTI25I27           0.011      0.088      0.123      0.902
+    MTI55I56          -0.657      0.173     -3.792      0.000
+    MTI55I57          -0.657      0.173     -3.792      0.000
+    MTI58I59           0.590      0.099      5.988      0.000
+    MTI59I60          -0.590      0.099     -5.988      0.000
+
+ BFT_FC_C BY
+    MTI07I08           0.430      0.089      4.835      0.000
+    MTI08I09          -0.430      0.089     -4.835      0.000
+    MTI19I20           0.558      0.099      5.654      0.000
+    MTI19I21           0.558      0.099      5.654      0.000
+    MTI25I26          -0.540      0.077     -7.028      0.000
+    MTI26I27           0.540      0.077      7.028      0.000
+    MTI28I30          -1.188      0.176     -6.762      0.000
+    MTI29I30          -1.188      0.176     -6.762      0.000
+    MTI31I32           0.766      0.101      7.573      0.000
+    MTI31I33           0.766      0.101      7.573      0.000
+    MTI34I36          -1.276      0.159     -8.049      0.000
+    MTI35I36          -1.276      0.159     -8.049      0.000
+    MTI37I38          -0.629      0.086     -7.290      0.000
+    MTI38I39           0.629      0.086      7.290      0.000
+    MTI40I41          -0.788      0.111     -7.118      0.000
+    MTI41I42           0.788      0.111      7.118      0.000
+    MTI43I45          -0.906      0.135     -6.729      0.000
+    MTI44I45          -0.906      0.135     -6.729      0.000
+    MTI46I47           0.729      0.106      6.877      0.000
+    MTI46I48           0.729      0.106      6.877      0.000
+    MTI49I51          -0.714      0.099     -7.198      0.000
+    MTI50I51          -0.714      0.099     -7.198      0.000
+    MTI52I54          -0.562      0.091     -6.188      0.000
+    MTI53I54          -0.562      0.091     -6.188      0.000
+    MTI55I56          -1.090      0.191     -5.700      0.000
+    MTI56I57           1.090      0.191      5.700      0.000
+    MTI58I59           0.821      0.114      7.204      0.000
+    MTI58I60           0.821      0.114      7.204      0.000
+
+ BFT_FC_N WITH
+    BFT_FC_E          -0.015      0.069     -0.220      0.826
+    BFT_FC_O           0.176      0.070      2.522      0.012
+    BFT_FC_A          -0.793      0.050    -15.927      0.000
+    BFT_FC_C           0.177      0.064      2.765      0.006
+
+ BFT_FC_E WITH
+    BFT_FC_O           0.024      0.072      0.334      0.738
+    BFT_FC_A           0.222      0.076      2.910      0.004
+    BFT_FC_C          -0.447      0.055     -8.174      0.000
+
+ BFT_FC_O WITH
+    BFT_FC_A          -0.111      0.083     -1.336      0.182
+    BFT_FC_C          -0.262      0.071     -3.693      0.000
+
+ BFT_FC_A WITH
+    BFT_FC_C          -0.302      0.072     -4.207      0.000
+
+ MTI01I02 WITH
+    MTI01I03           1.000      0.000    999.000    999.000
+    MTI02I03          -0.994      0.297     -3.344      0.001
+
+ MTI01I03 WITH
+    MTI02I03           1.096      0.306      3.586      0.000
+
+ MTI04I05 WITH
+    MTI04I06           1.000      0.000    999.000    999.000
+    MTI05I06          -0.986      0.284     -3.469      0.001
+
+ MTI04I06 WITH
+    MTI05I06           0.868      0.263      3.296      0.001
+
+ MTI07I08 WITH
+    MTI07I09           1.000      0.000    999.000    999.000
+    MTI08I09          -0.986      0.259     -3.805      0.000
+
+ MTI07I09 WITH
+    MTI08I09           0.499      0.198      2.516      0.012
+
+ MTI10I11 WITH
+    MTI10I12           1.000      0.000    999.000    999.000
+    MTI11I12          -0.623      0.244     -2.546      0.011
+
+ MTI10I12 WITH
+    MTI11I12           0.654      0.249      2.625      0.009
+
+ MTI13I14 WITH
+    MTI13I15           1.000      0.000    999.000    999.000
+    MTI14I15          -4.575      2.113     -2.166      0.030
+
+ MTI13I15 WITH
+    MTI14I15           1.500      0.968      1.550      0.121
+
+ MTI16I17 WITH
+    MTI16I18           1.000      0.000    999.000    999.000
+    MTI17I18          -1.398      0.388     -3.602      0.000
+
+ MTI16I18 WITH
+    MTI17I18           0.510      0.200      2.543      0.011
+
+ MTI19I20 WITH
+    MTI19I21           1.000      0.000    999.000    999.000
+    MTI20I21          -0.407      0.162     -2.520      0.012
+
+ MTI19I21 WITH
+    MTI20I21           0.295      0.179      1.645      0.100
+
+ MTI22I23 WITH
+    MTI22I24           1.000      0.000    999.000    999.000
+    MTI23I24          -1.024      0.318     -3.221      0.001
+
+ MTI22I24 WITH
+    MTI23I24           0.528      0.199      2.648      0.008
+
+ MTI25I26 WITH
+    MTI25I27           1.000      0.000    999.000    999.000
+    MTI26I27          -0.550      0.155     -3.554      0.000
+
+ MTI25I27 WITH
+    MTI26I27           0.465      0.146      3.182      0.001
+
+ MTI28I29 WITH
+    MTI28I30           1.000      0.000    999.000    999.000
+    MTI29I30          -0.563      0.225     -2.505      0.012
+
+ MTI28I30 WITH
+    MTI29I30           1.088      0.380      2.863      0.004
+
+ MTI31I32 WITH
+    MTI31I33           1.000      0.000    999.000    999.000
+    MTI32I33          -0.050      0.109     -0.464      0.642
+
+ MTI31I33 WITH
+    MTI32I33           0.813      0.233      3.492      0.000
+
+ MTI34I35 WITH
+    MTI34I36           1.000      0.000    999.000    999.000
+    MTI35I36          -1.105      0.285     -3.874      0.000
+
+ MTI34I36 WITH
+    MTI35I36           0.383      0.236      1.623      0.105
+
+ MTI37I38 WITH
+    MTI37I39           1.000      0.000    999.000    999.000
+    MTI38I39          -0.581      0.149     -3.904      0.000
+
+ MTI37I39 WITH
+    MTI38I39           0.088      0.074      1.183      0.237
+
+ MTI40I41 WITH
+    MTI40I42           1.000      0.000    999.000    999.000
+    MTI41I42          -0.853      0.227     -3.752      0.000
+
+ MTI40I42 WITH
+    MTI41I42           0.302      0.169      1.786      0.074
+
+ MTI43I44 WITH
+    MTI43I45           1.000      0.000    999.000    999.000
+    MTI44I45          -1.467      0.437     -3.358      0.001
+
+ MTI43I45 WITH
+    MTI44I45           0.821      0.345      2.381      0.017
+
+ MTI46I47 WITH
+    MTI46I48           1.000      0.000    999.000    999.000
+    MTI47I48          -0.544      0.161     -3.377      0.001
+
+ MTI46I48 WITH
+    MTI47I48           0.294      0.150      1.956      0.051
+
+ MTI49I50 WITH
+    MTI49I51           1.000      0.000    999.000    999.000
+    MTI50I51          -0.677      0.190     -3.556      0.000
+
+ MTI49I51 WITH
+    MTI50I51           0.332      0.158      2.104      0.035
+
+ MTI52I53 WITH
+    MTI52I54           1.000      0.000    999.000    999.000
+    MTI53I54          -0.675      0.215     -3.142      0.002
+
+ MTI52I54 WITH
+    MTI53I54           0.597      0.230      2.591      0.010
+
+ MTI55I56 WITH
+    MTI55I57           1.000      0.000    999.000    999.000
+    MTI56I57          -1.242      0.577     -2.151      0.031
+
+ MTI55I57 WITH
+    MTI56I57           4.020      1.610      2.497      0.013
+
+ MTI58I59 WITH
+    MTI58I60           1.000      0.000    999.000    999.000
+    MTI59I60          -0.306      0.181     -1.686      0.092
+
+ MTI58I60 WITH
+    MTI59I60           1.141      0.372      3.069      0.002
+
+ Means
+    BFT_FC_N           0.000      0.000    999.000    999.000
+    BFT_FC_E           0.000      0.000    999.000    999.000
+    BFT_FC_O           0.000      0.000    999.000    999.000
+    BFT_FC_A           0.000      0.000    999.000    999.000
+    BFT_FC_C           0.000      0.000    999.000    999.000
+
+ Thresholds
+    MTI01I02$1        -0.695      0.098     -7.079      0.000
+    MTI01I03$1        -0.541      0.087     -6.200      0.000
+    MTI02I03$1         0.154      0.078      1.973      0.049
+    MTI04I05$1         0.730      0.098      7.438      0.000
+    MTI04I06$1        -0.247      0.085     -2.910      0.004
+    MTI05I06$1        -0.977      0.124     -7.902      0.000
+    MTI07I08$1        -0.117      0.082     -1.429      0.153
+    MTI07I09$1        -0.576      0.085     -6.740      0.000
+    MTI08I09$1        -0.459      0.087     -5.288      0.000
+    MTI10I11$1         0.661      0.097      6.846      0.000
+    MTI10I12$1         0.891      0.110      8.109      0.000
+    MTI11I12$1         0.229      0.093      2.455      0.014
+    MTI13I14$1        -0.078      0.146     -0.534      0.593
+    MTI13I15$1         1.486      0.329      4.524      0.000
+    MTI14I15$1         1.564      0.358      4.365      0.000
+    MTI16I17$1        -0.923      0.116     -7.943      0.000
+    MTI16I18$1        -0.182      0.064     -2.825      0.005
+    MTI17I18$1         0.741      0.112      6.628      0.000
+    MTI19I20$1        -0.429      0.078     -5.533      0.000
+    MTI19I21$1        -0.246      0.083     -2.965      0.003
+    MTI20I21$1         0.183      0.078      2.345      0.019
+    MTI22I23$1         0.283      0.091      3.121      0.002
+    MTI22I24$1        -0.203      0.071     -2.883      0.004
+    MTI23I24$1        -0.486      0.094     -5.177      0.000
+    MTI25I26$1        -0.248      0.067     -3.675      0.000
+    MTI25I27$1        -0.257      0.066     -3.897      0.000
+    MTI26I27$1        -0.009      0.061     -0.154      0.878
+    MTI28I29$1        -0.054      0.080     -0.667      0.505
+    MTI28I30$1        -0.542      0.122     -4.432      0.000
+    MTI29I30$1        -0.489      0.108     -4.519      0.000
+    MTI31I32$1        -0.254      0.077     -3.311      0.001
+    MTI31I33$1        -0.821      0.123     -6.683      0.000
+    MTI32I33$1        -0.568      0.098     -5.780      0.000
+    MTI34I35$1        -0.575      0.091     -6.349      0.000
+    MTI34I36$1        -0.549      0.103     -5.305      0.000
+    MTI35I36$1         0.026      0.091      0.283      0.777
+    MTI37I38$1        -0.586      0.079     -7.435      0.000
+    MTI37I39$1        -0.206      0.054     -3.835      0.000
+    MTI38I39$1         0.380      0.068      5.561      0.000
+    MTI40I41$1        -0.150      0.083     -1.803      0.071
+    MTI40I42$1        -0.353      0.077     -4.586      0.000
+    MTI41I42$1        -0.204      0.081     -2.506      0.012
+    MTI43I44$1         0.603      0.112      5.375      0.000
+    MTI43I45$1        -0.418      0.102     -4.082      0.000
+    MTI44I45$1        -1.020      0.150     -6.800      0.000
+    MTI46I47$1        -0.564      0.086     -6.525      0.000
+    MTI46I48$1        -0.724      0.095     -7.625      0.000
+    MTI47I48$1        -0.161      0.068     -2.354      0.019
+    MTI49I50$1         0.175      0.083      2.113      0.035
+    MTI49I51$1         0.028      0.082      0.345      0.730
+    MTI50I51$1        -0.147      0.072     -2.036      0.042
+    MTI52I53$1         0.118      0.076      1.543      0.123
+    MTI52I54$1         0.154      0.081      1.906      0.057
+    MTI53I54$1         0.037      0.065      0.562      0.574
+    MTI55I56$1        -0.272      0.102     -2.672      0.008
+    MTI55I57$1        -1.517      0.272     -5.576      0.000
+    MTI56I57$1        -1.245      0.248     -5.030      0.000
+    MTI58I59$1         0.118      0.077      1.524      0.128
+    MTI58I60$1        -0.819      0.131     -6.243      0.000
+    MTI59I60$1        -0.936      0.136     -6.906      0.000
+
+ Variances
+    BFT_FC_N           1.000      0.000    999.000    999.000
+    BFT_FC_E           1.000      0.000    999.000    999.000
+    BFT_FC_O           1.000      0.000    999.000    999.000
+    BFT_FC_A           1.000      0.000    999.000    999.000
+    BFT_FC_C           1.000      0.000    999.000    999.000
+
+ Residual Variances
+    MTI01I02           1.994      0.297      6.706      0.000
+    MTI01I03           2.096      0.306      6.859      0.000
+    MTI02I03           2.090      0.522      4.004      0.000
+    MTI04I05           1.986      0.284      6.988      0.000
+    MTI04I06           1.868      0.263      7.095      0.000
+    MTI05I06           1.854      0.461      4.024      0.000
+    MTI07I08           1.986      0.259      7.665      0.000
+    MTI07I09           1.499      0.198      7.559      0.000
+    MTI08I09           1.485      0.379      3.915      0.000
+    MTI10I11           1.623      0.244      6.637      0.000
+    MTI10I12           1.654      0.249      6.639      0.000
+    MTI11I12           1.276      0.394      3.238      0.001
+    MTI13I14           5.575      2.113      2.639      0.008
+    MTI13I15           2.500      0.968      2.583      0.010
+    MTI14I15           6.075      2.915      2.084      0.037
+    MTI16I17           2.398      0.388      6.179      0.000
+    MTI16I18           1.510      0.200      7.532      0.000
+    MTI17I18           1.907      0.508      3.755      0.000
+    MTI19I20           1.407      0.162      8.708      0.000
+    MTI19I21           1.295      0.179      7.220      0.000
+    MTI20I21           0.702      0.243      2.895      0.004
+    MTI22I23           2.024      0.318      6.367      0.000
+    MTI22I24           1.528      0.199      7.667      0.000
+    MTI23I24           1.551      0.434      3.578      0.000
+    MTI25I26           1.550      0.155     10.022      0.000
+    MTI25I27           1.465      0.146     10.020      0.000
+    MTI26I27           1.015      0.233      4.357      0.000
+    MTI28I29           1.563      0.225      6.951      0.000
+    MTI28I30           2.088      0.380      5.494      0.000
+    MTI29I30           1.651      0.504      3.273      0.001
+    MTI31I32           1.050      0.109      9.678      0.000
+    MTI31I33           1.813      0.233      7.785      0.000
+    MTI32I33           0.864      0.267      3.238      0.001
+    MTI34I35           2.105      0.285      7.379      0.000
+    MTI34I36           1.383      0.236      5.862      0.000
+    MTI35I36           1.488      0.433      3.437      0.001
+    MTI37I38           1.581      0.149     10.621      0.000
+    MTI37I39           1.088      0.074     14.679      0.000
+    MTI38I39           0.669      0.161      4.158      0.000
+    MTI40I41           1.853      0.227      8.148      0.000
+    MTI40I42           1.302      0.169      7.704      0.000
+    MTI41I42           1.155      0.313      3.686      0.000
+    MTI43I44           2.467      0.437      5.646      0.000
+    MTI43I45           1.821      0.345      5.281      0.000
+    MTI44I45           2.289      0.691      3.310      0.001
+    MTI46I47           1.544      0.161      9.589      0.000
+    MTI46I48           1.294      0.150      8.617      0.000
+    MTI47I48           0.837      0.235      3.557      0.000
+    MTI49I50           1.677      0.190      8.809      0.000
+    MTI49I51           1.332      0.158      8.440      0.000
+    MTI50I51           1.009      0.274      3.679      0.000
+    MTI52I53           1.675      0.215      7.795      0.000
+    MTI52I54           1.597      0.230      6.930      0.000
+    MTI53I54           1.272      0.384      3.312      0.001
+    MTI55I56           2.242      0.577      3.883      0.000
+    MTI55I57           5.020      1.610      3.118      0.002
+    MTI56I57           5.262      2.043      2.575      0.010
+    MTI58I59           1.306      0.181      7.196      0.000
+    MTI58I60           2.141      0.372      5.759      0.000
+    MTI59I60           1.447      0.457      3.164      0.002
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ BFT_FC_N BY
+    MTI01I02           0.451      0.050      8.986      0.000
+    MTI01I03           0.488      0.066      7.352      0.000
+    MTI04I06          -0.456      0.055     -8.274      0.000
+    MTI05I06          -0.450      0.052     -8.698      0.000
+    MTI07I09          -0.435      0.046     -9.418      0.000
+    MTI08I09          -0.444      0.045     -9.844      0.000
+    MTI10I12          -0.532      0.046    -11.610      0.000
+    MTI11I12          -0.488      0.042    -11.569      0.000
+    MTI13I14          -0.432      0.042    -10.264      0.000
+    MTI13I15          -0.488      0.045    -10.900      0.000
+    MTI22I23          -0.563      0.048    -11.763      0.000
+    MTI22I24          -0.701      0.078     -8.974      0.000
+    MTI25I27           0.373      0.052      7.227      0.000
+    MTI26I27           0.379      0.048      7.820      0.000
+    MTI28I29           0.366      0.048      7.684      0.000
+    MTI29I30          -0.305      0.042     -7.194      0.000
+    MTI31I32           0.394      0.043      9.184      0.000
+    MTI32I33          -0.388      0.048     -8.025      0.000
+    MTI34I35          -0.358      0.049     -7.293      0.000
+    MTI34I36          -0.297      0.042     -7.100      0.000
+    MTI37I39           0.325      0.049      6.664      0.000
+    MTI38I39           0.320      0.043      7.412      0.000
+    MTI40I41          -0.303      0.043     -7.110      0.000
+    MTI40I42          -0.346      0.049     -7.019      0.000
+    MTI43I44          -0.384      0.047     -8.174      0.000
+    MTI43I45          -0.375      0.046     -8.065      0.000
+    MTI46I47           0.363      0.040      9.177      0.000
+    MTI47I48          -0.429      0.046     -9.417      0.000
+    MTI49I50           0.384      0.042      9.166      0.000
+    MTI50I51          -0.437      0.044     -9.865      0.000
+    MTI55I57           0.098      0.059      1.663      0.096
+    MTI56I57           0.092      0.056      1.640      0.101
+
+ BFT_FC_E BY
+    MTI01I02           0.244      0.048      5.040      0.000
+    MTI02I03          -0.252      0.051     -4.969      0.000
+    MTI04I05           0.264      0.052      5.055      0.000
+    MTI05I06          -0.244      0.049     -5.034      0.000
+    MTI07I08          -0.365      0.045     -8.101      0.000
+    MTI07I09          -0.402      0.053     -7.620      0.000
+    MTI10I11          -0.613      0.048    -12.904      0.000
+    MTI11I12           0.585      0.047     12.421      0.000
+    MTI13I14          -0.411      0.054     -7.599      0.000
+    MTI14I15           0.392      0.055      7.162      0.000
+    MTI16I18          -0.445      0.051     -8.750      0.000
+    MTI17I18          -0.402      0.046     -8.696      0.000
+    MTI19I20           0.599      0.053     11.246      0.000
+    MTI20I21          -0.540      0.049    -11.014      0.000
+    MTI28I29           0.504      0.050     10.079      0.000
+    MTI28I30           0.359      0.041      8.681      0.000
+    MTI31I33          -0.498      0.040    -12.422      0.000
+    MTI32I33          -0.681      0.045    -15.246      0.000
+    MTI34I35          -0.136      0.058     -2.340      0.019
+    MTI35I36           0.116      0.049      2.364      0.018
+    MTI49I50           0.483      0.049      9.870      0.000
+    MTI49I51           0.459      0.046      9.925      0.000
+    MTI52I53           0.486      0.047     10.453      0.000
+    MTI52I54           0.449      0.042     10.669      0.000
+    MTI58I60          -0.297      0.043     -6.831      0.000
+    MTI59I60          -0.372      0.054     -6.904      0.000
+
+ BFT_FC_O BY
+    MTI10I11          -0.205      0.052     -3.945      0.000
+    MTI10I12          -0.213      0.054     -3.972      0.000
+    MTI13I15          -0.545      0.058     -9.466      0.000
+    MTI14I15          -0.460      0.051     -9.086      0.000
+    MTI16I17           0.095      0.060      1.582      0.114
+    MTI17I18          -0.099      0.062     -1.592      0.111
+    MTI19I21          -0.591      0.044    -13.367      0.000
+    MTI20I21          -0.640      0.048    -13.429      0.000
+    MTI22I23           0.046      0.059      0.772      0.440
+    MTI23I24          -0.051      0.066     -0.773      0.440
+    MTI37I38           0.052      0.052      1.015      0.310
+    MTI37I39           0.067      0.066      1.012      0.312
+    MTI40I42          -0.484      0.054     -8.976      0.000
+    MTI41I42          -0.448      0.052     -8.658      0.000
+    MTI43I44          -0.212      0.060     -3.541      0.000
+    MTI44I45           0.204      0.058      3.531      0.000
+    MTI46I48          -0.444      0.048     -9.162      0.000
+    MTI47I48          -0.530      0.054     -9.756      0.000
+    MTI52I53           0.272      0.050      5.492      0.000
+    MTI53I54          -0.332      0.061     -5.473      0.000
+
+ BFT_FC_A BY
+    MTI01I03           0.411      0.069      5.969      0.000
+    MTI02I03           0.392      0.058      6.770      0.000
+    MTI04I05           0.037      0.067      0.552      0.581
+    MTI04I06           0.035      0.062      0.555      0.579
+    MTI16I17           0.162      0.053      3.048      0.002
+    MTI16I18           0.186      0.060      3.101      0.002
+    MTI22I24          -0.657      0.084     -7.801      0.000
+    MTI23I24          -0.588      0.056    -10.524      0.000
+    MTI25I26           0.008      0.065      0.123      0.902
+    MTI25I27           0.008      0.068      0.123      0.902
+    MTI55I56          -0.355      0.068     -5.250      0.000
+    MTI55I57          -0.274      0.060     -4.554      0.000
+    MTI58I59           0.414      0.061      6.821      0.000
+    MTI59I60          -0.393      0.057     -6.921      0.000
+
+ BFT_FC_C BY
+    MTI07I08           0.258      0.045      5.706      0.000
+    MTI08I09          -0.290      0.049     -5.915      0.000
+    MTI19I20           0.392      0.060      6.566      0.000
+    MTI19I21           0.326      0.047      6.885      0.000
+    MTI25I26          -0.397      0.044     -8.944      0.000
+    MTI26I27           0.422      0.047      8.940      0.000
+    MTI28I30          -0.532      0.039    -13.723      0.000
+    MTI29I30          -0.622      0.040    -15.373      0.000
+    MTI31I32           0.526      0.045     11.703      0.000
+    MTI31I33           0.378      0.039      9.746      0.000
+    MTI34I36          -0.674      0.036    -18.575      0.000
+    MTI35I36          -0.691      0.042    -16.305      0.000
+    MTI37I38          -0.444      0.043    -10.272      0.000
+    MTI38I39           0.557      0.044     12.618      0.000
+    MTI40I41          -0.464      0.044    -10.661      0.000
+    MTI41I42           0.489      0.044     11.237      0.000
+    MTI43I45          -0.497      0.046    -10.871      0.000
+    MTI44I45          -0.489      0.047    -10.485      0.000
+    MTI46I47           0.455      0.047      9.627      0.000
+    MTI46I48           0.451      0.048      9.322      0.000
+    MTI49I51          -0.414      0.039    -10.583      0.000
+    MTI50I51          -0.496      0.043    -11.573      0.000
+    MTI52I54          -0.331      0.042     -7.878      0.000
+    MTI53I54          -0.438      0.055     -7.980      0.000
+    MTI55I56          -0.589      0.051    -11.621      0.000
+    MTI56I57           0.424      0.050      8.473      0.000
+    MTI58I59           0.575      0.052     11.030      0.000
+    MTI58I60           0.437      0.043     10.129      0.000
+
+ BFT_FC_N WITH
+    BFT_FC_E          -0.015      0.069     -0.220      0.826
+    BFT_FC_O           0.176      0.070      2.522      0.012
+    BFT_FC_A          -0.793      0.050    -15.927      0.000
+    BFT_FC_C           0.177      0.064      2.765      0.006
+
+ BFT_FC_E WITH
+    BFT_FC_O           0.024      0.072      0.334      0.738
+    BFT_FC_A           0.222      0.076      2.910      0.004
+    BFT_FC_C          -0.447      0.055     -8.174      0.000
+
+ BFT_FC_O WITH
+    BFT_FC_A          -0.111      0.083     -1.336      0.182
+    BFT_FC_C          -0.262      0.071     -3.693      0.000
+
+ BFT_FC_A WITH
+    BFT_FC_C          -0.302      0.072     -4.207      0.000
+
+ MTI01I02 WITH
+    MTI01I03           0.489      0.062      7.833      0.000
+    MTI02I03          -0.487      0.065     -7.520      0.000
+
+ MTI01I03 WITH
+    MTI02I03           0.524      0.060      8.674      0.000
+
+ MTI04I05 WITH
+    MTI04I06           0.519      0.062      8.371      0.000
+    MTI05I06          -0.514      0.066     -7.807      0.000
+
+ MTI04I06 WITH
+    MTI05I06           0.466      0.069      6.773      0.000
+
+ MTI07I08 WITH
+    MTI07I09           0.580      0.063      9.217      0.000
+    MTI08I09          -0.574      0.061     -9.421      0.000
+
+ MTI07I09 WITH
+    MTI08I09           0.334      0.082      4.057      0.000
+
+ MTI10I11 WITH
+    MTI10I12           0.610      0.073      8.312      0.000
+    MTI11I12          -0.433      0.094     -4.626      0.000
+
+ MTI10I12 WITH
+    MTI11I12           0.450      0.092      4.909      0.000
+
+ MTI13I14 WITH
+    MTI13I15           0.268      0.096      2.785      0.005
+    MTI14I15          -0.786      0.051    -15.503      0.000
+
+ MTI13I15 WITH
+    MTI14I15           0.385      0.102      3.762      0.000
+
+ MTI16I17 WITH
+    MTI16I18           0.526      0.066      8.005      0.000
+    MTI17I18          -0.654      0.056    -11.575      0.000
+
+ MTI16I18 WITH
+    MTI17I18           0.300      0.074      4.034      0.000
+
+ MTI19I20 WITH
+    MTI19I21           0.741      0.067     11.065      0.000
+    MTI20I21          -0.410      0.105     -3.888      0.000
+
+ MTI19I21 WITH
+    MTI20I21           0.309      0.132      2.349      0.019
+
+ MTI22I23 WITH
+    MTI22I24           0.569      0.068      8.380      0.000
+    MTI23I24          -0.578      0.070     -8.250      0.000
+
+ MTI22I24 WITH
+    MTI23I24           0.343      0.079      4.338      0.000
+
+ MTI25I26 WITH
+    MTI25I27           0.664      0.051     12.948      0.000
+    MTI26I27          -0.438      0.069     -6.340      0.000
+
+ MTI25I27 WITH
+    MTI26I27           0.382      0.073      5.200      0.000
+
+ MTI28I29 WITH
+    MTI28I30           0.553      0.074      7.451      0.000
+    MTI29I30          -0.351      0.086     -4.093      0.000
+
+ MTI28I30 WITH
+    MTI29I30           0.586      0.079      7.377      0.000
+
+ MTI31I32 WITH
+    MTI31I33           0.725      0.063     11.573      0.000
+    MTI32I33          -0.053      0.107     -0.493      0.622
+
+ MTI31I33 WITH
+    MTI32I33           0.650      0.066      9.777      0.000
+
+ MTI34I35 WITH
+    MTI34I36           0.586      0.075      7.858      0.000
+    MTI35I36          -0.624      0.061    -10.205      0.000
+
+ MTI34I36 WITH
+    MTI35I36           0.267      0.113      2.352      0.019
+
+ MTI37I38 WITH
+    MTI37I39           0.763      0.043     17.913      0.000
+    MTI38I39          -0.565      0.066     -8.602      0.000
+
+ MTI37I39 WITH
+    MTI38I39           0.103      0.079      1.294      0.196
+
+ MTI40I41 WITH
+    MTI40I42           0.644      0.064     10.083      0.000
+    MTI41I42          -0.583      0.067     -8.736      0.000
+
+ MTI40I42 WITH
+    MTI41I42           0.246      0.101      2.438      0.015
+
+ MTI43I44 WITH
+    MTI43I45           0.472      0.076      6.182      0.000
+    MTI44I45          -0.617      0.059    -10.506      0.000
+
+ MTI43I45 WITH
+    MTI44I45           0.402      0.085      4.717      0.000
+
+ MTI46I47 WITH
+    MTI46I48           0.708      0.059     11.990      0.000
+    MTI47I48          -0.478      0.077     -6.192      0.000
+
+ MTI46I48 WITH
+    MTI47I48           0.282      0.102      2.758      0.006
+
+ MTI49I50 WITH
+    MTI49I51           0.669      0.061     10.974      0.000
+    MTI50I51          -0.520      0.070     -7.395      0.000
+
+ MTI49I51 WITH
+    MTI50I51           0.286      0.094      3.040      0.002
+
+ MTI52I53 WITH
+    MTI52I54           0.611      0.072      8.502      0.000
+    MTI53I54          -0.462      0.069     -6.741      0.000
+
+ MTI52I54 WITH
+    MTI53I54           0.419      0.082      5.092      0.000
+
+ MTI55I56 WITH
+    MTI55I57           0.298      0.079      3.778      0.000
+    MTI56I57          -0.362      0.076     -4.734      0.000
+
+ MTI55I57 WITH
+    MTI56I57           0.782      0.051     15.472      0.000
+
+ MTI58I59 WITH
+    MTI58I60           0.598      0.075      7.967      0.000
+    MTI59I60          -0.223      0.098     -2.260      0.024
+
+ MTI58I60 WITH
+    MTI59I60           0.648      0.072      9.029      0.000
+
+ Means
+    BFT_FC_N           0.000      0.000    999.000    999.000
+    BFT_FC_E           0.000      0.000    999.000    999.000
+    BFT_FC_O           0.000      0.000    999.000    999.000
+    BFT_FC_A           0.000      0.000    999.000    999.000
+    BFT_FC_C           0.000      0.000    999.000    999.000
+
+ Thresholds
+    MTI01I02$1        -0.423      0.051     -8.295      0.000
+    MTI01I03$1        -0.357      0.051     -6.955      0.000
+    MTI02I03$1         0.097      0.048      2.011      0.044
+    MTI04I05$1         0.498      0.052      9.576      0.000
+    MTI04I06$1        -0.158      0.051     -3.121      0.002
+    MTI05I06$1        -0.618      0.053    -11.689      0.000
+    MTI07I08$1        -0.070      0.050     -1.422      0.155
+    MTI07I09$1        -0.381      0.049     -7.741      0.000
+    MTI08I09$1        -0.309      0.051     -6.086      0.000
+    MTI10I11$1         0.394      0.050      7.869      0.000
+    MTI10I12$1         0.551      0.051     10.712      0.000
+    MTI11I12$1         0.130      0.051      2.543      0.011
+    MTI13I14$1        -0.027      0.049     -0.542      0.588
+    MTI13I15$1         0.573      0.053     10.804      0.000
+    MTI14I15$1         0.509      0.052      9.756      0.000
+    MTI16I17$1        -0.586      0.053    -10.971      0.000
+    MTI16I18$1        -0.133      0.048     -2.791      0.005
+    MTI17I18$1         0.488      0.053      9.121      0.000
+    MTI19I20$1        -0.302      0.051     -5.967      0.000
+    MTI19I21$1        -0.144      0.048     -3.018      0.003
+    MTI20I21$1         0.116      0.049      2.357      0.018
+    MTI22I23$1         0.165      0.049      3.349      0.001
+    MTI22I24$1        -0.148      0.049     -2.998      0.003
+    MTI23I24$1        -0.316      0.050     -6.302      0.000
+    MTI25I26$1        -0.182      0.049     -3.686      0.000
+    MTI25I27$1        -0.198      0.050     -3.972      0.000
+    MTI26I27$1        -0.007      0.048     -0.154      0.878
+    MTI28I29$1        -0.034      0.050     -0.668      0.504
+    MTI28I30$1        -0.243      0.049     -4.973      0.000
+    MTI29I30$1        -0.256      0.049     -5.241      0.000
+    MTI31I32$1        -0.174      0.051     -3.386      0.001
+    MTI31I33$1        -0.405      0.049     -8.187      0.000
+    MTI32I33$1        -0.383      0.050     -7.688      0.000
+    MTI34I35$1        -0.366      0.051     -7.231      0.000
+    MTI34I36$1        -0.290      0.050     -5.836      0.000
+    MTI35I36$1         0.014      0.049      0.282      0.778
+    MTI37I38$1        -0.414      0.050     -8.264      0.000
+    MTI37I39$1        -0.186      0.048     -3.845      0.000
+    MTI38I39$1         0.337      0.052      6.512      0.000
+    MTI40I41$1        -0.088      0.049     -1.806      0.071
+    MTI40I42$1        -0.237      0.049     -4.882      0.000
+    MTI41I42$1        -0.126      0.050     -2.541      0.011
+    MTI43I44$1         0.339      0.051      6.653      0.000
+    MTI43I45$1        -0.229      0.049     -4.652      0.000
+    MTI44I45$1        -0.551      0.053    -10.441      0.000
+    MTI46I47$1        -0.352      0.051     -6.893      0.000
+    MTI46I48$1        -0.448      0.052     -8.664      0.000
+    MTI47I48$1        -0.118      0.048     -2.458      0.014
+    MTI49I50$1         0.107      0.050      2.141      0.032
+    MTI49I51$1         0.016      0.047      0.345      0.730
+    MTI50I51$1        -0.102      0.049     -2.078      0.038
+    MTI52I53$1         0.075      0.048      1.553      0.120
+    MTI52I54$1         0.091      0.047      1.931      0.053
+    MTI53I54$1         0.029      0.051      0.564      0.573
+    MTI55I56$1        -0.147      0.053     -2.791      0.005
+    MTI55I57$1        -0.632      0.052    -12.178      0.000
+    MTI56I57$1        -0.485      0.049     -9.804      0.000
+    MTI58I59$1         0.082      0.053      1.553      0.120
+    MTI58I60$1        -0.435      0.050     -8.759      0.000
+    MTI59I60$1        -0.624      0.051    -12.211      0.000
+
+ Variances
+    BFT_FC_N           1.000      0.000    999.000    999.000
+    BFT_FC_E           1.000      0.000    999.000    999.000
+    BFT_FC_O           1.000      0.000    999.000    999.000
+    BFT_FC_A           1.000      0.000    999.000    999.000
+    BFT_FC_C           1.000      0.000    999.000    999.000
+
+ Residual Variances
+    MTI01I02           0.740      0.049     15.126      0.000
+    MTI01I03           0.911      0.027     33.885      0.000
+    MTI02I03           0.826      0.044     18.663      0.000
+    MTI04I05           0.925      0.029     31.860      0.000
+    MTI04I06           0.766      0.047     16.340      0.000
+    MTI05I06           0.741      0.049     14.979      0.000
+    MTI07I08           0.716      0.044     16.184      0.000
+    MTI07I09           0.654      0.051     12.831      0.000
+    MTI08I09           0.674      0.046     14.554      0.000
+    MTI10I11           0.576      0.056     10.189      0.000
+    MTI10I12           0.633      0.054     11.813      0.000
+    MTI11I12           0.411      0.057      7.189      0.000
+    MTI13I14           0.649      0.049     13.349      0.000
+    MTI13I15           0.371      0.066      5.601      0.000
+    MTI14I15           0.643      0.057     11.217      0.000
+    MTI16I17           0.968      0.020     49.285      0.000
+    MTI16I18           0.804      0.044     18.429      0.000
+    MTI17I18           0.827      0.040     20.914      0.000
+    MTI19I20           0.697      0.049     14.174      0.000
+    MTI19I21           0.443      0.056      7.857      0.000
+    MTI20I21           0.282      0.062      4.518      0.000
+    MTI22I23           0.690      0.051     13.570      0.000
+    MTI22I24           0.807      0.054     15.044      0.000
+    MTI23I24           0.658      0.064     10.218      0.000
+    MTI25I26           0.840      0.035     24.156      0.000
+    MTI25I27           0.866      0.035     24.586      0.000
+    MTI26I27           0.621      0.046     13.402      0.000
+    MTI28I29           0.617      0.052     11.799      0.000
+    MTI28I30           0.418      0.044      9.470      0.000
+    MTI29I30           0.453      0.050      9.114      0.000
+    MTI31I32           0.495      0.049     10.022      0.000
+    MTI31I33           0.441      0.044      9.915      0.000
+    MTI32I33           0.393      0.057      6.931      0.000
+    MTI34I35           0.855      0.038     22.788      0.000
+    MTI34I36           0.386      0.046      8.399      0.000
+    MTI35I36           0.437      0.049      8.909      0.000
+    MTI37I38           0.788      0.041     19.262      0.000
+    MTI37I39           0.882      0.032     27.575      0.000
+    MTI38I39           0.524      0.049     10.680      0.000
+    MTI40I41           0.643      0.046     13.897      0.000
+    MTI40I42           0.587      0.054     10.878      0.000
+    MTI41I42           0.445      0.054      8.299      0.000
+    MTI43I44           0.778      0.045     17.490      0.000
+    MTI43I45           0.547      0.051     10.672      0.000
+    MTI44I45           0.667      0.054     12.249      0.000
+    MTI46I47           0.603      0.047     12.930      0.000
+    MTI46I48           0.495      0.052      9.429      0.000
+    MTI47I48           0.456      0.057      7.962      0.000
+    MTI49I50           0.624      0.049     12.844      0.000
+    MTI49I51           0.448      0.049      9.129      0.000
+    MTI50I51           0.486      0.049      9.849      0.000
+    MTI52I53           0.683      0.049     14.080      0.000
+    MTI52I54           0.555      0.045     12.286      0.000
+    MTI53I54           0.774      0.048     16.245      0.000
+    MTI55I56           0.654      0.054     12.025      0.000
+    MTI55I57           0.872      0.038     23.148      0.000
+    MTI56I57           0.798      0.041     19.538      0.000
+    MTI58I59           0.642      0.055     11.663      0.000
+    MTI58I60           0.606      0.043     13.979      0.000
+    MTI59I60           0.642      0.061     10.526      0.000
+
+
+STDY Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ BFT_FC_N BY
+    MTI01I02           0.451      0.050      8.986      0.000
+    MTI01I03           0.488      0.066      7.352      0.000
+    MTI04I06          -0.456      0.055     -8.274      0.000
+    MTI05I06          -0.450      0.052     -8.698      0.000
+    MTI07I09          -0.435      0.046     -9.418      0.000
+    MTI08I09          -0.444      0.045     -9.844      0.000
+    MTI10I12          -0.532      0.046    -11.610      0.000
+    MTI11I12          -0.488      0.042    -11.569      0.000
+    MTI13I14          -0.432      0.042    -10.264      0.000
+    MTI13I15          -0.488      0.045    -10.900      0.000
+    MTI22I23          -0.563      0.048    -11.763      0.000
+    MTI22I24          -0.701      0.078     -8.974      0.000
+    MTI25I27           0.373      0.052      7.227      0.000
+    MTI26I27           0.379      0.048      7.820      0.000
+    MTI28I29           0.366      0.048      7.684      0.000
+    MTI29I30          -0.305      0.042     -7.194      0.000
+    MTI31I32           0.394      0.043      9.184      0.000
+    MTI32I33          -0.388      0.048     -8.025      0.000
+    MTI34I35          -0.358      0.049     -7.293      0.000
+    MTI34I36          -0.297      0.042     -7.100      0.000
+    MTI37I39           0.325      0.049      6.664      0.000
+    MTI38I39           0.320      0.043      7.412      0.000
+    MTI40I41          -0.303      0.043     -7.110      0.000
+    MTI40I42          -0.346      0.049     -7.019      0.000
+    MTI43I44          -0.384      0.047     -8.174      0.000
+    MTI43I45          -0.375      0.046     -8.065      0.000
+    MTI46I47           0.363      0.040      9.177      0.000
+    MTI47I48          -0.429      0.046     -9.417      0.000
+    MTI49I50           0.384      0.042      9.166      0.000
+    MTI50I51          -0.437      0.044     -9.865      0.000
+    MTI55I57           0.098      0.059      1.663      0.096
+    MTI56I57           0.092      0.056      1.640      0.101
+
+ BFT_FC_E BY
+    MTI01I02           0.244      0.048      5.040      0.000
+    MTI02I03          -0.252      0.051     -4.969      0.000
+    MTI04I05           0.264      0.052      5.055      0.000
+    MTI05I06          -0.244      0.049     -5.034      0.000
+    MTI07I08          -0.365      0.045     -8.101      0.000
+    MTI07I09          -0.402      0.053     -7.620      0.000
+    MTI10I11          -0.613      0.048    -12.904      0.000
+    MTI11I12           0.585      0.047     12.421      0.000
+    MTI13I14          -0.411      0.054     -7.599      0.000
+    MTI14I15           0.392      0.055      7.162      0.000
+    MTI16I18          -0.445      0.051     -8.750      0.000
+    MTI17I18          -0.402      0.046     -8.696      0.000
+    MTI19I20           0.599      0.053     11.246      0.000
+    MTI20I21          -0.540      0.049    -11.014      0.000
+    MTI28I29           0.504      0.050     10.079      0.000
+    MTI28I30           0.359      0.041      8.681      0.000
+    MTI31I33          -0.498      0.040    -12.422      0.000
+    MTI32I33          -0.681      0.045    -15.246      0.000
+    MTI34I35          -0.136      0.058     -2.340      0.019
+    MTI35I36           0.116      0.049      2.364      0.018
+    MTI49I50           0.483      0.049      9.870      0.000
+    MTI49I51           0.459      0.046      9.925      0.000
+    MTI52I53           0.486      0.047     10.453      0.000
+    MTI52I54           0.449      0.042     10.669      0.000
+    MTI58I60          -0.297      0.043     -6.831      0.000
+    MTI59I60          -0.372      0.054     -6.904      0.000
+
+ BFT_FC_O BY
+    MTI10I11          -0.205      0.052     -3.945      0.000
+    MTI10I12          -0.213      0.054     -3.972      0.000
+    MTI13I15          -0.545      0.058     -9.466      0.000
+    MTI14I15          -0.460      0.051     -9.086      0.000
+    MTI16I17           0.095      0.060      1.582      0.114
+    MTI17I18          -0.099      0.062     -1.592      0.111
+    MTI19I21          -0.591      0.044    -13.367      0.000
+    MTI20I21          -0.640      0.048    -13.429      0.000
+    MTI22I23           0.046      0.059      0.772      0.440
+    MTI23I24          -0.051      0.066     -0.773      0.440
+    MTI37I38           0.052      0.052      1.015      0.310
+    MTI37I39           0.067      0.066      1.012      0.312
+    MTI40I42          -0.484      0.054     -8.976      0.000
+    MTI41I42          -0.448      0.052     -8.658      0.000
+    MTI43I44          -0.212      0.060     -3.541      0.000
+    MTI44I45           0.204      0.058      3.531      0.000
+    MTI46I48          -0.444      0.048     -9.162      0.000
+    MTI47I48          -0.530      0.054     -9.756      0.000
+    MTI52I53           0.272      0.050      5.492      0.000
+    MTI53I54          -0.332      0.061     -5.473      0.000
+
+ BFT_FC_A BY
+    MTI01I03           0.411      0.069      5.969      0.000
+    MTI02I03           0.392      0.058      6.770      0.000
+    MTI04I05           0.037      0.067      0.552      0.581
+    MTI04I06           0.035      0.062      0.555      0.579
+    MTI16I17           0.162      0.053      3.048      0.002
+    MTI16I18           0.186      0.060      3.101      0.002
+    MTI22I24          -0.657      0.084     -7.801      0.000
+    MTI23I24          -0.588      0.056    -10.524      0.000
+    MTI25I26           0.008      0.065      0.123      0.902
+    MTI25I27           0.008      0.068      0.123      0.902
+    MTI55I56          -0.355      0.068     -5.250      0.000
+    MTI55I57          -0.274      0.060     -4.554      0.000
+    MTI58I59           0.414      0.061      6.821      0.000
+    MTI59I60          -0.393      0.057     -6.921      0.000
+
+ BFT_FC_C BY
+    MTI07I08           0.258      0.045      5.706      0.000
+    MTI08I09          -0.290      0.049     -5.915      0.000
+    MTI19I20           0.392      0.060      6.566      0.000
+    MTI19I21           0.326      0.047      6.885      0.000
+    MTI25I26          -0.397      0.044     -8.944      0.000
+    MTI26I27           0.422      0.047      8.940      0.000
+    MTI28I30          -0.532      0.039    -13.723      0.000
+    MTI29I30          -0.622      0.040    -15.373      0.000
+    MTI31I32           0.526      0.045     11.703      0.000
+    MTI31I33           0.378      0.039      9.746      0.000
+    MTI34I36          -0.674      0.036    -18.575      0.000
+    MTI35I36          -0.691      0.042    -16.305      0.000
+    MTI37I38          -0.444      0.043    -10.272      0.000
+    MTI38I39           0.557      0.044     12.618      0.000
+    MTI40I41          -0.464      0.044    -10.661      0.000
+    MTI41I42           0.489      0.044     11.237      0.000
+    MTI43I45          -0.497      0.046    -10.871      0.000
+    MTI44I45          -0.489      0.047    -10.485      0.000
+    MTI46I47           0.455      0.047      9.627      0.000
+    MTI46I48           0.451      0.048      9.322      0.000
+    MTI49I51          -0.414      0.039    -10.583      0.000
+    MTI50I51          -0.496      0.043    -11.573      0.000
+    MTI52I54          -0.331      0.042     -7.878      0.000
+    MTI53I54          -0.438      0.055     -7.980      0.000
+    MTI55I56          -0.589      0.051    -11.621      0.000
+    MTI56I57           0.424      0.050      8.473      0.000
+    MTI58I59           0.575      0.052     11.030      0.000
+    MTI58I60           0.437      0.043     10.129      0.000
+
+ BFT_FC_N WITH
+    BFT_FC_E          -0.015      0.069     -0.220      0.826
+    BFT_FC_O           0.176      0.070      2.522      0.012
+    BFT_FC_A          -0.793      0.050    -15.927      0.000
+    BFT_FC_C           0.177      0.064      2.765      0.006
+
+ BFT_FC_E WITH
+    BFT_FC_O           0.024      0.072      0.334      0.738
+    BFT_FC_A           0.222      0.076      2.910      0.004
+    BFT_FC_C          -0.447      0.055     -8.174      0.000
+
+ BFT_FC_O WITH
+    BFT_FC_A          -0.111      0.083     -1.336      0.182
+    BFT_FC_C          -0.262      0.071     -3.693      0.000
+
+ BFT_FC_A WITH
+    BFT_FC_C          -0.302      0.072     -4.207      0.000
+
+ MTI01I02 WITH
+    MTI01I03           0.489      0.062      7.833      0.000
+    MTI02I03          -0.487      0.065     -7.520      0.000
+
+ MTI01I03 WITH
+    MTI02I03           0.524      0.060      8.674      0.000
+
+ MTI04I05 WITH
+    MTI04I06           0.519      0.062      8.371      0.000
+    MTI05I06          -0.514      0.066     -7.807      0.000
+
+ MTI04I06 WITH
+    MTI05I06           0.466      0.069      6.773      0.000
+
+ MTI07I08 WITH
+    MTI07I09           0.580      0.063      9.217      0.000
+    MTI08I09          -0.574      0.061     -9.421      0.000
+
+ MTI07I09 WITH
+    MTI08I09           0.334      0.082      4.057      0.000
+
+ MTI10I11 WITH
+    MTI10I12           0.610      0.073      8.312      0.000
+    MTI11I12          -0.433      0.094     -4.626      0.000
+
+ MTI10I12 WITH
+    MTI11I12           0.450      0.092      4.909      0.000
+
+ MTI13I14 WITH
+    MTI13I15           0.268      0.096      2.785      0.005
+    MTI14I15          -0.786      0.051    -15.503      0.000
+
+ MTI13I15 WITH
+    MTI14I15           0.385      0.102      3.762      0.000
+
+ MTI16I17 WITH
+    MTI16I18           0.526      0.066      8.005      0.000
+    MTI17I18          -0.654      0.056    -11.575      0.000
+
+ MTI16I18 WITH
+    MTI17I18           0.300      0.074      4.034      0.000
+
+ MTI19I20 WITH
+    MTI19I21           0.741      0.067     11.065      0.000
+    MTI20I21          -0.410      0.105     -3.888      0.000
+
+ MTI19I21 WITH
+    MTI20I21           0.309      0.132      2.349      0.019
+
+ MTI22I23 WITH
+    MTI22I24           0.569      0.068      8.380      0.000
+    MTI23I24          -0.578      0.070     -8.250      0.000
+
+ MTI22I24 WITH
+    MTI23I24           0.343      0.079      4.338      0.000
+
+ MTI25I26 WITH
+    MTI25I27           0.664      0.051     12.948      0.000
+    MTI26I27          -0.438      0.069     -6.340      0.000
+
+ MTI25I27 WITH
+    MTI26I27           0.382      0.073      5.200      0.000
+
+ MTI28I29 WITH
+    MTI28I30           0.553      0.074      7.451      0.000
+    MTI29I30          -0.351      0.086     -4.093      0.000
+
+ MTI28I30 WITH
+    MTI29I30           0.586      0.079      7.377      0.000
+
+ MTI31I32 WITH
+    MTI31I33           0.725      0.063     11.573      0.000
+    MTI32I33          -0.053      0.107     -0.493      0.622
+
+ MTI31I33 WITH
+    MTI32I33           0.650      0.066      9.777      0.000
+
+ MTI34I35 WITH
+    MTI34I36           0.586      0.075      7.858      0.000
+    MTI35I36          -0.624      0.061    -10.205      0.000
+
+ MTI34I36 WITH
+    MTI35I36           0.267      0.113      2.352      0.019
+
+ MTI37I38 WITH
+    MTI37I39           0.763      0.043     17.913      0.000
+    MTI38I39          -0.565      0.066     -8.602      0.000
+
+ MTI37I39 WITH
+    MTI38I39           0.103      0.079      1.294      0.196
+
+ MTI40I41 WITH
+    MTI40I42           0.644      0.064     10.083      0.000
+    MTI41I42          -0.583      0.067     -8.736      0.000
+
+ MTI40I42 WITH
+    MTI41I42           0.246      0.101      2.438      0.015
+
+ MTI43I44 WITH
+    MTI43I45           0.472      0.076      6.182      0.000
+    MTI44I45          -0.617      0.059    -10.506      0.000
+
+ MTI43I45 WITH
+    MTI44I45           0.402      0.085      4.717      0.000
+
+ MTI46I47 WITH
+    MTI46I48           0.708      0.059     11.990      0.000
+    MTI47I48          -0.478      0.077     -6.192      0.000
+
+ MTI46I48 WITH
+    MTI47I48           0.282      0.102      2.758      0.006
+
+ MTI49I50 WITH
+    MTI49I51           0.669      0.061     10.974      0.000
+    MTI50I51          -0.520      0.070     -7.395      0.000
+
+ MTI49I51 WITH
+    MTI50I51           0.286      0.094      3.040      0.002
+
+ MTI52I53 WITH
+    MTI52I54           0.611      0.072      8.502      0.000
+    MTI53I54          -0.462      0.069     -6.741      0.000
+
+ MTI52I54 WITH
+    MTI53I54           0.419      0.082      5.092      0.000
+
+ MTI55I56 WITH
+    MTI55I57           0.298      0.079      3.778      0.000
+    MTI56I57          -0.362      0.076     -4.734      0.000
+
+ MTI55I57 WITH
+    MTI56I57           0.782      0.051     15.472      0.000
+
+ MTI58I59 WITH
+    MTI58I60           0.598      0.075      7.967      0.000
+    MTI59I60          -0.223      0.098     -2.260      0.024
+
+ MTI58I60 WITH
+    MTI59I60           0.648      0.072      9.029      0.000
+
+ Means
+    BFT_FC_N           0.000      0.000    999.000    999.000
+    BFT_FC_E           0.000      0.000    999.000    999.000
+    BFT_FC_O           0.000      0.000    999.000    999.000
+    BFT_FC_A           0.000      0.000    999.000    999.000
+    BFT_FC_C           0.000      0.000    999.000    999.000
+
+ Thresholds
+    MTI01I02$1        -0.423      0.051     -8.295      0.000
+    MTI01I03$1        -0.357      0.051     -6.955      0.000
+    MTI02I03$1         0.097      0.048      2.011      0.044
+    MTI04I05$1         0.498      0.052      9.576      0.000
+    MTI04I06$1        -0.158      0.051     -3.121      0.002
+    MTI05I06$1        -0.618      0.053    -11.689      0.000
+    MTI07I08$1        -0.070      0.050     -1.422      0.155
+    MTI07I09$1        -0.381      0.049     -7.741      0.000
+    MTI08I09$1        -0.309      0.051     -6.086      0.000
+    MTI10I11$1         0.394      0.050      7.869      0.000
+    MTI10I12$1         0.551      0.051     10.712      0.000
+    MTI11I12$1         0.130      0.051      2.543      0.011
+    MTI13I14$1        -0.027      0.049     -0.542      0.588
+    MTI13I15$1         0.573      0.053     10.804      0.000
+    MTI14I15$1         0.509      0.052      9.756      0.000
+    MTI16I17$1        -0.586      0.053    -10.971      0.000
+    MTI16I18$1        -0.133      0.048     -2.791      0.005
+    MTI17I18$1         0.488      0.053      9.121      0.000
+    MTI19I20$1        -0.302      0.051     -5.967      0.000
+    MTI19I21$1        -0.144      0.048     -3.018      0.003
+    MTI20I21$1         0.116      0.049      2.357      0.018
+    MTI22I23$1         0.165      0.049      3.349      0.001
+    MTI22I24$1        -0.148      0.049     -2.998      0.003
+    MTI23I24$1        -0.316      0.050     -6.302      0.000
+    MTI25I26$1        -0.182      0.049     -3.686      0.000
+    MTI25I27$1        -0.198      0.050     -3.972      0.000
+    MTI26I27$1        -0.007      0.048     -0.154      0.878
+    MTI28I29$1        -0.034      0.050     -0.668      0.504
+    MTI28I30$1        -0.243      0.049     -4.973      0.000
+    MTI29I30$1        -0.256      0.049     -5.241      0.000
+    MTI31I32$1        -0.174      0.051     -3.386      0.001
+    MTI31I33$1        -0.405      0.049     -8.187      0.000
+    MTI32I33$1        -0.383      0.050     -7.688      0.000
+    MTI34I35$1        -0.366      0.051     -7.231      0.000
+    MTI34I36$1        -0.290      0.050     -5.836      0.000
+    MTI35I36$1         0.014      0.049      0.282      0.778
+    MTI37I38$1        -0.414      0.050     -8.264      0.000
+    MTI37I39$1        -0.186      0.048     -3.845      0.000
+    MTI38I39$1         0.337      0.052      6.512      0.000
+    MTI40I41$1        -0.088      0.049     -1.806      0.071
+    MTI40I42$1        -0.237      0.049     -4.882      0.000
+    MTI41I42$1        -0.126      0.050     -2.541      0.011
+    MTI43I44$1         0.339      0.051      6.653      0.000
+    MTI43I45$1        -0.229      0.049     -4.652      0.000
+    MTI44I45$1        -0.551      0.053    -10.441      0.000
+    MTI46I47$1        -0.352      0.051     -6.893      0.000
+    MTI46I48$1        -0.448      0.052     -8.664      0.000
+    MTI47I48$1        -0.118      0.048     -2.458      0.014
+    MTI49I50$1         0.107      0.050      2.141      0.032
+    MTI49I51$1         0.016      0.047      0.345      0.730
+    MTI50I51$1        -0.102      0.049     -2.078      0.038
+    MTI52I53$1         0.075      0.048      1.553      0.120
+    MTI52I54$1         0.091      0.047      1.931      0.053
+    MTI53I54$1         0.029      0.051      0.564      0.573
+    MTI55I56$1        -0.147      0.053     -2.791      0.005
+    MTI55I57$1        -0.632      0.052    -12.178      0.000
+    MTI56I57$1        -0.485      0.049     -9.804      0.000
+    MTI58I59$1         0.082      0.053      1.553      0.120
+    MTI58I60$1        -0.435      0.050     -8.759      0.000
+    MTI59I60$1        -0.624      0.051    -12.211      0.000
+
+ Variances
+    BFT_FC_N           1.000      0.000    999.000    999.000
+    BFT_FC_E           1.000      0.000    999.000    999.000
+    BFT_FC_O           1.000      0.000    999.000    999.000
+    BFT_FC_A           1.000      0.000    999.000    999.000
+    BFT_FC_C           1.000      0.000    999.000    999.000
+
+ Residual Variances
+    MTI01I02           0.740      0.049     15.126      0.000
+    MTI01I03           0.911      0.027     33.885      0.000
+    MTI02I03           0.826      0.044     18.663      0.000
+    MTI04I05           0.925      0.029     31.860      0.000
+    MTI04I06           0.766      0.047     16.340      0.000
+    MTI05I06           0.741      0.049     14.979      0.000
+    MTI07I08           0.716      0.044     16.184      0.000
+    MTI07I09           0.654      0.051     12.831      0.000
+    MTI08I09           0.674      0.046     14.554      0.000
+    MTI10I11           0.576      0.056     10.189      0.000
+    MTI10I12           0.633      0.054     11.813      0.000
+    MTI11I12           0.411      0.057      7.189      0.000
+    MTI13I14           0.649      0.049     13.349      0.000
+    MTI13I15           0.371      0.066      5.601      0.000
+    MTI14I15           0.643      0.057     11.217      0.000
+    MTI16I17           0.968      0.020     49.285      0.000
+    MTI16I18           0.804      0.044     18.429      0.000
+    MTI17I18           0.827      0.040     20.914      0.000
+    MTI19I20           0.697      0.049     14.174      0.000
+    MTI19I21           0.443      0.056      7.857      0.000
+    MTI20I21           0.282      0.062      4.518      0.000
+    MTI22I23           0.690      0.051     13.570      0.000
+    MTI22I24           0.807      0.054     15.044      0.000
+    MTI23I24           0.658      0.064     10.218      0.000
+    MTI25I26           0.840      0.035     24.156      0.000
+    MTI25I27           0.866      0.035     24.586      0.000
+    MTI26I27           0.621      0.046     13.402      0.000
+    MTI28I29           0.617      0.052     11.799      0.000
+    MTI28I30           0.418      0.044      9.470      0.000
+    MTI29I30           0.453      0.050      9.114      0.000
+    MTI31I32           0.495      0.049     10.022      0.000
+    MTI31I33           0.441      0.044      9.915      0.000
+    MTI32I33           0.393      0.057      6.931      0.000
+    MTI34I35           0.855      0.038     22.788      0.000
+    MTI34I36           0.386      0.046      8.399      0.000
+    MTI35I36           0.437      0.049      8.909      0.000
+    MTI37I38           0.788      0.041     19.262      0.000
+    MTI37I39           0.882      0.032     27.575      0.000
+    MTI38I39           0.524      0.049     10.680      0.000
+    MTI40I41           0.643      0.046     13.897      0.000
+    MTI40I42           0.587      0.054     10.878      0.000
+    MTI41I42           0.445      0.054      8.299      0.000
+    MTI43I44           0.778      0.045     17.490      0.000
+    MTI43I45           0.547      0.051     10.672      0.000
+    MTI44I45           0.667      0.054     12.249      0.000
+    MTI46I47           0.603      0.047     12.930      0.000
+    MTI46I48           0.495      0.052      9.429      0.000
+    MTI47I48           0.456      0.057      7.962      0.000
+    MTI49I50           0.624      0.049     12.844      0.000
+    MTI49I51           0.448      0.049      9.129      0.000
+    MTI50I51           0.486      0.049      9.849      0.000
+    MTI52I53           0.683      0.049     14.080      0.000
+    MTI52I54           0.555      0.045     12.286      0.000
+    MTI53I54           0.774      0.048     16.245      0.000
+    MTI55I56           0.654      0.054     12.025      0.000
+    MTI55I57           0.872      0.038     23.148      0.000
+    MTI56I57           0.798      0.041     19.538      0.000
+    MTI58I59           0.642      0.055     11.663      0.000
+    MTI58I60           0.606      0.043     13.979      0.000
+    MTI59I60           0.642      0.061     10.526      0.000
+
+
+STD Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ BFT_FC_N BY
+    MTI01I02           0.740      0.120      6.161      0.000
+    MTI01I03           0.740      0.120      6.161      0.000
+    MTI04I06          -0.711      0.109     -6.503      0.000
+    MTI05I06          -0.711      0.109     -6.503      0.000
+    MTI07I09          -0.659      0.096     -6.843      0.000
+    MTI08I09          -0.659      0.096     -6.843      0.000
+    MTI10I12          -0.859      0.120     -7.155      0.000
+    MTI11I12          -0.859      0.120     -7.155      0.000
+    MTI13I14          -1.267      0.280     -4.524      0.000
+    MTI13I15          -1.267      0.280     -4.524      0.000
+    MTI22I23          -0.965      0.138     -7.008      0.000
+    MTI22I24          -0.965      0.138     -7.008      0.000
+    MTI25I27           0.485      0.077      6.314      0.000
+    MTI26I27           0.485      0.077      6.314      0.000
+    MTI28I29           0.583      0.098      5.965      0.000
+    MTI29I30          -0.583      0.098     -5.965      0.000
+    MTI31I32           0.575      0.076      7.521      0.000
+    MTI32I33          -0.575      0.076     -7.521      0.000
+    MTI34I35          -0.562      0.096     -5.822      0.000
+    MTI34I36          -0.562      0.096     -5.822      0.000
+    MTI37I39           0.361      0.061      5.956      0.000
+    MTI38I39           0.361      0.061      5.956      0.000
+    MTI40I41          -0.515      0.087     -5.952      0.000
+    MTI40I42          -0.515      0.087     -5.952      0.000
+    MTI43I44          -0.684      0.115     -5.929      0.000
+    MTI43I45          -0.684      0.115     -5.929      0.000
+    MTI46I47           0.581      0.084      6.912      0.000
+    MTI47I48          -0.581      0.084     -6.912      0.000
+    MTI49I50           0.630      0.091      6.945      0.000
+    MTI50I51          -0.630      0.091     -6.945      0.000
+    MTI55I57           0.236      0.155      1.529      0.126
+    MTI56I57           0.236      0.155      1.529      0.126
+
+ BFT_FC_E BY
+    MTI01I02           0.401      0.092      4.364      0.000
+    MTI02I03          -0.401      0.092     -4.364      0.000
+    MTI04I05           0.386      0.086      4.487      0.000
+    MTI05I06          -0.386      0.086     -4.487      0.000
+    MTI07I08          -0.608      0.094     -6.446      0.000
+    MTI07I09          -0.608      0.094     -6.446      0.000
+    MTI10I11          -1.030      0.136     -7.554      0.000
+    MTI11I12           1.030      0.136      7.554      0.000
+    MTI13I14          -1.204      0.280     -4.298      0.000
+    MTI14I15           1.204      0.280      4.298      0.000
+    MTI16I18          -0.610      0.095     -6.412      0.000
+    MTI17I18          -0.610      0.095     -6.412      0.000
+    MTI19I20           0.851      0.109      7.783      0.000
+    MTI20I21          -0.851      0.109     -7.783      0.000
+    MTI28I29           0.802      0.124      6.456      0.000
+    MTI28I30           0.802      0.124      6.456      0.000
+    MTI31I33          -1.010      0.144     -7.027      0.000
+    MTI32I33          -1.010      0.144     -7.027      0.000
+    MTI34I35          -0.214      0.097     -2.213      0.027
+    MTI35I36           0.214      0.097      2.213      0.027
+    MTI49I50           0.792      0.117      6.773      0.000
+    MTI49I51           0.792      0.117      6.773      0.000
+    MTI52I53           0.762      0.106      7.182      0.000
+    MTI52I54           0.762      0.106      7.182      0.000
+    MTI58I60          -0.558      0.107     -5.190      0.000
+    MTI59I60          -0.558      0.107     -5.190      0.000
+
+ BFT_FC_O BY
+    MTI10I11          -0.344      0.094     -3.647      0.000
+    MTI10I12          -0.344      0.094     -3.647      0.000
+    MTI13I15          -1.414      0.326     -4.332      0.000
+    MTI14I15          -1.414      0.326     -4.332      0.000
+    MTI16I17           0.150      0.096      1.564      0.118
+    MTI17I18          -0.150      0.096     -1.564      0.118
+    MTI19I21          -1.010      0.122     -8.291      0.000
+    MTI20I21          -1.010      0.122     -8.291      0.000
+    MTI22I23           0.078      0.102      0.770      0.441
+    MTI23I24          -0.078      0.102     -0.770      0.441
+    MTI37I38           0.074      0.074      1.010      0.312
+    MTI37I39           0.074      0.074      1.010      0.312
+    MTI40I42          -0.721      0.106     -6.783      0.000
+    MTI41I42          -0.721      0.106     -6.783      0.000
+    MTI43I44          -0.378      0.117     -3.245      0.001
+    MTI44I45           0.378      0.117      3.245      0.001
+    MTI46I48          -0.717      0.103     -6.995      0.000
+    MTI47I48          -0.717      0.103     -6.995      0.000
+    MTI52I53           0.426      0.089      4.814      0.000
+    MTI53I54          -0.426      0.089     -4.814      0.000
+
+ BFT_FC_A BY
+    MTI01I03           0.624      0.114      5.473      0.000
+    MTI02I03           0.624      0.114      5.473      0.000
+    MTI04I05           0.054      0.098      0.550      0.582
+    MTI04I06           0.054      0.098      0.550      0.582
+    MTI16I17           0.254      0.086      2.969      0.003
+    MTI16I18           0.254      0.086      2.969      0.003
+    MTI22I24          -0.904      0.140     -6.442      0.000
+    MTI23I24          -0.904      0.140     -6.442      0.000
+    MTI25I26           0.011      0.088      0.123      0.902
+    MTI25I27           0.011      0.088      0.123      0.902
+    MTI55I56          -0.657      0.173     -3.792      0.000
+    MTI55I57          -0.657      0.173     -3.792      0.000
+    MTI58I59           0.590      0.099      5.988      0.000
+    MTI59I60          -0.590      0.099     -5.988      0.000
+
+ BFT_FC_C BY
+    MTI07I08           0.430      0.089      4.835      0.000
+    MTI08I09          -0.430      0.089     -4.835      0.000
+    MTI19I20           0.558      0.099      5.654      0.000
+    MTI19I21           0.558      0.099      5.654      0.000
+    MTI25I26          -0.540      0.077     -7.028      0.000
+    MTI26I27           0.540      0.077      7.028      0.000
+    MTI28I30          -1.188      0.176     -6.762      0.000
+    MTI29I30          -1.188      0.176     -6.762      0.000
+    MTI31I32           0.766      0.101      7.573      0.000
+    MTI31I33           0.766      0.101      7.573      0.000
+    MTI34I36          -1.276      0.159     -8.049      0.000
+    MTI35I36          -1.276      0.159     -8.049      0.000
+    MTI37I38          -0.629      0.086     -7.290      0.000
+    MTI38I39           0.629      0.086      7.290      0.000
+    MTI40I41          -0.788      0.111     -7.118      0.000
+    MTI41I42           0.788      0.111      7.118      0.000
+    MTI43I45          -0.906      0.135     -6.729      0.000
+    MTI44I45          -0.906      0.135     -6.729      0.000
+    MTI46I47           0.729      0.106      6.877      0.000
+    MTI46I48           0.729      0.106      6.877      0.000
+    MTI49I51          -0.714      0.099     -7.198      0.000
+    MTI50I51          -0.714      0.099     -7.198      0.000
+    MTI52I54          -0.562      0.091     -6.188      0.000
+    MTI53I54          -0.562      0.091     -6.188      0.000
+    MTI55I56          -1.090      0.191     -5.700      0.000
+    MTI56I57           1.090      0.191      5.700      0.000
+    MTI58I59           0.821      0.114      7.204      0.000
+    MTI58I60           0.821      0.114      7.204      0.000
+
+ BFT_FC_N WITH
+    BFT_FC_E          -0.015      0.069     -0.220      0.826
+    BFT_FC_O           0.176      0.070      2.522      0.012
+    BFT_FC_A          -0.793      0.050    -15.927      0.000
+    BFT_FC_C           0.177      0.064      2.765      0.006
+
+ BFT_FC_E WITH
+    BFT_FC_O           0.024      0.072      0.334      0.738
+    BFT_FC_A           0.222      0.076      2.910      0.004
+    BFT_FC_C          -0.447      0.055     -8.174      0.000
+
+ BFT_FC_O WITH
+    BFT_FC_A          -0.111      0.083     -1.336      0.182
+    BFT_FC_C          -0.262      0.071     -3.693      0.000
+
+ BFT_FC_A WITH
+    BFT_FC_C          -0.302      0.072     -4.207      0.000
+
+ MTI01I02 WITH
+    MTI01I03           1.000      0.000    999.000    999.000
+    MTI02I03          -0.994      0.297     -3.344      0.001
+
+ MTI01I03 WITH
+    MTI02I03           1.096      0.306      3.586      0.000
+
+ MTI04I05 WITH
+    MTI04I06           1.000      0.000    999.000    999.000
+    MTI05I06          -0.986      0.284     -3.469      0.001
+
+ MTI04I06 WITH
+    MTI05I06           0.868      0.263      3.296      0.001
+
+ MTI07I08 WITH
+    MTI07I09           1.000      0.000    999.000    999.000
+    MTI08I09          -0.986      0.259     -3.805      0.000
+
+ MTI07I09 WITH
+    MTI08I09           0.499      0.198      2.516      0.012
+
+ MTI10I11 WITH
+    MTI10I12           1.000      0.000    999.000    999.000
+    MTI11I12          -0.623      0.244     -2.546      0.011
+
+ MTI10I12 WITH
+    MTI11I12           0.654      0.249      2.625      0.009
+
+ MTI13I14 WITH
+    MTI13I15           1.000      0.000    999.000    999.000
+    MTI14I15          -4.575      2.113     -2.166      0.030
+
+ MTI13I15 WITH
+    MTI14I15           1.500      0.968      1.550      0.121
+
+ MTI16I17 WITH
+    MTI16I18           1.000      0.000    999.000    999.000
+    MTI17I18          -1.398      0.388     -3.602      0.000
+
+ MTI16I18 WITH
+    MTI17I18           0.510      0.200      2.543      0.011
+
+ MTI19I20 WITH
+    MTI19I21           1.000      0.000    999.000    999.000
+    MTI20I21          -0.407      0.162     -2.520      0.012
+
+ MTI19I21 WITH
+    MTI20I21           0.295      0.179      1.645      0.100
+
+ MTI22I23 WITH
+    MTI22I24           1.000      0.000    999.000    999.000
+    MTI23I24          -1.024      0.318     -3.221      0.001
+
+ MTI22I24 WITH
+    MTI23I24           0.528      0.199      2.648      0.008
+
+ MTI25I26 WITH
+    MTI25I27           1.000      0.000    999.000    999.000
+    MTI26I27          -0.550      0.155     -3.554      0.000
+
+ MTI25I27 WITH
+    MTI26I27           0.465      0.146      3.182      0.001
+
+ MTI28I29 WITH
+    MTI28I30           1.000      0.000    999.000    999.000
+    MTI29I30          -0.563      0.225     -2.505      0.012
+
+ MTI28I30 WITH
+    MTI29I30           1.088      0.380      2.863      0.004
+
+ MTI31I32 WITH
+    MTI31I33           1.000      0.000    999.000    999.000
+    MTI32I33          -0.050      0.109     -0.464      0.642
+
+ MTI31I33 WITH
+    MTI32I33           0.813      0.233      3.492      0.000
+
+ MTI34I35 WITH
+    MTI34I36           1.000      0.000    999.000    999.000
+    MTI35I36          -1.105      0.285     -3.874      0.000
+
+ MTI34I36 WITH
+    MTI35I36           0.383      0.236      1.623      0.105
+
+ MTI37I38 WITH
+    MTI37I39           1.000      0.000    999.000    999.000
+    MTI38I39          -0.581      0.149     -3.904      0.000
+
+ MTI37I39 WITH
+    MTI38I39           0.088      0.074      1.183      0.237
+
+ MTI40I41 WITH
+    MTI40I42           1.000      0.000    999.000    999.000
+    MTI41I42          -0.853      0.227     -3.752      0.000
+
+ MTI40I42 WITH
+    MTI41I42           0.302      0.169      1.786      0.074
+
+ MTI43I44 WITH
+    MTI43I45           1.000      0.000    999.000    999.000
+    MTI44I45          -1.467      0.437     -3.358      0.001
+
+ MTI43I45 WITH
+    MTI44I45           0.821      0.345      2.381      0.017
+
+ MTI46I47 WITH
+    MTI46I48           1.000      0.000    999.000    999.000
+    MTI47I48          -0.544      0.161     -3.377      0.001
+
+ MTI46I48 WITH
+    MTI47I48           0.294      0.150      1.956      0.051
+
+ MTI49I50 WITH
+    MTI49I51           1.000      0.000    999.000    999.000
+    MTI50I51          -0.677      0.190     -3.556      0.000
+
+ MTI49I51 WITH
+    MTI50I51           0.332      0.158      2.104      0.035
+
+ MTI52I53 WITH
+    MTI52I54           1.000      0.000    999.000    999.000
+    MTI53I54          -0.675      0.215     -3.142      0.002
+
+ MTI52I54 WITH
+    MTI53I54           0.597      0.230      2.591      0.010
+
+ MTI55I56 WITH
+    MTI55I57           1.000      0.000    999.000    999.000
+    MTI56I57          -1.242      0.577     -2.151      0.031
+
+ MTI55I57 WITH
+    MTI56I57           4.020      1.610      2.497      0.013
+
+ MTI58I59 WITH
+    MTI58I60           1.000      0.000    999.000    999.000
+    MTI59I60          -0.306      0.181     -1.686      0.092
+
+ MTI58I60 WITH
+    MTI59I60           1.141      0.372      3.069      0.002
+
+ Means
+    BFT_FC_N           0.000      0.000    999.000    999.000
+    BFT_FC_E           0.000      0.000    999.000    999.000
+    BFT_FC_O           0.000      0.000    999.000    999.000
+    BFT_FC_A           0.000      0.000    999.000    999.000
+    BFT_FC_C           0.000      0.000    999.000    999.000
+
+ Thresholds
+    MTI01I02$1        -0.695      0.098     -7.079      0.000
+    MTI01I03$1        -0.541      0.087     -6.200      0.000
+    MTI02I03$1         0.154      0.078      1.973      0.049
+    MTI04I05$1         0.730      0.098      7.438      0.000
+    MTI04I06$1        -0.247      0.085     -2.910      0.004
+    MTI05I06$1        -0.977      0.124     -7.902      0.000
+    MTI07I08$1        -0.117      0.082     -1.429      0.153
+    MTI07I09$1        -0.576      0.085     -6.740      0.000
+    MTI08I09$1        -0.459      0.087     -5.288      0.000
+    MTI10I11$1         0.661      0.097      6.846      0.000
+    MTI10I12$1         0.891      0.110      8.109      0.000
+    MTI11I12$1         0.229      0.093      2.455      0.014
+    MTI13I14$1        -0.078      0.146     -0.534      0.593
+    MTI13I15$1         1.486      0.329      4.524      0.000
+    MTI14I15$1         1.564      0.358      4.365      0.000
+    MTI16I17$1        -0.923      0.116     -7.943      0.000
+    MTI16I18$1        -0.182      0.064     -2.825      0.005
+    MTI17I18$1         0.741      0.112      6.628      0.000
+    MTI19I20$1        -0.429      0.078     -5.533      0.000
+    MTI19I21$1        -0.246      0.083     -2.965      0.003
+    MTI20I21$1         0.183      0.078      2.345      0.019
+    MTI22I23$1         0.283      0.091      3.121      0.002
+    MTI22I24$1        -0.203      0.071     -2.883      0.004
+    MTI23I24$1        -0.486      0.094     -5.177      0.000
+    MTI25I26$1        -0.248      0.067     -3.675      0.000
+    MTI25I27$1        -0.257      0.066     -3.897      0.000
+    MTI26I27$1        -0.009      0.061     -0.154      0.878
+    MTI28I29$1        -0.054      0.080     -0.667      0.505
+    MTI28I30$1        -0.542      0.122     -4.432      0.000
+    MTI29I30$1        -0.489      0.108     -4.519      0.000
+    MTI31I32$1        -0.254      0.077     -3.311      0.001
+    MTI31I33$1        -0.821      0.123     -6.683      0.000
+    MTI32I33$1        -0.568      0.098     -5.780      0.000
+    MTI34I35$1        -0.575      0.091     -6.349      0.000
+    MTI34I36$1        -0.549      0.103     -5.305      0.000
+    MTI35I36$1         0.026      0.091      0.283      0.777
+    MTI37I38$1        -0.586      0.079     -7.435      0.000
+    MTI37I39$1        -0.206      0.054     -3.835      0.000
+    MTI38I39$1         0.380      0.068      5.561      0.000
+    MTI40I41$1        -0.150      0.083     -1.803      0.071
+    MTI40I42$1        -0.353      0.077     -4.586      0.000
+    MTI41I42$1        -0.204      0.081     -2.506      0.012
+    MTI43I44$1         0.603      0.112      5.375      0.000
+    MTI43I45$1        -0.418      0.102     -4.082      0.000
+    MTI44I45$1        -1.020      0.150     -6.800      0.000
+    MTI46I47$1        -0.564      0.086     -6.525      0.000
+    MTI46I48$1        -0.724      0.095     -7.625      0.000
+    MTI47I48$1        -0.161      0.068     -2.354      0.019
+    MTI49I50$1         0.175      0.083      2.113      0.035
+    MTI49I51$1         0.028      0.082      0.345      0.730
+    MTI50I51$1        -0.147      0.072     -2.036      0.042
+    MTI52I53$1         0.118      0.076      1.543      0.123
+    MTI52I54$1         0.154      0.081      1.906      0.057
+    MTI53I54$1         0.037      0.065      0.562      0.574
+    MTI55I56$1        -0.272      0.102     -2.672      0.008
+    MTI55I57$1        -1.517      0.272     -5.576      0.000
+    MTI56I57$1        -1.245      0.248     -5.030      0.000
+    MTI58I59$1         0.118      0.077      1.524      0.128
+    MTI58I60$1        -0.819      0.131     -6.243      0.000
+    MTI59I60$1        -0.936      0.136     -6.906      0.000
+
+ Variances
+    BFT_FC_N           1.000      0.000    999.000    999.000
+    BFT_FC_E           1.000      0.000    999.000    999.000
+    BFT_FC_O           1.000      0.000    999.000    999.000
+    BFT_FC_A           1.000      0.000    999.000    999.000
+    BFT_FC_C           1.000      0.000    999.000    999.000
+
+ Residual Variances
+    MTI01I02           1.994      0.297      6.706      0.000
+    MTI01I03           2.096      0.306      6.859      0.000
+    MTI02I03           2.090      0.522      4.004      0.000
+    MTI04I05           1.986      0.284      6.988      0.000
+    MTI04I06           1.868      0.263      7.095      0.000
+    MTI05I06           1.854      0.461      4.024      0.000
+    MTI07I08           1.986      0.259      7.665      0.000
+    MTI07I09           1.499      0.198      7.559      0.000
+    MTI08I09           1.485      0.379      3.915      0.000
+    MTI10I11           1.623      0.244      6.637      0.000
+    MTI10I12           1.654      0.249      6.639      0.000
+    MTI11I12           1.276      0.394      3.238      0.001
+    MTI13I14           5.575      2.113      2.639      0.008
+    MTI13I15           2.500      0.968      2.583      0.010
+    MTI14I15           6.075      2.915      2.084      0.037
+    MTI16I17           2.398      0.388      6.179      0.000
+    MTI16I18           1.510      0.200      7.532      0.000
+    MTI17I18           1.907      0.508      3.755      0.000
+    MTI19I20           1.407      0.162      8.708      0.000
+    MTI19I21           1.295      0.179      7.220      0.000
+    MTI20I21           0.702      0.243      2.895      0.004
+    MTI22I23           2.024      0.318      6.367      0.000
+    MTI22I24           1.528      0.199      7.667      0.000
+    MTI23I24           1.551      0.434      3.578      0.000
+    MTI25I26           1.550      0.155     10.022      0.000
+    MTI25I27           1.465      0.146     10.020      0.000
+    MTI26I27           1.015      0.233      4.357      0.000
+    MTI28I29           1.563      0.225      6.951      0.000
+    MTI28I30           2.088      0.380      5.494      0.000
+    MTI29I30           1.651      0.504      3.273      0.001
+    MTI31I32           1.050      0.109      9.678      0.000
+    MTI31I33           1.813      0.233      7.785      0.000
+    MTI32I33           0.864      0.267      3.238      0.001
+    MTI34I35           2.105      0.285      7.379      0.000
+    MTI34I36           1.383      0.236      5.862      0.000
+    MTI35I36           1.488      0.433      3.437      0.001
+    MTI37I38           1.581      0.149     10.621      0.000
+    MTI37I39           1.088      0.074     14.679      0.000
+    MTI38I39           0.669      0.161      4.158      0.000
+    MTI40I41           1.853      0.227      8.148      0.000
+    MTI40I42           1.302      0.169      7.704      0.000
+    MTI41I42           1.155      0.313      3.686      0.000
+    MTI43I44           2.467      0.437      5.646      0.000
+    MTI43I45           1.821      0.345      5.281      0.000
+    MTI44I45           2.289      0.691      3.310      0.001
+    MTI46I47           1.544      0.161      9.589      0.000
+    MTI46I48           1.294      0.150      8.617      0.000
+    MTI47I48           0.837      0.235      3.557      0.000
+    MTI49I50           1.677      0.190      8.809      0.000
+    MTI49I51           1.332      0.158      8.440      0.000
+    MTI50I51           1.009      0.274      3.679      0.000
+    MTI52I53           1.675      0.215      7.795      0.000
+    MTI52I54           1.597      0.230      6.930      0.000
+    MTI53I54           1.272      0.384      3.312      0.001
+    MTI55I56           2.242      0.577      3.883      0.000
+    MTI55I57           5.020      1.610      3.118      0.002
+    MTI56I57           5.262      2.043      2.575      0.010
+    MTI58I59           1.306      0.181      7.196      0.000
+    MTI58I60           2.141      0.372      5.759      0.000
+    MTI59I60           1.447      0.457      3.164      0.002
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed     Scale
+    Variable        Estimate       S.E.  Est./S.E.    P-Value     Factors
+
+    MTI01I02           0.260      0.049      5.301      0.000      0.609
+    MTI01I03           0.089      0.027      3.307      0.001      0.659
+    MTI02I03           0.174      0.044      3.919      0.000      0.629
+    MTI04I05           0.075      0.029      2.591      0.010      0.682
+    MTI04I06           0.234      0.047      4.983      0.000      0.641
+    MTI05I06           0.259      0.049      5.226      0.000      0.632
+    MTI07I08           0.284      0.044      6.426      0.000      0.600
+    MTI07I09           0.346      0.051      6.776      0.000      0.661
+    MTI08I09           0.326      0.046      7.054      0.000      0.674
+    MTI10I11           0.424      0.056      7.510      0.000      0.596
+    MTI10I12           0.367      0.054      6.862      0.000      0.618
+    MTI11I12           0.589      0.057     10.286      0.000      0.568
+    MTI13I14           0.351      0.049      7.204      0.000      0.341
+    MTI13I15           0.629      0.066      9.481      0.000      0.385
+    MTI14I15           0.357      0.057      6.218      0.000      0.325
+    MTI16I17           0.032      0.020      1.618      0.106      0.635
+    MTI16I18           0.196      0.044      4.487      0.000      0.730
+    MTI17I18           0.173      0.040      4.370      0.000      0.659
+    MTI19I20           0.303      0.049      6.155      0.000      0.704
+    MTI19I21           0.557      0.056      9.869      0.000      0.585
+    MTI20I21           0.718      0.062     11.489      0.000      0.634
+    MTI22I23           0.310      0.051      6.108      0.000      0.584
+    MTI22I24           0.193      0.054      3.594      0.000      0.727
+    MTI23I24           0.342      0.064      5.316      0.000      0.651
+    MTI25I26           0.160      0.035      4.598      0.000      0.736
+    MTI25I27           0.134      0.035      3.801      0.000      0.769
+    MTI26I27           0.379      0.046      8.171      0.000      0.782
+    MTI28I29           0.383      0.052      7.316      0.000      0.628
+    MTI28I30           0.582      0.044     13.186      0.000      0.447
+    MTI29I30           0.547      0.050     11.018      0.000      0.524
+    MTI31I32           0.505      0.049     10.242      0.000      0.686
+    MTI31I33           0.559      0.044     12.563      0.000      0.493
+    MTI32I33           0.607      0.057     10.690      0.000      0.675
+    MTI34I35           0.145      0.038      3.873      0.000      0.637
+    MTI34I36           0.614      0.046     13.349      0.000      0.528
+    MTI35I36           0.563      0.049     11.485      0.000      0.542
+    MTI37I38           0.212      0.041      5.189      0.000      0.706
+    MTI37I39           0.118      0.032      3.679      0.000      0.901
+    MTI38I39           0.476      0.049      9.685      0.000      0.886
+    MTI40I41           0.357      0.046      7.722      0.000      0.589
+    MTI40I42           0.413      0.054      7.649      0.000      0.672
+    MTI41I42           0.555      0.054     10.329      0.000      0.621
+    MTI43I44           0.222      0.045      4.977      0.000      0.562
+    MTI43I45           0.453      0.051      8.842      0.000      0.548
+    MTI44I45           0.333      0.054      6.123      0.000      0.540
+    MTI46I47           0.397      0.047      8.527      0.000      0.625
+    MTI46I48           0.505      0.052      9.620      0.000      0.619
+    MTI47I48           0.544      0.057      9.491      0.000      0.738
+    MTI49I50           0.376      0.049      7.727      0.000      0.610
+    MTI49I51           0.552      0.049     11.256      0.000      0.580
+    MTI50I51           0.514      0.049     10.398      0.000      0.694
+    MTI52I53           0.317      0.049      6.535      0.000      0.639
+    MTI52I54           0.445      0.045      9.838      0.000      0.590
+    MTI53I54           0.226      0.048      4.748      0.000      0.780
+    MTI55I56           0.346      0.054      6.365      0.000      0.540
+    MTI55I57           0.128      0.038      3.383      0.001      0.417
+    MTI56I57           0.202      0.041      4.958      0.000      0.389
+    MTI58I59           0.358      0.055      6.511      0.000      0.701
+    MTI58I60           0.394      0.043      9.105      0.000      0.532
+    MTI59I60           0.358      0.061      5.858      0.000      0.666
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.527E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              BFT_FC_N      BFT_FC_E      BFT_FC_O      BFT_FC_A      BFT_FC_C
+              ________      ________      ________      ________      ________
+               -0.002        -0.001        -0.009         0.003         0.009
+
+
+           Covariances
+              BFT_FC_N      BFT_FC_E      BFT_FC_O      BFT_FC_A      BFT_FC_C
+              ________      ________      ________      ________      ________
+ BFT_FC_N       0.786
+ BFT_FC_E       0.010         0.803
+ BFT_FC_O       0.172         0.036         0.664
+ BFT_FC_A      -0.650         0.177        -0.103         0.675
+ BFT_FC_C       0.189        -0.445        -0.250        -0.284         0.837
+
+
+           Correlations
+              BFT_FC_N      BFT_FC_E      BFT_FC_O      BFT_FC_A      BFT_FC_C
+              ________      ________      ________      ________      ________
+ BFT_FC_N       1.000
+ BFT_FC_E       0.013         1.000
+ BFT_FC_O       0.239         0.050         1.000
+ BFT_FC_A      -0.893         0.240        -0.154         1.000
+ BFT_FC_C       0.233        -0.543        -0.335        -0.378         1.000
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    scores_MT_int.dat
+
+  Order and format of variables
+
+    MTI01I02       F10.3
+    MTI01I03       F10.3
+    MTI02I03       F10.3
+    MTI04I05       F10.3
+    MTI04I06       F10.3
+    MTI05I06       F10.3
+    MTI07I08       F10.3
+    MTI07I09       F10.3
+    MTI08I09       F10.3
+    MTI10I11       F10.3
+    MTI10I12       F10.3
+    MTI11I12       F10.3
+    MTI13I14       F10.3
+    MTI13I15       F10.3
+    MTI14I15       F10.3
+    MTI16I17       F10.3
+    MTI16I18       F10.3
+    MTI17I18       F10.3
+    MTI19I20       F10.3
+    MTI19I21       F10.3
+    MTI20I21       F10.3
+    MTI22I23       F10.3
+    MTI22I24       F10.3
+    MTI23I24       F10.3
+    MTI25I26       F10.3
+    MTI25I27       F10.3
+    MTI26I27       F10.3
+    MTI28I29       F10.3
+    MTI28I30       F10.3
+    MTI29I30       F10.3
+    MTI31I32       F10.3
+    MTI31I33       F10.3
+    MTI32I33       F10.3
+    MTI34I35       F10.3
+    MTI34I36       F10.3
+    MTI35I36       F10.3
+    MTI37I38       F10.3
+    MTI37I39       F10.3
+    MTI38I39       F10.3
+    MTI40I41       F10.3
+    MTI40I42       F10.3
+    MTI41I42       F10.3
+    MTI43I44       F10.3
+    MTI43I45       F10.3
+    MTI44I45       F10.3
+    MTI46I47       F10.3
+    MTI46I48       F10.3
+    MTI47I48       F10.3
+    MTI49I50       F10.3
+    MTI49I51       F10.3
+    MTI50I51       F10.3
+    MTI52I53       F10.3
+    MTI52I54       F10.3
+    MTI53I54       F10.3
+    MTI55I56       F10.3
+    MTI55I57       F10.3
+    MTI56I57       F10.3
+    MTI58I59       F10.3
+    MTI58I60       F10.3
+    MTI59I60       F10.3
+    BFT_FC_N       F10.3
+    BFT_FC_E       F10.3
+    BFT_FC_O       F10.3
+    BFT_FC_A       F10.3
+    BFT_FC_C       F10.3
+    ID_ALL         I4
+
+  Save file format
+    65F10.3 I4
+
+  Save file record length    10000
+
+
+     Beginning Time:  14:05:53
+        Ending Time:  14:07:15
+       Elapsed Time:  00:01:22
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

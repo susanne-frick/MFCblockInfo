@@ -1,0 +1,79 @@
+---
+title: "Data Preparation"
+author: Susanne Frick
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{data_preparation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+knitr::opts_knit$set(
+  root.dir = "../data_raw"
+)
+```
+
+## Dataset
+This example uses a dataset from Wetzel & Frick (2020) which is available on OSF: \url{https://osf.io/z9w6s/}
+
+```{r setup}
+library(MFCblockInfo)
+```
+
+## Questionnaire design
+Specify the loading matrix with items in rows and traits in columns, 1=positively keyed item, -1=negatively keyed item
+```{r}
+design.load.MT <- read.table("design_load_bft-matched.txt", sep="\t", header=TRUE)
+head(design.load.MT)
+```
+
+The TIRT design matrix of pairwise comparisons (termed $\Lambda$ in \textcite{brown2011}) can be created with create.design.mat, given number of blocks (K) and block size (nb).
+```{r}
+K <- 20
+nb <- 3
+design.mat <- create.design.mat(K=K, nb=nb)
+design.mat[1:6,1:6]
+```
+
+## Read and format Mplus parameter estimates
+```{r}
+
+mt <- MplusAutomation::readModels("tirt_bft-matched_intercepts.out", what=c("parameters"))
+mt.pars <- mt$parameters$unstandardized
+```
+Make sure to extract unstandardized parameter estimates.
+
+```{r}
+#theta
+scores.mt <- read.table("scores_bft-matched_intercepts.dat", quote="\"", comment.char="")[,61:66] # last column is ID
+colnames(scores.mt) <- c("N","E","O","A","C","id_all")
+
+#pair thresholds
+thresh.mt <- mt.pars[mt.pars$paramHeader=="Thresholds",]$est
+
+```
+
+Use load2mat and uni2mat to convert estimates for loadings and uniquenesses to matrices, respectively. (uni2mat assumes a diagonal matrix of error covariances, i.e. errors do not covary between items.)
+```{r}
+#loadings
+load.mt <- load2mat(mt.pars, design.load.MT, design.mat)
+head(load.mt)
+
+#uniqenesses
+uni.mt <- uni2mat(mt.pars, "^MT")
+uni.mt[1:6,1:6]
+```
+
+Combine these objects to a list, for convenience. Thresholds should be inverted ($\times(-1)$) to intercepts.
+```{r}
+#combine to data
+# ! intercepts = -thresholds
+data.mt <- list(traits=scores.mt, int=-thresh.mt, loads=load.mt, uni=uni.mt, K=K, nb=nb)
+
+```
+The two dataset is available via data("data.mt").

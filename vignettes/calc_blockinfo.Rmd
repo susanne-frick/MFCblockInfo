@@ -1,0 +1,113 @@
+---
+title: "Calculate block information"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calc_blockinfo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette shows how to calculate block information and block information summaries for an empirical sample.
+
+```{r setup}
+library(MFCblockInfo)
+```
+
+Load the data.
+```{r}
+data("data.mt")
+str(data.mt)
+```
+## Small working example
+Computationally feasible: only for the first two persons, and blocks 1 and 3.
+```{r}
+info1 <- calc.info.block(lhb.mplus, traits=as.matrix(data.mt$traits[1:2,-ncol(data.mt$traits)]),
+                         int=data.mt$int, loads=data.mt$loads, uni=data.mt$uni, K=data.mt$K, nb=data.mt$nb,
+                         which.blocks=c(1,3))
+```
+
+Obtain standard errors / estimation variances, sum information across all blocks (summed=TRUE), return variances (var.out=TRUE)
+```{r}
+ses1 <- info2se(info1, summed=T, var.out=T)
+```
+
+Calculate the trace of the information matrix, average across persons
+```{r}
+trace1 <- calc.info.trace(info1, avg=F)
+```
+
+## Example with full dataset
+(To save computational time, the stored result can be used.)
+```{r}
+# info.mt <- calc.info.block(lhb.mplus, traits=as.matrix(data.mt$traits[,-ncol(data.mt$traits)]),
+#                            int=data.mt$int, loads=data.mt$loads, uni=data.mt$uni,
+#                            K=data.mt$K, nb=data.mt$nb) #which.blocks defaults to all
+info.mt <- readRDS("data/info_all_emp_MT.rds")
+```
+
+Calculate and examine block $R^2$ for all blocks, averaged across persons.
+```{r}
+r2.mt.all <- do.call(rbind, lapply(1:20, function(b, info.emp) colMeans(calc.info.block.r2(info.emp, wo.blocks=b))
+                                   , info.emp=info.mt))
+round(r2.mt.all, 2)
+psych::describe(r2.mt.all)
+```
+
+Calculate the trace of test information (T-optimality), averaged across persons.
+```{r}
+trace.mt.all <- calc.info.trace(info.mt, avg=T)
+```
+
+Calculate and examine the test information for the empirical sample.
+```{r}
+ses.mt <- info2se(info.mt, summed=T)
+
+#scatterplot
+par(mfrow=c(1,2))
+for(tr in 1:ncol(ses.mt)) {
+  plot(data.mt$traits[,tr], ses.mt[,tr], main=paste("Trait",tr),
+       xlab="MT", ylab="SE")
+}
+round(colMeans(ses.mt), 2)
+```
+
+## Block information plots
+
+Block information, plot blocks 3 and 4.
+```{r}
+# info.mt.plots <- calc.info.plot(tr.levels=seq(-2,2,.5), fix.levels=c(-1,0,1), fix.level.others=0, K=data.mt$K, which.blocks=1:data.mt$K,
+#                           lhb.mplus,
+#                           int=data.mt$int, loads=data.mt$loads, uni=data.mt$uni, nb=data.mt$nb)
+# saveRDS(info.mt.plots, file="data/info_mt_plots.rds")
+info.mt.plots <- readRDS("data/info_mt_plots.rds")
+plot.block(which.blocks = 3:4, info=info.mt.plots, K=20, loads=data.mt$loads)
+```
+
+Test information (\textit{SE}s).
+```{r}
+# testinfo.mt.plots <- calc.testinfo.plot(tr.levels=seq(-2,2,.5), fix.level.others=0, K=data.mt$K, which.blocks=1:data.mt$K,
+#                                         FUN=lhb.mplus,
+#                                         int=data.mt$int, loads=data.mt$loads, uni=data.mt$uni, nb=data.mt$nb)
+# saveRDS(testinfo.mt.plots, file="data/testinfo_mt_plots.rds")
+testinfo.mt.plots <- readRDS("data/testinfo_mt_plots.rds")
+plot.testinfo(testinfo.mt.plots, loads=data.mt$loads, par.mfrow=c(2,5))
+```
+
+only 1 trait varied, others randomly drawn from MVN, n for each trait level
+```{r}
+# testinfo.mt.1d <- calc.testinfo.1d(tr.levels=seq(-2,2,.5), sigma=cor(data.mt$traits[,1:5]), n=10, which.blocks = 1:data.mt$K,
+#                                    seed=42,
+#                                    FUN=lhb.mplus,
+#                                    int=data.mt$int, loads=data.mt$loads, uni=data.mt$uni,
+#                                    K=data.mt$K, nb=data.mt$nb)
+#plot with base r or anything else
+# for(tr in 1:ncol(testinfo.mt.1d$ses)) plot(testinfo.mt.1d$variedlevels, testinfo.mt.1d$ses[,tr], type="l")
+```
+
