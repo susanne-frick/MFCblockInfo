@@ -181,10 +181,10 @@ header$command <- c("\\hline \n Method & Length & Estimator & Loadings & \\multi
                     "\\cmidrule(rl){2-8}",
                     "\\hline \n \\multicolumn{8}{l}{\\small \\textit{Note.} MB = Mean Bias, RMSE = Root Mean Squared Error, ML = Maximum} \\\\
                     \\multicolumn{8}{l}{\\small Likelihood, MAP = Maximum a posteriori. Standard deviations are given in} \\\\
-                    \\multicolumn{8}{l}{\\small brackets.} \n")
+                    \\multicolumn{8}{l}{\\small parentheses.} \n")
 
 print(xtable::xtable(means.paper, digits=2, align="lllllrlrl",
-                     caption="Means in bias for information-based standard errors by condition in simulation study 1 on standard error accuracy",
+                     caption="Means of bias for information-based standard errors by condition in simulation study 1 on standard error accuracy",
                      label="tb:var_means_se"), include.colnames = F, include.rownames=F, hline.after=c(nrow(means.paper)/2),
       sanitize.rownames.function=function(x){x}, sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},

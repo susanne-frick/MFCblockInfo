@@ -91,7 +91,7 @@ header$pos <- list(-1, nrow(means.paper))
 header$command <- c("\\hline \n Target & Algorithm & \\multicolumn{2}{c}{$r(\\theta,\\hat{\\theta})$} & \\multicolumn{2}{c}{$r(\\theta,\\hat{\\theta})^2$} & \\multicolumn{2}{c}{MAB} & \\multicolumn{2}{c}{RMSE} \\\\",
                     "\\hline \n \\multicolumn{10}{l}{\\small \\textit{Note.} MAB = Mean Absolute Bias, RMSE = Root Mean Squared Error, A = A-optimality,} \\\\
                     \\multicolumn{10}{l}{\\small D = D-optimality, MIP T = Mixed Integer Programming with T-optimality. Standard} \\\\
-                    \\multicolumn{10}{l}{\\small deviations are given in brackets.}\n")
+                    \\multicolumn{10}{l}{\\small deviations are given in parentheses.}\n")
 
 print(xtable::xtable(means.paper, digits=2,
                      caption="Mean trait recovery by algorithm in simulation study 3 on test extension",
@@ -131,12 +131,11 @@ header <- list()
 header$pos <- list(-1, nrow(var.paper))
 header$command <- c("\\hline \n Factor & $r(\\theta, \\hat{\\theta})$ & MAB & RMSE\\\\",
                     "\\hline \n \\multicolumn{4}{l}{\\small \\textit{Note.} MAB = Mean Absolute Bias, RMSE = Root} \\\\
-                    \\multicolumn{4}{l}{\\small Mean Squared Error. MIP = Mixed Integer} \\\\
-                    \\multicolumn{4}{l}{\\small Programming with T-optimality, A = A-optimality,} \\\\
-                    \\multicolumn{4}{l}{\\small  D = D-optimality. $r(\\theta, \\hat{\\theta})$ was Fisher \\textit{Z} transformed.}\n")
+                    \\multicolumn{4}{l}{\\small Mean Squared Error. $r(\\theta, \\hat{\\theta})$ was Fisher \\textit{Z} } \\\\
+                    \\multicolumn{4}{l}{\\small transformed.}\n")
 
 print(xtable::xtable(var.paper, digits=0,
-                     caption="Variance in recovery of trait scores explained in \\% by algorithm and target in simulation study 3 on test extension",
+                     caption="Variance in trait recovery explained in \\% by algorithm and target in simulation study 3 on test extension",
                      label="tb:var_sim_ext"), include.colnames = F, include.rownames=T, hline.after=c(0, nrow(var.paper)-1),
       sanitize.rownames.function=function(x){x}, sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},

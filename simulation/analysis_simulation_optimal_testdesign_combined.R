@@ -84,7 +84,7 @@ header <- list()
 header$pos <- list(-1, nrow(means.paper))
 header$command <- c("\\hline \n Algorithm & Constraints & Target & \\multicolumn{2}{c}{$r(\\theta,\\hat{\\theta})$} & \\multicolumn{2}{c}{$r(\\theta,\\hat{\\theta})^2$} & \\multicolumn{2}{c}{MAB} & \\multicolumn{2}{c}{RMSE} \\\\",
                     "\\hline \n \\multicolumn{11}{l}{\\small \\textit{Note.} MAB = Mean Absolute Bias, RMSE = Root Mean Squared Error, MIP T = Mixed Integer} \\\\
-                    \\multicolumn{11}{l}{\\small Programming with T-optimality. Standard deviations are given in brackets.} \n")
+                    \\multicolumn{11}{l}{\\small Programming with T-optimality. Standard deviations are given in parentheses.} \n")
 print(xtable::xtable(means.paper, digits=2,
                      caption="Mean trait recovery by condition in simulation study 2 on test construction",
                      label="tb:means_con"), include.colnames = F, include.rownames=F, hline.after=c(0,4,8,12),
@@ -138,7 +138,7 @@ header$command <- c("\\hline \n Factor & $r(\\theta, \\hat{\\theta})$ & MAB & RM
                     \\multicolumn{4}{l}{\\small transformed.} \n")
 
 print(xtable::xtable(var.paper, digits=0,
-                     caption="Variance in recovery of trait scores explained in \\% by algorithm, target and constraints in simulation study 2 on test construction",
+                     caption="Variance in trait recovery explained in \\% by algorithm, target and constraints in simulation study 2 on test construction",
                      label="tb:var_sim_con"), include.colnames = F, include.rownames=T, hline.after=c(0, nrow(var.paper)-1),
       sanitize.rownames.function=function(x){x}, sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},
