@@ -6,7 +6,7 @@ Author: Susanne Frick
 Maintainer: Susanne Frick <susanne.frick@uni-mannheim.de>
 Description: This package can compute block information for multidimensional forced-choice questionnaires.
     It currently uses only the Thurstonian IRT model by Brown & Maydeu-Olivares (2011), as formulated by Yousfi (2019).
-License: What license is it under?
+License: see GitHub page
 Encoding: UTF-8
 LazyData: true
 Imports: 
