@@ -7,6 +7,11 @@
 #' @export
 #'
 calc.rel.emp <- function(scores, ses) {
+  if(is.null(dim(scores))==TRUE){
+    var(scores)/(var(scores) + mean(ses^2, na.rm = TRUE))
+  }
+  else{
   svar <- apply(scores, 2, var)
   svar/(svar + colMeans(ses^2, na.rm=T))
+  }
 }
