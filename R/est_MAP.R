@@ -1,4 +1,4 @@
-est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, ...) {
+est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, lh.fun=lh, ...) {
 
   nb <- nrow(perms)
   K <- nrow(loads)/nb
@@ -10,15 +10,25 @@ est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, S
 
   traits <- ses <- matrix(NA, nrow(responses), ncol(loads))
 
+  errors <- NULL
+  warns <- NULL
+  messages <- NULL
+  
   #loop over persons
   for(j in 1:nrow(responses)) {
-
-    result <- optim(par=rep(0,ncol(loads)),method="L-BFGS-B", fn=lh, lhb.fun=FUN, hessian=SE,
+    tryCatch({
+    result <- optim(par=rep(0,ncol(loads)),method="L-BFGS-B", fn=lh.fun, lhb.fun=FUN, hessian=SE,
                  control = list(fnscale=-1), lower=rep(-3,ncol(loads)),upper=rep(3,ncol(loads)),
                  responsesj=responses[j,], loads=loads, int=int, uni=uni, bi=bi, bi_int=bi_int,
                  perms_int=perms_int, Tr=Tr, perms=perms_order, ...)
     traits[j,] <- result$par
     if(isTRUE(SE)) ses[j,] <- sqrt(diag(MASS::ginv(-result$hessian)))
+    messages <- c(messages, result$message)
+    }, error=function(e){
+      errors <<- c(errors, conditionMessage(e))
+      result[j,] <- NA
+    }, warning=function(w)
+      warns=c(warns, conditionMessage(w)))
    }
-  return(list("traits"=traits, "ses"=ses))
+  return(list("traits"=traits, "ses"=ses, "errors"=errors, "warns"=warns, "messages"=messages))
 }
