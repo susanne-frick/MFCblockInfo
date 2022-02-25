@@ -1,4 +1,4 @@
-est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, lh.fun=lh, ...) {
+est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, lh.fun=lh, starts=NULL, ...) {
 
   nb <- nrow(perms)
   K <- nrow(loads)/nb
@@ -13,12 +13,15 @@ est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, S
   errors <- NULL
   warns <- NULL
   messages <- NULL
-  
+
+  if(is.null(starts)) starts <- matrix(0, nrow(responses), ncol(loads))
+    
   #loop over persons
   for(j in 1:nrow(responses)) {
     tryCatch({
-    result <- optim(par=rep(0,ncol(loads)),method="L-BFGS-B", fn=lh.fun, lhb.fun=FUN, hessian=SE,
-                 control = list(fnscale=-1), lower=rep(-3,ncol(loads)),upper=rep(3,ncol(loads)),
+    result <- optim(par=starts[j,],fn=lh.fun, lhb.fun=FUN, hessian=SE,
+                 control = list(fnscale=-1), 
+                 lower=rep(-3,ncol(loads)),upper=rep(3,ncol(loads)),method="L-BFGS-B",
                  responsesj=responses[j,], loads=loads, int=int, uni=uni, bi=bi, bi_int=bi_int,
                  perms_int=perms_int, Tr=Tr, perms=perms_order, ...)
     traits[j,] <- result$par
