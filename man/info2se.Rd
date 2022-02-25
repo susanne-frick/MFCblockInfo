@@ -4,14 +4,16 @@
 \alias{info2se}
 \title{convert information to SEs}
 \usage{
-info2se(infos, summed = TRUE, var.out = FALSE)
+info2se(infos, summed = TRUE, var.out = FALSE, s.prior = NULL)
 }
 \arguments{
 \item{infos}{list of arrays with block information as returned from calc.info.block()}
 
 \item{summed}{logical, should the information be summed across blocks? defaults to TRUE}
 
-\item{var.out}{logival, return variances instead of SEs? defaults to FALSE}
+\item{var.out}{logical, return variances instead of SEs? defaults to FALSE}
+
+\item{s.prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
 }
 \value{
 if summed across bocks: matrix: rows=persons, columns=traits,

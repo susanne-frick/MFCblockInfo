@@ -4,12 +4,20 @@
 \alias{calc.info.block.r2}
 \title{information for one block in R2 metric}
 \usage{
-calc.info.block.r2(info.all = NULL, wo.blocks = 1, FUN = NULL, ...)
+calc.info.block.r2(
+  info.all = NULL,
+  wo.blocks = 1,
+  s.prior = NULL,
+  FUN = NULL,
+  ...
+)
 }
 \arguments{
 \item{info.all}{as calculated from info.block for all blocks}
 
 \item{wo.blocks}{vector of indices of blocks for which to compute R2}
+
+\item{s.prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
 
 \item{FUN}{function to compute response probability (is info.all is not given)}
 
