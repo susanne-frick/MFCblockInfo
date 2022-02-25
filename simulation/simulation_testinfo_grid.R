@@ -12,7 +12,7 @@ library(MFCblockInfo)
 # design.load.all <- readRDS("simulation/design_load_all_234.rds")
 design.load.all <- readRDS("design_load_all_234.rds")
 
-factor.blocksize <- c(3)
+factor.blocksize <- c(2,3,4)
 factor.loadings <- c("good","bad")
 factor.estimator <- c("ML","MAP")
 factor.length <- c("short","long")
@@ -22,8 +22,6 @@ factor.length <- c("short","long")
 #fix 2nd trait (extraversion)
 trait.levels <- matrix(0, length(seq(-2,2,.5))*2, 5)
 trait.levels[,2] <- seq(-2,2,.5)
-#add all same traits (all high to all low)
-trait.levels[(nrow(trait.levels)/2+1):nrow(trait.levels),] <- seq(-2,2,.5)
 
 Q <- 500 #Number of questionnaires per condition
 
@@ -112,7 +110,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
     ses.info <- info2se(calc.info.block(lhb.mplus, traits=estimates$traits, int=gamma.true, loads=load.mat, uni=diag(items$uni),
                         K=K, nb=nb), summed=T, s.prior=s.prior.d)
     #number of persons with at least one NA
-    na.info <- sum(rowSums(is.na(ses.info)>0)) #mistake! it should be sum(rowSums(is.na(ses.info))>0)
+    na.info <- sum(rowSums(is.na(ses.info))>0)
 
     mean.bias.exp <- rowMeans( t(ses.info) - se.true)
     rmse.exp <- sqrt(rowMeans( (t(ses.info) - se.true)^2 ))
