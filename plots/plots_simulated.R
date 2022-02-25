@@ -75,10 +75,14 @@ dev.off()
 
 #testinfo 1D
 info.test.plot.1d <- readRDS("plots/info_test_plot_1d.rds")
+se.lower <- info.test.plot.1d$ses[,1] - info.test.plot.1d$SDses[,1]
+se.upper <- info.test.plot.1d$ses[,1] + info.test.plot.1d$SDses[,1]
 #plot with base r or anything else
 y.lim <- range(info.test.plot.1d$ses, na.rm=T)
 CairoPDF("plots/plot_testinfo_1d.pdf", width=8, height=8, pointsize=20)
 plot(info.test.plot.1d$variedlevels, info.test.plot.1d$ses[,1], type="l", ylim=y.lim, ylab="SE",xlab=expression(theta), xlim=c(-1.8,1.8))
 grid(col="lightgrey", lty="solid")
-lines(info.test.plot.1d$variedlevels, info.test.plot.1d$ses[,1])
+polygon(x=c(info.test.plot.1d$variedlevels,rev(info.test.plot.1d$variedlevels)), c(info.test.plot.1d$ses[,1], rev(se.upper)), col="skyblue1")
+polygon(x=c(info.test.plot.1d$variedlevels,rev(info.test.plot.1d$variedlevels)), c(info.test.plot.1d$ses[,1], rev(se.lower)), col="skyblue1")
+lines(info.test.plot.1d$variedlevels, info.test.plot.1d$ses[,1], lwd=2)
 dev.off()

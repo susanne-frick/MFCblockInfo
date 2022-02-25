@@ -29,8 +29,9 @@ calc.testinfo.1d <- function(tr.levels, sigma, n=20, seed=NULL, which.blocks, ..
   #testinfo
   ses.fix <- lapply(info.fix, info2se, summed=T)
   #average across levels of fix.dim
-  traits.ses.fix <- matrix(NA, length(tr.levels), ncol(sigma))
+  traits.ses.fix <- traits.ses.sds.fix <- matrix(NA, length(tr.levels), ncol(sigma))
   for (tr in 1:ncol(sigma)) traits.ses.fix[,tr] <- tapply(ses.fix[[tr]][,tr], traits.fix[[tr]][,tr], mean)
-
-  return(list("ses"=traits.ses.fix, "variedlevels"=tr.levels))
+  for (tr in 1:ncol(sigma)) traits.ses.sds.fix[,tr] <- tapply(ses.fix[[tr]][,tr], traits.fix[[tr]][,tr], sd)
+  
+  return(list("ses"=traits.ses.fix, "SDses"=traits.ses.sds.fix, "variedlevels"=tr.levels))
 }
