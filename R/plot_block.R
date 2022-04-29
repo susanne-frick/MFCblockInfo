@@ -28,7 +28,7 @@ plot.block <- function(which.blocks, info, K, loads, trait.names=NULL,
     #set par: rows=traits, columns=fix.levels, 0 margins
     withr::local_par(mfrow=c(length(ind.info),
                              ifelse(nb>2, length(info$variedlevels$fix.levels), 1)),
-                     mai=c(0.3,0,0,0), oma=c(0,0,2,0))
+                     mai=c(0.5,0,0,0), oma=c(0,0,2,0))
 
     #info about which trait
     for(tr in traits.which.blocks[b,]) {
@@ -39,7 +39,7 @@ plot.block <- function(which.blocks, info, K, loads, trait.names=NULL,
         r2 <- calc.info.block.r2(info.all=info$info[[ind]], wo.blocks = b)
 
         ####----- plot ----------####
-        trait.names.varied <- trait.names[info$pairs[ind,1:2]]
+        trait.names.varied <- trait.names[info$pairs[ind,1:3]]
 
         z.lim <- range(r2[,tr])
         if(nb > 2) {
@@ -55,7 +55,7 @@ plot.block <- function(which.blocks, info, K, loads, trait.names=NULL,
                                   ylab=trait.names.varied[2],
                                   zlab=zlab, border=border,
                                   nticks=nticks, scale=TRUE, ...))
-            if(ind==max(ind.info)) title(sub=th3, line=1, adj=.55)
+           title(sub=paste(trait.names.varied[3], "=", th3), line=1, adj=.55)
           }
         } else {
           z.mat <- matrix(r2[,tr],
