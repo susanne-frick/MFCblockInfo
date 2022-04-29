@@ -1,4 +1,4 @@
-est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, lh.fun=lh, starts=NULL, ...) {
+est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, SE=TRUE, lh.fun=lh, starts=NULL, box=3, ...) {
 
   nb <- nrow(perms)
   K <- nrow(loads)/nb
@@ -21,7 +21,7 @@ est.MAP <- function(FUN, responses, int, loads, uni, perms, which.blocks=NULL, S
     tryCatch({
     result <- optim(par=starts[j,],fn=lh.fun, lhb.fun=FUN, hessian=SE,
                  control = list(fnscale=-1), 
-                 lower=rep(-3,ncol(loads)),upper=rep(3,ncol(loads)),method="L-BFGS-B",
+                 lower=rep(-box,ncol(loads)),upper=rep(box,ncol(loads)),method="L-BFGS-B",
                  responsesj=responses[j,], loads=loads, int=int, uni=uni, bi=bi, bi_int=bi_int,
                  perms_int=perms_int, Tr=Tr, perms=perms_order, ...)
     traits[j,] <- result$par
