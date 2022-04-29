@@ -10,18 +10,18 @@ library(MFCblockInfo)
 # design.load.all <- readRDS("simulation/design_load_all_5-15_equal.rds")
 design.load.all <- readRDS("design_load_all_5-15_equal.rds")
 
-factor.blocksize <- 2:4
+factor.blocksize <- 3
 factor.keying <- "12" # c("0","12","23")
 factor.int <- "large"
 factor.load <- "acceptable"
 factor.length <- "long"
 factor.algorithm <- c("opt","r2","loads","random")
-factor.constraints <- c("unconstrained","constrained")
-factor.target <- c("weighted","equal")
-factor.ntraits <- "5" #c("5","15")
+factor.constraints <- c("constrained")
+factor.target <- c("weighted")
+factor.ntraits <- c("15")
 
 #number of replications
-R <- 200 #500
+R <- 2#500
 
 design.sim <- expand.grid("blocksize"=factor.blocksize, "keying"=factor.keying, "length"=factor.length, "intercepts"=factor.int,
                           "loads"=factor.load, 
@@ -73,9 +73,9 @@ if(isFALSE(any(rowSums(traits.grid.15==0)==15))) traits.grid.15 <- rbind(traits.
 traits.grid.list <- list("5"=traits.grid.5, "15"=traits.grid.15)
 
 #reduce for testing
-# traits.grid.list <- lapply(traits.grid.list, function(tl) rbind(tl[1:5,], rep(0, ncol(tl))))
-
-J <- 500 #Number of participants
+traits.grid.list <- lapply(traits.grid.list, function(tl) rbind(tl[1:5,], rep(0, ncol(tl))))
+traits.grid.list[["15"]] <- traits.grid.list[["15"]][5:6,] #further reduction 
+J <-  500 #Number of participants
 
 ####------------------ start simulation -------------------####
 
@@ -94,9 +94,9 @@ mpiopts <- list(chunkSize=chunkSize)
 # res <- foreach(d=1:nrow(design.sim), .packages=c("mvtnorm","numDeriv","devtools"), .combine=rbind) %dopar% {
 #
 
-res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("mvtnorm","numDeriv","devtools","lpSolveAPI","MFCblockInfo"),
-                .inorder=F, .errorhandling="remove", .options.mpi=mpiopts) %dopar% {
-                  set.seed(1204+d)
+res <- foreach (d=1:nrow(design.sim), .combine=list, .verbose=T, .packages=c("mvtnorm","numDeriv","devtools","lpSolveAPI","MFCblockInfo"),
+                .inorder=F, .errorhandling="pass", .options.mpi=mpiopts) %dopar% {
+                  set.seed(0703+d)
   
                   ####------------------- test design -----------------------####
                   #select design load according to test design condition
@@ -143,11 +143,10 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                     traits.blocks.ind <- do.call(cbind, (lapply(1:ncol(design.load), function(f, tb) apply(tb, 1, function(rw) ifelse(f %in% rw, 1, 0)), tb=traits.blocks)))
                     n.traits <- rep(K.final/ncol(design.load)*nb, ncol(design.load))
                     #constraints on item keying (comparisons between opposite-keyed items)
-                    #at least 1/2 of pairwise comparisons between differently keyed items
-                    #this makes 1/2, 3/4, 1 mixed keyed blocks for block sizes 2,3,4
+                    #at least 3/4 of blocks are mixed keyed
                     loads.blocks <- t(apply(blocks, 1, function(b, dl) colSums(dl[b,]), dl=design.load))
                     block.mixed <- ifelse(rowSums(loads.blocks)==nb, 0, 1)
-                    n.mixed <- design.sim[d,"blocksize"]/4*K.final
+                    n.mixed <- 3/4*K.final
                     #at least 1 negatively keyed item per trait
                     traits.neg.ind <- apply(loads.blocks, 2, function(rw) ifelse(rw==-1, 1, 0))
                     n.neg <- rep(1, ncol(design.load))
@@ -169,7 +168,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                   infos <- calc.info.block(lhb.mplus, traits=as.matrix(traits.grid), int=gamma.true, loads=load.mat, uni=diag(items$uni),
                                            K=K, nb=nb)
                   #trace for each block (and grid point)
-                  info.trace <- calc.info.trace(infos)
+                  info.trace <- do.call(rbind, lapply(infos, function(ip) apply(ip, 1, function(i) sum(diag(i)))))
                   
                   ####------------ MIP algorithm with T-optimality -----------------------####
                   results.opt <- select.optimal(info.sum=info.trace, traits.grid=traits.grid, K=K, K.final=K.final,
@@ -180,7 +179,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                   if(as.character(design.sim[d,"target"])=="weighted") {
                     #weights for R^2
                     a.all <- rowSums(info2se(infos, var.out=T), na.rm=T)
-                    a.all <- a.all[which(rowSums(traits.grid==0)==ncol(traits.grid))]/a.all
+                    a.all <- a.all/a.all[which(rowSums(traits.grid==0)==ncol(traits.grid))]
                   }
                   
                   #R^2 mean across persons and traits, weighted
@@ -188,12 +187,15 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                   means.r2 <- matrix(means.r2, 1, K)
                   results.r2 <- select.optimal(info.sum=means.r2, traits.grid=matrix(0,1,1), K=K, K.final=K.final,
                                                constraint.list=constraint.list)
+                  #ind.r2 <- order(means.r2, decreasing = T)[1:K.final] #old version without constraints
                   
                   ####---------------- item selection based on loadings ------------------####
                   loads.blocks <- t(apply(blocks, 1, function(b, dl) colSums(dl[b,]), dl=load.mat))
                   means.loads <- matrix(rowMeans(abs(loads.blocks)), 1, K)
                   results.loads <- select.optimal(info.sum=means.loads, traits.grid=matrix(0,1,1), K=K, K.final=K.final,
                                                   constraint.list=constraint.list)
+                  
+                  #ind.loads <- order(means.loads, decreasing = T)[1:K.final] #old version without constraints
                   
                   ####---------------- random item selection ------------------####
                   results.rand <- select.optimal(info.sum=matrix(runif(K, 0, 1), 1, K), traits.grid=matrix(0,1,1), K=K, K.final=K.final,
@@ -224,11 +226,11 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                       res.r <- data.frame(design.sim[d,], "trait"=1:ncol(design.load), "algorithm"="opt", rec=NA, RMSE=NA, MAB=NA)
                     }
                   }
-                  saveRDS(res.r, file=paste0("results_opt_conditions/results_simulation_opt_conditions_d",d,".rds"))
+                  saveRDS(res.r, file=paste0("results_opt_conditions_15traits_1run/results_simulation_opt_conditions_d",d,".rds"))
                   res.r
                 }
 
-saveRDS(res, file="results_simulation_opt_conditions.rds")
+saveRDS(res, file="results_simulation_opt_conditions_15traits_1run.rds")
 
 # stopCluster(cl)
 closeCluster(cl)

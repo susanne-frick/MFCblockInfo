@@ -11,7 +11,7 @@ library(MFCblockInfo)
 design.load.all <- readRDS("design_load_all_5-15_equal.rds")
 
 factor.blocksize <- 2:4
-factor.keying <- "12" # c("0","12","23")
+factor.keying <- "0" # c("0","12","23")
 factor.int <- "large"
 factor.load <- "acceptable"
 factor.length <- "long"
@@ -100,7 +100,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
   
                   ####------------------- test design -----------------------####
                   #select design load according to test design condition
-                  design.load <- design.load.all[[as.character(design.sim[d,"ntraits"])]][[as.character(design.sim[d,"blocksize"])]][["12"]]
+                  design.load <- design.load.all[[as.character(design.sim[d,"ntraits"])]][[as.character(design.sim[d,"blocksize"])]][[as.character(design.sim[d,"keying"])]]
                   #quadruple
                   design.load <- rbind(design.load, design.load, design.load, design.load)
                                   
@@ -142,20 +142,12 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                     traits.blocks <- create.traits.blocks(loads=design.load, which.blocks=1:K, nb=nb)
                     traits.blocks.ind <- do.call(cbind, (lapply(1:ncol(design.load), function(f, tb) apply(tb, 1, function(rw) ifelse(f %in% rw, 1, 0)), tb=traits.blocks)))
                     n.traits <- rep(K.final/ncol(design.load)*nb, ncol(design.load))
-                    #constraints on item keying (comparisons between opposite-keyed items)
-                    #at least 1/2 of pairwise comparisons between differently keyed items
-                    #this makes 1/2, 3/4, 1 mixed keyed blocks for block sizes 2,3,4
-                    loads.blocks <- t(apply(blocks, 1, function(b, dl) colSums(dl[b,]), dl=design.load))
-                    block.mixed <- ifelse(rowSums(loads.blocks)==nb, 0, 1)
-                    n.mixed <- design.sim[d,"blocksize"]/4*K.final
-                    #at least 1 negatively keyed item per trait
-                    traits.neg.ind <- apply(loads.blocks, 2, function(rw) ifelse(rw==-1, 1, 0))
-                    n.neg <- rep(1, ncol(design.load))
+                    #constraints on item keying and negatively keyed items per trait are not applicable
                     
                     #combine to constraint.list
-                    constraint.list <- list("left"=cbind(traits.blocks.ind, block.mixed, traits.neg.ind),
-                                            "operator"=c(rep("=",ncol(traits.blocks.ind)), ">=", rep(">=",ncol(traits.neg.ind))),
-                                            "right"=c(n.traits, n.mixed, n.neg))
+                    constraint.list <- list("left"=cbind(traits.blocks.ind),
+                                            "operator"=c(rep("=",ncol(traits.blocks.ind))),
+                                            "right"=c(n.traits))
                     
                   } else {
                     constraint.list <- NULL
@@ -224,11 +216,11 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                       res.r <- data.frame(design.sim[d,], "trait"=1:ncol(design.load), "algorithm"="opt", rec=NA, RMSE=NA, MAB=NA)
                     }
                   }
-                  saveRDS(res.r, file=paste0("results_opt_conditions/results_simulation_opt_conditions_d",d,".rds"))
+                  saveRDS(res.r, file=paste0("results_opt_poskeyed/results_simulation_opt_poskeyed_d",d,".rds"))
                   res.r
                 }
 
-saveRDS(res, file="results_simulation_opt_conditions.rds")
+saveRDS(res, file="results_simulation_opt_poskeyed.rds")
 
 # stopCluster(cl)
 closeCluster(cl)

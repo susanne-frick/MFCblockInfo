@@ -27,6 +27,12 @@ design.sim <- expand.grid("blocksize"=factor.blocksize, "keying"=factor.keying, 
                           "loads"=factor.load, 
                           "constraints"=factor.constraints, "target"=factor.target, "ntraits"=factor.ntraits,
                           "rep"=1:R)
+#read in which rows are missing
+id.miss <- readRDS("missing_rows_opt_conditions.rds")
+id.design <- paste(design.sim$blocksize, design.sim$target, design.sim$constraints, design.sim$rep, sep="_")
+#compare and extract which rows (d) in design.sim are missing
+d.miss <- which(id.design %in% setdiff(id.design, id.miss))
+design.sim <- design.sim[d.miss,]
 
 ####-------------------- fixed conditions -------------------------####
 
@@ -88,14 +94,14 @@ registerDoMPI(cl)
 sinkWorkerOutput(paste0("worker_iter_opt.out"))
 
 # define chunkSize so that each cluster worker gets a single task chunk
-chunkSize <- ceiling(R/getDoParWorkers())
+chunkSize <- ceiling(nrow(design.sim)/getDoParWorkers())
 mpiopts <- list(chunkSize=chunkSize)
 
 # res <- foreach(d=1:nrow(design.sim), .packages=c("mvtnorm","numDeriv","devtools"), .combine=rbind) %dopar% {
 #
 
-res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("mvtnorm","numDeriv","devtools","lpSolveAPI","MFCblockInfo"),
-                .inorder=F, .errorhandling="remove", .options.mpi=mpiopts) %dopar% {
+res <- foreach (d=1:nrow(design.sim), .combine=list, .verbose=T, .packages=c("mvtnorm","numDeriv","devtools","lpSolveAPI","MFCblockInfo"),
+                .inorder=F, .errorhandling="pass", .options.mpi=mpiopts) %dopar% {
                   set.seed(1204+d)
   
                   ####------------------- test design -----------------------####
@@ -224,11 +230,11 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                       res.r <- data.frame(design.sim[d,], "trait"=1:ncol(design.load), "algorithm"="opt", rec=NA, RMSE=NA, MAB=NA)
                     }
                   }
-                  saveRDS(res.r, file=paste0("results_opt_conditions/results_simulation_opt_conditions_d",d,".rds"))
+                  saveRDS(res.r, file=paste0("results_opt_conditions_missingrows/results_simulation_opt_conditions_d",d,".rds"))
                   res.r
                 }
 
-saveRDS(res, file="results_simulation_opt_conditions.rds")
+saveRDS(res, file="results_simulation_opt_conditions_missingrows.rds")
 
 # stopCluster(cl)
 closeCluster(cl)
