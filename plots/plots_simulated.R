@@ -73,6 +73,10 @@ CairoPDF("plots/plot_testinfo.pdf", width=12, height=22, pointsize=20)
 plot.testinfo(info.test.plot, loads=load.mat, par.mfrow=c(5,2), cex=2)
 dev.off()
 
+range(do.call(c, lapply(info.test.plot$info, function(i, ind) i[ind,1], ind=info.test.plot$gridnb[,1]==0)))
+range(do.call(c, lapply(info.test.plot$info, function(i) i[,1])))
+range(do.call(c, lapply(info.test.plot$info, function(i, ind) i[ind,1], ind=abs(info.test.plot$gridnb[,1])==2)))
+
 #testinfo 1D
 info.test.plot.1d <- readRDS("plots/info_test_plot_1d.rds")
 se.lower <- info.test.plot.1d$ses[,1] - info.test.plot.1d$SDses[,1]
