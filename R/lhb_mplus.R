@@ -21,6 +21,7 @@ lhb.mplus <- function(traits,int,loads,uni,y_b,perms,perms_int,Tr,nb,algorithm=m
   loads=as.matrix(loads) #loads should be a matrix
   udiffs <- int[perms_int[,y_b]] + (Tr %*% (loads[perms[,y_b],]%*% traits))[-nb]
   sigdiffs2 <- (tcrossprod(Tr %*% uni[perms[,y_b],perms[,y_b]], Tr))[-nb,-nb]
+  
   out=mvtnorm::pmvnorm(lower=rep(0,nb-1), upper=rep(Inf,nb-1), mean=udiffs, sigma=sigdiffs2, algorithm=algorithm)
 
   ## out: likelihood for one block and one person

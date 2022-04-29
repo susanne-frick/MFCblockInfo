@@ -24,7 +24,6 @@ lh <- function(traitsj, lhb.fun, responsesj, bi, bi_int, int, loads, uni, m.prio
   for (k in 1:nrow(bi)) {
     b <- bi[k,]
     b_int <- bi_int[,k]
-
     out <- out + lhb.fun(traits=traitsj, y_b=responsesj[k], int=c(int[b_int],-int[b_int]), loads=loads[b,], uni=uni[b,b],
                                    loga=TRUE, ...)
   }
