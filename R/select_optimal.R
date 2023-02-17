@@ -4,12 +4,14 @@
 #' @param traits.grid grid of traits for which block information was calculated
 #' @param K integer number of blocks in the pool
 #' @param K.final integer, final number of blocks
+#' @param direction character, direction of optimization (min or max), defaults to max
 #'
 #' @return list: solved should equal 0 if a solution was found, ind.opt contains the indices of selected blocks
 #' @export
 #'
 #' @examples
-select.optimal <- function(info.sum, traits.grid, info.start=NULL, K, K.final, weights.grid=NULL, constraint.list=NULL) {
+select.optimal <- function(info.sum, traits.grid, info.start=NULL, K, K.final, weights.grid=NULL, constraint.list=NULL,
+                           direction = "max") {
 
   if(is.null(info.start)) info.start <- rep(0, nrow(traits.grid))
   #number of decision variables (blocks + criterion)
@@ -27,7 +29,7 @@ select.optimal <- function(info.sum, traits.grid, info.start=NULL, K, K.final, w
   ####----------- create model --------------####
   lpmodel <- lpSolveAPI::make.lp(0, M)
   #specifications
-  lpSolveAPI::lp.control(lpmodel, sense="max")
+  lpSolveAPI::lp.control(lpmodel, sense=direction)
 
   #variable types
   lpSolveAPI::set.type(lpmodel, columns=1:K, type="binary")
