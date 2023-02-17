@@ -4,12 +4,14 @@
 \alias{calc.info.trace}
 \title{Trace of information matrix}
 \usage{
-calc.info.trace(infos, avg = F)
+calc.info.trace(infos, avg = F, prior = NULL)
 }
 \arguments{
 \item{infos}{block information as returned from calc.info.block()}
 
 \item{avg}{logical, average result across persons? defaults to FALSE}
+
+\item{prior}{prior covariance matrix for the traits, defaults to NULL}
 }
 \value{
 matrix of traces of information matrices, rows=persons, columns=blocks

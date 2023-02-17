@@ -4,10 +4,14 @@
 \alias{calc.d.optimality}
 \title{Calculate D-optimality}
 \usage{
-calc.d.optimality(infos)
+calc.d.optimality(infos, prior = NULL, summed = TRUE)
 }
 \arguments{
 \item{infos}{block information as returned from calc.info.block()}
+
+\item{prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
+
+\item{summed}{logical, should the information be summed across blocks? defaults to TRUE}
 }
 \value{
 numeric vector of D-optimality for each person

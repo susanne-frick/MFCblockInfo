@@ -4,10 +4,14 @@
 \alias{calc.a.optimality}
 \title{calculate A-optimality}
 \usage{
-calc.a.optimality(infos)
+calc.a.optimality(infos, prior = NULL, summed = TRUE)
 }
 \arguments{
 \item{infos}{block information as returned from calc.block.infos}
+
+\item{prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
+
+\item{summed}{logical, should the information be summed across blocks? defaults to TRUE}
 }
 \value{
 numeric vector of A-optimality for each person

@@ -13,7 +13,8 @@ select.greedy(
   K.final,
   maximize = F,
   weights.grid = NULL,
-  constraint.list = NULL
+  constraint.list = NULL,
+  ...
 )
 }
 \arguments{

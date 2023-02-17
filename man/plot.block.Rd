@@ -10,6 +10,8 @@
   K,
   loads,
   trait.names = NULL,
+  trait.cov = trait.cov,
+  y = "a",
   col = "skyblue1",
   bty = "u",
   col.grid = "grey45",

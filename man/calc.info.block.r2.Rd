@@ -7,7 +7,7 @@
 calc.info.block.r2(
   info.all = NULL,
   wo.blocks = 1,
-  s.prior = NULL,
+  prior = NULL,
   FUN = NULL,
   ...
 )
@@ -18,10 +18,6 @@ calc.info.block.r2(
 \item{wo.blocks}{vector of indices of blocks for which to compute R2}
 
 \item{s.prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
-
-\item{FUN}{function to compute response probability (is info.all is not given)}
-
-\item{...}{other arguments passed to FUN}
 }
 \value{
 matrix of reductions in SEs, rows = persons, columns = traits

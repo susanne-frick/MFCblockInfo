@@ -11,7 +11,8 @@ select.optimal(
   K,
   K.final,
   weights.grid = NULL,
-  constraint.list = NULL
+  constraint.list = NULL,
+  direction = "max"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ select.optimal(
 \item{K}{integer number of blocks in the pool}
 
 \item{K.final}{integer, final number of blocks}
+
+\item{direction}{character, direction of optimization (min or max), defaults to max}
 }
 \value{
 list: solved should equal 0 if a solution was found, ind.opt contains the indices of selected blocks
