@@ -10,7 +10,7 @@
 #' @return plot with reduction in SEs, traits in rows, fixed trait in columns
 #'
 #' @examples
-plot.block <- function(which.blocks, info, K, loads, trait.names=NULL,
+plot.block <- function(which.blocks, info, K, loads, trait.names=NULL, trait.cov = trait.cov, y = "r2",
                        col="skyblue1", bty="u", col.grid="grey45",
                        r=1, phi=30, shade=.2, ltheta=60, ticktype="detailed",
                        zlab="\n\nR2", border=NA,
@@ -32,12 +32,15 @@ plot.block <- function(which.blocks, info, K, loads, trait.names=NULL,
 
     #info about which trait
     for(tr in traits.which.blocks[b,]) {
-      main.name <- paste("Info about", trait.names[tr],"for Block",b)
+      main.name <- paste("Block ", expression(R^2), "for", trait.names[tr],"and Block",b)
       #levels of fix.dim
       for(ind in ind.info) {
         #calculate r2
-        r2 <- calc.info.block.r2(info.all=info$info[[ind]], wo.blocks = b)
-
+        if(y == "r2") {
+          r2 <- calc.info.block.r2(info.all=info$info[[ind]], wo.blocks = b)
+        } else {
+          r2 <- info2se(infos=info$info[[ind]], summed = FALSE, prior = trait.cov)[, b, ]
+        }
         ####----- plot ----------####
         trait.names.varied <- trait.names[info$pairs[ind,1:3]]
 
