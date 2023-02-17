@@ -1,7 +1,7 @@
 Package: MFCblockInfo
 Type: Package
 Title: compute block information for multidimensional forced-choice questionnaires
-Version: 0.1.0
+Version: 0.2.0
 Author: Susanne Frick
 Maintainer: Susanne Frick <susanne.frick@uni-mannheim.de>
 Description: This package can compute block information for multidimensional forced-choice questionnaires.
