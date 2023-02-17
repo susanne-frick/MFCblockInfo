@@ -5,49 +5,53 @@
 #' @param infos list of arrays with block information as returned from calc.info.block()
 #' @param summed logical, should the information be summed across blocks? defaults to TRUE
 #' @param var.out logical, return variances instead of SEs? defaults to FALSE
-#' @param s.prior matrix of prior covariances, if given, posterior information is computed, defaults to NULL
+#' @param prior matrix of prior covariances, if given, posterior information is computed, defaults to NULL
 #'
 #' @return if summed across bocks: matrix: rows=persons, columns=traits,
 #' otherwise: list with entries for each person: matrix of SEs: rows = blocks, columns = traits
 #' @export
 #'
-info2se <- function(infos, summed=TRUE, var.out=FALSE, s.prior=NULL) {
-
+info2se <- function(infos, summed=TRUE, var.out=FALSE, prior=NULL) {
+  
   #SEs from infos (within a person)
-  .info2se <- function(infos, summed=TRUE, var.out) {
+  .info2se <- function(infos, summed=TRUE, var.out, prior) {
     if (isTRUE(summed)) infos <- matrix(colSums(infos, dims=1), dim(infos)[2], dim(infos)[3])
+    
+    #several blocks
     if (length(dim(infos))==3) {
-      #several blocks
-      if(isTRUE(var.out)) {
-        t(apply(infos, 1, function(info) diag(MASS::ginv(info))))
+      if(is.null(prior)) {
+        ses <- t(apply(infos, 1, function(info) diag(MASS::ginv(info))))
       } else {
-        t(apply(infos, 1, function(info) sqrt(diag(MASS::ginv(info)))))
+        ses <- t(apply(infos, 1, function(info) diag(MASS::ginv(info + prior))))
       }
-    #summed / only one block
-    } else if(is.null(s.prior)) {
-      if(isTRUE(var.out)) {
-        diag(MASS::ginv(infos))
-      } else {
-        sqrt(diag(MASS::ginv(infos)))
+      if(isFALSE(var.out)) {
+        ses <- t(apply(ses, 1, function(se) sqrt(se)))
       }
+      
+      #summed / only one block
     } else {
-      if(isTRUE(var.out)) {
-        diag(MASS::ginv(infos + s.prior))
-      } else {
-        sqrt(diag(MASS::ginv(infos + s.prior)))
+      if(is.null(prior)) {
+      ses <- diag(MASS::ginv(infos))
+    } else {
+      ses <- diag(MASS::ginv(infos + prior))
+    }
+      if(isFALSE(var.out)) {
+        ses <- sqrt(ses)
       }
     }
+    return(ses)
   }
-
+  
   if (is.list(infos)) {
-    ses <- lapply(infos, .info2se, summed=summed, var.out=var.out)
+    ses <- lapply(infos, .info2se, summed=summed, var.out=var.out, prior=prior)
   } else {
-    ses <- .info2se(infos, summed=summed, var.out=var.out)
+    ses <- .info2se(infos, summed=summed, var.out=var.out, prior=prior)
   }
-
-  if(isTRUE(summed)) {
+  
+  if(isTRUE(summed) | length(ses) == 1) {
     return(do.call(rbind, ses))
   } else {
-    return(ses)
+    sesre <- matrix(do.call(c, ses), nrow = length(ses), byrow = TRUE)
+    return(array(sesre, dim = c(length(ses), dim(ses[[1]])[1], dim(ses[[1]])[2])))
   }
 }
