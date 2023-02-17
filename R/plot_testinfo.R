@@ -34,7 +34,7 @@ plot.testinfo <- function(info, loads=NULL, trait.names=NULL, par.mfrow=c(3,4),
 
   #info about which trait
   for(tr in 1:ncol(info$pairs)) {
-    main.name <- paste("Info about", trait.names[tr])
+    main.name <- paste("SEs for", trait.names[tr])
     #z.lim <- range(do.call(c, lapply(info$info, function(i) i[,tr])))
     #levels of fix.dim
     for(ind in 1:nrow(info$pairs)) {
