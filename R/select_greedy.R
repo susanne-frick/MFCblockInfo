@@ -11,11 +11,11 @@
 #' @export
 #'
 #' @examples
-select.greedy <- function(infos, FUN, traits.grid, K, K.start, K.final, maximize=F, weights.grid=NULL, constraint.list=NULL) {
+select.greedy <- function(infos, FUN, traits.grid, K, K.start, K.final, maximize=F, weights.grid=NULL, constraint.list=NULL, ...) {
   min.FUN <- ifelse(maximize, which.max, which.min)
   if(is.null(weights.grid)) {
     #summarize information for weights on traits/grid points
-    infos.all <- FUN(infos)
+    infos.all <- FUN(infos, ...)
     if(maximize) {
       infos.all <- infos.all/infos.all[[which(rowSums(traits.grid==0)==ncol(traits.grid))]]
     } else {
@@ -31,18 +31,20 @@ select.greedy <- function(infos, FUN, traits.grid, K, K.start, K.final, maximize
       ses.b <- vector("numeric", K)
       for(b in which(sel==0)) {
         info.b <- lapply(infos, function(ip) ip[c(which(sel==1),b),,])
-        ses.b[b] <- mean(FUN(info.b) * infos.all) #weighted
+        summed <- ifelse(sum(sel) == 0, FALSE, TRUE)
+        ses.b[b] <- mean(FUN(info.b, summed = summed, ...) * infos.all) #weighted
       }
       sel[sel==0][min.FUN(ses.b[sel==0])] <- 1
     }
-  } else {
+  } else { 
     while(sum(sel==1) < K.final) {
       ses.b <- vector("numeric", K)
       con.b <- vector("numeric", K)
       for(b in which(sel==0)) {
         info.b <- lapply(infos, function(ip) ip[c(which(sel==1),b),,])
-        ses.b[b] <- mean(FUN(info.b) * infos.all) * ifelse(maximize, -1, 1) #weighted
-        con.b[b] <-   sum(do.call(c, lapply((colSums(constraint.list$left[sel==1,]) + constraint.list$left[b,]) - constraint.list$right, max, 0)))
+        summed <- ifelse(sum(sel) == 0, FALSE, TRUE)
+        ses.b[b] <- mean(FUN(info.b, summed = summed, ...) * infos.all) * ifelse(maximize, -1, 1) #weighted
+        con.b[b] <- sum(do.call(c, lapply((colSums(constraint.list$left[sel==1,]) + constraint.list$left[b,]) - constraint.list$right, max, 0)))
       }
       #normalize critera
       ses.b <- ses.b/sum(ses.b)
