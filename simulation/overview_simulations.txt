@@ -1,0 +1,109 @@
+Overview Simulations
+----------------------------------------------------------------
+
+-	full grid
+	-	intercepts: variance, random
+	-	constraints: unconstrained
+	-	target: weighted, equal
+	-	algorithms: greedy-a, greedy-d, opt-t, r2, mean-a, loads, random
+	-	information: posterior
+
+  (information posterior would not work with constrained because of greedy)
+  ----------------------------------------------------------
+	-	scripts
+    - simulation_opt_int-variance.R 
+      - results_opt_int-variance_2399.rds
+      - analysis_opt_int-variance.R
+        - results_opt_int-variance_cleaned.rds
+        
+      (In the row indexed with d1792, the MIP solver did not converge.)
+      - simulation_opt_int-variance_missing-row_d1972.R
+
+----------------------------------------------------------------
+
+-	1-grid
+	-	intercepts: variance, random
+	-	information: posterior
+	- algorithms: greedy-a, greedy-d, opt-t, mean-a, r2, loads, random
+
+  - next: laufen lassen, R^2 war noch nicht posterior
+  
+  (- missing: ML und random)
+  - ML und posterior unterscheiden sich nicht, nur posterior berichten
+	---------------------------------------------------------
+	- scripts
+	
+	  - simulation_opt_grid1_posterior.R
+	    - results_simulation_opt_grid1_posterior.rds
+	    - analysis_simulation_opt_grid1_posterior.R
+  	    - results_opt_grid1_posterior_cleaned.rds
+
+    - attempts
+      Mean(R2)/SD(R2)
+      - simulation_opt_grid1_posterior_r2-avg.R
+	      - results_simulation_opt_grid1_posterior_r2-avg.rds
+	      - analysis_simulation_opt_grid1_posterior_r2-avg.R
+	    -> plots in revision letter
+	    
+      ML instead of posterior
+      - simulation_optimal_testdesin_grid1.R
+        - results_simulation_opt_grid1.rds
+      - analysis_simulation_optimal_testdesign_grid1.R
+      - analysis_opt_gri1_posterior-vs-ML.R
+
+------------------------------------------------------------------
+analysis across full grid and 1-grid
+
+- analysis_simulation_opt_all-targets.R
+
+-------------------------------------------------------------------
+simulations with all positively keyed items
+
+full grid
+- simulation_opt_int-variance_poskeyed.R
+  - results_opt_int-variance_poskeyed_2397.rds
+  - analysis_opt_int-variance_poskeyed.R
+    - results_opt_int-variance_poskeyed_cleaned.rds
+
+1-grid
+- simulation_opt_grid1_posterior_poskeyed.R
+  - results_simulation_opt_grid1_posterior_poskeyed.rds
+  - analysis_simulation_opt_grid1_posterior_poskeyed.R
+    - results_opt_grid1_posterior_poskeyed_cleaned.rds
+
+analysis across both
+- analysis_opt_all-targets_poskeyed.R
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+versions used in Revision 1
+
+-	simulation_optimal_testdesign_conditions.R
+  - results_simulation_optimal_testdesign_conditions_part1.rds
+  - results_simulation_opt_conditions_missingrows.rds
+  - analysis_simulation_optimal_testdesign_conditions.R
+
+- simulation_greedy_conditions.R
+  - results_simulation_greedy_conditions.rds
+  - analysis_simulation_greedy_conditions.rds
+  
+  ----------------------------------------------------------------
+  all positively keyed items
+  
+  - simulation_optimal_testdesign_conditions_poskeyed.R
+    - results_simulation_optimal_testdesign_conditions_poskeyed_part1.rds
+    - simulation_optimal_testdesign_conditions_poskeyed_missingrows.R
+      - results_simulation_optimal_testdesign_conditions_poskeyed_part2.rds
+    - analysis_simulation_optimal_testdesign_conditions_poskeyed.R
+    
+  - simulation_greedy_conditions_poskeyed.R
+    - results_simulation_greedy_conditions_poskeyed_part1.rds
+    - simulation_greedy_conditions_poskeyed_missingrows.R
+      - results_simulation_greedy_conditions_poskeyed_missingrows.rds
+    - analysis_simulation_greedy_conditions_poskeyed.R
+    
+    
+    independence likelihood
+    - simulation_opt_poskeyed_dependent.R
+      - results_opt_poskeyed_dependent_part1.rds
+    - analysis_opt_conditions_poskeyed_dependent.R

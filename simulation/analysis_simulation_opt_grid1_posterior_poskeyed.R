@@ -1,12 +1,12 @@
 ####--------------- analysis simulation testinfo ---------------####
 
 library(psych)
-devtools::load_all()
 devtools::load_all("../DataAnalysisSimulation/")
+devtools::load_all()
 
 ####------------------ read in and check results ---------------####
 
-res <- readRDS("simulation/results_simulation_opt_grid1_posterior.rds")
+res <- readRDS("simulation/results_simulation_opt_grid1_posterior_poskeyed.rds")
 head(res)
 
 anyNA(res)
@@ -49,36 +49,6 @@ head(res$algorithm)
 
 ####------------------ descriptives in text -------------####
 
-# mean.frame(dvs = c("rec", "RMSE", "MAB", "rel", "fisherz.r"), ivs = c("algorithm","blocksize", "intercepts"), results = res, rn = 3)
-# mean.frame(dvs = c("sens", "spec"), ivs = c("algorithm","blocksize", "intercepts"), results = res, rn = 3)
-# mean.frame(dvs = c("A","D","T.opt","Frob"), ivs = c("algorithm","blocksize", "intercepts"), results = res, rn = 3)
-# 
-# mean.frame(dvs = c("rec", "RMSE", "MAB", "rel", "fisherz.r"), ivs = c("algorithm"), results = res, rn = 3)
-# mean.frame(dvs = c("sens", "spec"), ivs = c("algorithm"), results = res, rn = 3)
-# mean.frame(dvs = c("A","D","T.opt","Frob"), ivs = c("algorithm"), results = res, rn = 3)
-# 
-# mean.frame(dvs = c("A","D","T.opt","Frob"), ivs = c("blocksize"), results = res, rn = 3)
-# mean.frame(dvs = c("A","D","T.opt","Frob"), ivs = c("intercepts"), results = res, rn = 3)
-
-
-# algorithm vs. random
-# round(mean(res$MAB[res$algorithm %in% c("opt","r2","loads")]), 2)
-# round(mean(res$MAB[res$algorithm %in% c("random")]), 2)
-# 
-# # Info vs. Loadings
-# round(mean(res$MAB[res$algorithm %in% c("opt","r2")]), 2)
-# round(mean(res$MAB[res$algorithm %in% c("loads")]), 2)
-# 
-
-#blocksize
-# round(mean(res$T.opt[res$blocksize %in% 2]), 2)
-# round(mean(res$T.opt[res$blocksize %in% 3]), 2)
-# round(mean(res$T.opt[res$blocksize %in% 4]), 2)
-# 
-# #intercepts
-# round(mean(res$T.opt[res$intercepts %in% "random"]), 2)
-# round(mean(res$T.opt[res$intercepts %in% "ordered"]), 2)
-
 # mean table
 
 #without constraints because they did not make a difference and the table gets too long otherwise
@@ -108,18 +78,17 @@ means.paper
 header <- list()
 header$pos <- list(-1, nrow(means.paper))
 header$command <- c("\\hline \n Intercepts & Algorithm & \\multicolumn{2}{c}{Sensitivity} & \\multicolumn{2}{c}{Specificity} \\\\",
-                    "\\hline \n \\multicolumn{6}{l}{\\small \\textit{Note.} MIP = Mixed Integer Programming. Standard deviations are} \\\\ 
-                    \n \\multicolumn{6}{l}{\\small given in parentheses.} \n")
+                    "\\hline \n \\multicolumn{6}{l}{\\small \\textit{Note.} MIP = Mixed Integer Programming. Standard deviations are given in parentheses.} \n")
 print(xtable::xtable(means.paper, digits=2,
-                     caption="Mean sensitivity and specificity by condition in simulation study 2 on test construction for the single target (screening test)",
-                     label="tb:means_screen"), include.colnames = F, include.rownames=F, 
+                     caption="Mean sensitivity and specificity by condition in the simulation study on test construction with all positively keyed items for the screening test",
+                     label="tb:means_screen_pos"), include.colnames = F, include.rownames=F, 
       hline.after=seq(0, nrow(means.paper)-1, by = length(unique(res$algorithm))),
       sanitize.rownames.function=function(x){x}, sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       #floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_screening.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_screening_poskeyed.tex")
 
 # descriptives in text
 # sensitivity overall mean
@@ -171,7 +140,7 @@ contrasts(res$intercepts) <- matrix(c(-1,1), 2, 1,
 contrasts(res$intercepts)
 
 # save prepared data with correct contrasts on factors
-saveRDS(res, file = "simulation/results_opt_grid1_posterior_cleaned.rds")
+saveRDS(res, file = "simulation/results_opt_grid1_posterior_poskeyed_cleaned.rds")
 
 # only for sensitivity and specificity
 lm.sens <- calc.lms(dvs=c("sens","spec"), ivs=c("algorithm", "blocksize", "intercepts"), results=res)
@@ -184,7 +153,7 @@ var.sens <- rm.0rows(var.sens)
 colnames(var.sens) <- c("Sensitivity", "Specificity")
 rownames(var.sens) <- c("Algorithm vs. Random", "Block $R^2$ vs. Mean Variances",
                         "2 vs. 3 and 4", "3 vs. 4",
-                        "Intercepts",
+                        "Block $R^2$ vs. Mean Variances $\\times$ 2 vs. 3 and 4",
                         "Algorithm vs. Random $\\times$ Intercepts",
                         "2 vs. 3 and 4 $\\times$ Intercepts",
                         "Residuals")
@@ -196,23 +165,23 @@ header$command <- c("\\hline \n Factor & Sens. & Spec. \\\\",
                     "\\hline \n \\multicolumn{3}{l}{\\small \\textit{Note.} Sens = Sensitivity, Spec = Specificity.} \n")
 
 print(xtable::xtable(var.sens, digits=0,
-                     caption="Variance in sensitivity and specificity explained in \\% by algorithm, intercepts and block size in simulation study 2 on test construction for the single target (screening test)",
-                     label="tb:var_screen"), include.colnames = F, include.rownames=T, hline.after=c(0, nrow(var.sens)-1),
+                     caption="Variance in sensitivity and specificity explained in \\% by algorithm, intercepts and block size in the simulation on test construction with all positively keyed items for the screening test",
+                     label="tb:var_screen_pos"), include.colnames = F, include.rownames=T, hline.after=c(0, nrow(var.sens)-1),
       sanitize.rownames.function=function(x){x}, sanitize.colnames.function = function(x){x},
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_var_screening.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_var_screening_poskeyed.tex")
 
 
 # lm.algo.main <- calc.lms.main(dvs=c("fisherz.r","MAB","RMSE"), ivs=c("algorithm","target"), results=res)
-lm.algo.main <- calc.lms.main(dvs=c("sens","spec","A","D","T.opt","Frob"), ivs=c("algorithm", "blocksize", "intercepts"), results=res)
-var.expl(lm.algo.main)
-
-# lm.algo <- calc.lms(dvs=c("fisherz.r","MAB","RMSE"), ivs=c("algorithm","target"), results=res)
-lm.algo <- calc.lms(dvs=c("sens","spec","A","D","T.opt","Frob"), ivs=c("algorithm", "blocksize", "intercepts"), results=res)
-var.expl.algo <- var.expl(lm.algo)
-rm.0rows(var.expl.algo)
+# lm.algo.main <- calc.lms.main(dvs=c("sens","spec","A","D","T.opt","Frob"), ivs=c("algorithm", "blocksize", "intercepts"), results=res)
+# var.expl(lm.algo.main)
+# 
+# # lm.algo <- calc.lms(dvs=c("fisherz.r","MAB","RMSE"), ivs=c("algorithm","target"), results=res)
+# lm.algo <- calc.lms(dvs=c("sens","spec","A","D","T.opt","Frob"), ivs=c("algorithm", "blocksize", "intercepts"), results=res)
+# var.expl.algo <- var.expl(lm.algo)
+# rm.0rows(var.expl.algo)
 
 
 
@@ -249,12 +218,12 @@ plot.spec <- plot.algo("spec", "Specificity", res.b3)
 plot.D <- plot.algo("D", "D-optimality", res.b3)
 plot.Frob <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b3)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/plot_screening.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_screening_poskeyed.pdf",
        grid.arrange(plot.sens, plot.spec,
                     nrow=1, ncol=2),
-       width=14, height=4, units="in")
+       width=16, height=4, units="in")
 
-ggsave("simulation/plot_opt_grid1_posterior.pdf",
+ggsave("simulation/plot_opt_grid1_posterior_poskeyed.pdf",
        grid.arrange(plot.sens, plot.A, plot.Topt,
                     plot.spec, plot.D, plot.Frob,
                     nrow=2, ncol=3),
@@ -264,9 +233,9 @@ plot.rec <- plot.algo("rec", expression(r(theta,hat(theta))), res.b3)
 plot.MAB <- plot.algo("MAB", "MAB", res.b3)
 plot.RMSE <- plot.algo("RMSE", "RMSE", res.b3)
 
-ggsave("simulation/plot_opt_grid1_posterior_recovery.pdf",
+ggsave("simulation/plot_opt_grid1_posterior_recovery_poskeyed.pdf",
        grid.arrange(plot.rec, plot.MAB, plot.RMSE, nrow=1, ncol=3),
-       width=18, height=4, units="in")
+       width=20, height=4, units="in")
 
 
 
