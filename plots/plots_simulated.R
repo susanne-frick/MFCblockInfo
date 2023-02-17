@@ -64,7 +64,7 @@ items$u.mean[blocks[4,]]
 #blockinfo
 info.block.plot <- readRDS("plots/info_block_plot.rds")
 CairoPDF("plots/plot_blockinfo.pdf", width=8, height=7, pointsize=12)
-plot.block(which.blocks = 4, info=info.block.plot, K=20, loads=load.mat)
+plot.block(which.blocks = 4, info=info.block.plot, K=20, loads=load.mat, trait.cov = trait.cov, y = "r2", zlab = "\n\nSEs")
 dev.off()
 
 #testinfo
