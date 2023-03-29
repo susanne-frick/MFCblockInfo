@@ -8,7 +8,10 @@ calc.info.block.r2(
   info.all = NULL,
   wo.blocks = 1,
   prior = NULL,
-  FUN = NULL,
+  avg = FALSE,
+  rep = 20,
+  K.final = NULL,
+  constraint.list = NULL,
   ...
 )
 }
@@ -17,7 +20,7 @@ calc.info.block.r2(
 
 \item{wo.blocks}{vector of indices of blocks for which to compute R2}
 
-\item{s.prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
+\item{prior}{matrix of prior covariances, if given, posterior information is computed, defaults to NULL}
 }
 \value{
 matrix of reductions in SEs, rows = persons, columns = traits

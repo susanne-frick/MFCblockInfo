@@ -11,7 +11,7 @@
   loads,
   trait.names = NULL,
   trait.cov = trait.cov,
-  y = "a",
+  y = "r2",
   col = "skyblue1",
   bty = "u",
   col.grid = "grey45",
