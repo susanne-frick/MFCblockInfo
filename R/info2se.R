@@ -22,7 +22,7 @@ info2se <- function(infos, summed=TRUE, var.out=FALSE, prior=NULL) {
       if(is.null(prior)) {
         ses <- t(apply(infos, 1, function(info) diag(MASS::ginv(info))))
       } else {
-        ses <- t(apply(infos, 1, function(info) diag(MASS::ginv(info + prior))))
+        ses <- t(apply(infos, 1, function(info) diag(MASS::ginv(info + solve(prior)))))
       }
       if(isFALSE(var.out)) {
         ses <- t(apply(ses, 1, function(se) sqrt(se)))
@@ -33,7 +33,7 @@ info2se <- function(infos, summed=TRUE, var.out=FALSE, prior=NULL) {
       if(is.null(prior)) {
       ses <- diag(MASS::ginv(infos))
     } else {
-      ses <- diag(MASS::ginv(infos + prior))
+      ses <- diag(MASS::ginv(infos + solve(prior)))
     }
       if(isFALSE(var.out)) {
         ses <- sqrt(ses)

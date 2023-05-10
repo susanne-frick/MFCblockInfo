@@ -15,8 +15,10 @@
 #'
 calc.info.trace <- function(infos, avg=F, prior = NULL) {
   if(isFALSE(is.null(prior))) {
-    prior <- array(rep(prior, each = dim(infos[[1]])[1]), dim = dim(infos[[1]]))
-    infos <- lapply(infos, function(ip, p) ip + p, p = prior)
+    # invert 
+    iprior <- solve(prior)
+    iprior <- array(rep(iprior, each = dim(infos[[1]])[1]), dim = dim(infos[[1]]))
+    infos <- lapply(infos, function(ip, p) ip + p, p = iprior)
   }
   info.trace <- do.call(rbind, lapply(infos, function(ip) apply(ip, 1, function(i) sum(diag(i)))))
   if(avg==TRUE) {

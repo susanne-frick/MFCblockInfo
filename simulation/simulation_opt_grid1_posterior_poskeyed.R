@@ -200,7 +200,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                   ####---------------- trait estimation and summary measures -------------####
                   results.list <- list("greedy-a"=ind.a.opt, "greedy-d"=ind.d.opt, "opt-t"=ind.t.opt,
                                        "mean-a"=ind.a.mean, "r2"=ind.r2, "loads"=ind.loads, "random"=ind.rand)
-                  testinfo <- colSums(infos[[1]], dims = 1) + trait.cov
+                  testinfo <- colSums(infos[[1]], dims = 1) + solve(trait.cov)
                   
                   res.r <- NULL
                   for (a in factor.algorithm) {
@@ -226,7 +226,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                       
                       A <- calc.a.optimality(infos.a, prior = trait.cov)
                       D <- calc.d.optimality(infos.a, prior = trait.cov)
-                      testinfo.a <- colSums(infos.a[[1]], dims = 1) + trait.cov
+                      testinfo.a <- colSums(infos.a[[1]], dims = 1) + solve(trait.cov)
                       T.opt <- sum(diag(testinfo.a))
                       
                       Frob <- norm(testinfo.a %*% solve(testinfo) - diag(ncol(testinfo)), type = "F")

@@ -161,7 +161,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                   infos <- calc.info.block(lhb.mplus, traits=as.matrix(traits.grid), int=gamma.true, loads=load.mat, uni=diag(items$uni),
                                            K=K, nb=nb)
                   testinfo <- lapply(infos, colSums, dims = 1)
-                  testinfo <- lapply(testinfo, function(ti, prior) ti + prior, prior = trait.cov)
+                  testinfo <- lapply(testinfo, function(ti, iprior) ti + iprior, iprior = solve(trait.cov))
                   
                   #trace for each block (and grid point)
                   info.trace <- calc.info.trace(infos, prior = trait.cov)
@@ -238,7 +238,7 @@ res <- foreach (d=1:nrow(design.sim), .combine=rbind, .verbose=T, .packages=c("m
                       
                       infos.a <- lapply(infos, function(i, ind) i[ind,,], ind = results.list[[as.character(a)]])
                       testinfo.a <- lapply(infos.a, colSums, dims = 1)
-                      testinfo.a <- lapply(testinfo.a, function(ti, prior) ti + prior, prior = trait.cov)
+                      testinfo.a <- lapply(testinfo.a, function(ti, iprior) ti + iprior, iprior = solve(trait.cov))
                       
                       A <- mean(calc.a.optimality(infos.a, prior = trait.cov) * a.all)
                       D <- mean(calc.d.optimality(infos.a, prior = trait.cov) * d.all)

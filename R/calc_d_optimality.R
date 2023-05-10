@@ -15,10 +15,12 @@ calc.d.optimality <- function(infos, prior = NULL, summed = TRUE) {
   }
   
   if(isFALSE(is.null(prior))) {
+    # invert 
+    iprior <- solve(prior)
     # expand the prior if there are several blocks (or not summed)
-    if(length(dim(infos[[1]])) > 2) prior <- array(rep(prior, each = dim(infos[[1]])[1]), dim = dim(infos[[1]]))
+    if(length(dim(infos[[1]])) > 2) iprior <- array(rep(iprior, each = dim(infos[[1]])[1]), dim = dim(infos[[1]]))
     # add the prior
-    infos <- lapply(infos, function(ip, p) ip + p, p = prior)
+    infos <- lapply(infos, function(ip, p) ip + p, p = iprior)
   }
   #calculate determinant
   if(length(dim(infos[[1]])) > 2) {
