@@ -152,7 +152,7 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_population_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_means_population_poskeyed.tex")
 
 
 ####------------------ differences between algorithms -----------####
@@ -210,12 +210,10 @@ rownames(var.paper) <- c("Algorithm vs. Random",
                          "$R^2$ vs. Mean Variances", 
                          "Intercepts","Target","2 vs. 3 and 4", "3 vs. 4",
                          "Algorithm vs. Random $\\times$ Intercepts", 
-                         "$R^2$ vs. Mean Variances $\\times$ Intercepts", 
                          "Target $\\times$ Intercepts",
                          "Algorithm vs. Random $\\times$ 2 vs. 3 and 4",
                          "$R^2$ vs. Mean Variances $\\times$ 2 vs. 3 and 4", 
                          "2 vs. 3 and 4 $\\times$ Intercepts",
-                         "$R^2$ vs. Mean Variances $\\times$ Intercepts $\\times$ 2 vs. 3 and 4", 
                          "Residuals")
 var.paper
 
@@ -232,7 +230,7 @@ print(xtable::xtable(var.paper, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_var_population_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_var_population_poskeyed.tex")
 
 ####---------------- plots --------------####
 library(ggplot2)
@@ -266,7 +264,7 @@ plot.D <- plot.algo("D", "D-optimality", res.equal.ord)
 plot.T.opt <- plot.algo("T.opt", "T-optimality", res.equal.ord)
 plot.Frob <- plot.algo("Frob", "Frobenius Norm", res.equal.ord)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_opt_recovery_poskeyed.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/plot_opt_recovery_poskeyed.pdf",
        grid.arrange(plot.rec, plot.MAB, plot.RMSE,
                     nrow=1, ncol=3),
        width=20, height=6, units="in")
@@ -282,8 +280,7 @@ res.equal.ord.b2 <- res[res$target=="equal" & res$intercepts=="ordered" & res$bl
 plot.b2.MAB <- plot.algo("MAB", "MAB", res.equal.ord.b2)
 plot.b2.RMSE <- plot.algo("RMSE", "RMSE", res.equal.ord.b2)
 plot.b2.rec <- plot.algo("rec", expression(r(theta,hat(theta))), res.equal.ord.b2)
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_opt_recovery_poskeyed_B2.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/plot_opt_recovery_poskeyed_B2.pdf",
        grid.arrange(plot.b2.rec, plot.b2.MAB, plot.b2.RMSE,
                     nrow=1, ncol=3),
        width=20, height=6, units="in")
-

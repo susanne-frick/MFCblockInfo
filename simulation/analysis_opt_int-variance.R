@@ -6,7 +6,7 @@ devtools::load_all("../DataAnalysisSimulation/")
 
 ####------------------ read in and check results ---------------####
 
-res <- readRDS("simulation/results_opt_int-variance_2399.rds")
+res <- readRDS("simulation/results_opt_int-variance_2397.rds")
 head(res)
 
 anyNA(res)
@@ -27,29 +27,29 @@ nrow(res)/(5*4)
 #number of NAs (optimizer did not find a solution)
 table(rowSums(is.na(res))>0)
 
-# #identifier for which ones are missing
-# id.res <- paste(res$blocksize, res$target, res$intercepts, res$rep, sep="_")
-# 
-# factor.blocksize <- 2:4
-# factor.keying <- "12" # c("0","12","23")
-# factor.int <- c("random", "ordered")
-# factor.load <- "acceptable"
-# factor.length <- "long"
-# factor.algorithm <- c("greedy-a","greedy-d","opt-t","mean-a","r2","loads","random")
-# factor.constraints <- c("unconstrained")
-# factor.target <- c("weighted","equal")
-# factor.ntraits <- "5" #c("5","15")
-# 
-# #number of replications
-# R <- 200 #500
-# 
-# design.sim <- expand.grid("blocksize"=factor.blocksize, "keying"=factor.keying, "length"=factor.length, "intercepts"=factor.int,
-#                           "loads"=factor.load, 
-#                           "constraints"=factor.constraints, "target"=factor.target, "ntraits"=factor.ntraits,
-#                           "rep"=1:R)
-# id.res.full <- paste(design.sim$blocksize, design.sim$target, design.sim$intercepts, design.sim$rep, sep="_")
-# setdiff(id.res.full, id.res)
-# which(id.res.full == setdiff(id.res.full, id.res))
+#identifier for which ones are missing
+id.res <- paste(res$blocksize, res$target, res$intercepts, res$rep, sep="_")
+
+factor.blocksize <- 2:4
+factor.keying <- "12" # c("0","12","23")
+factor.int <- c("random", "ordered")
+factor.load <- "acceptable"
+factor.length <- "long"
+factor.algorithm <- c("greedy-a","greedy-d","opt-t","mean-a","r2","loads","random")
+factor.constraints <- c("unconstrained")
+factor.target <- c("weighted","equal")
+factor.ntraits <- "5" #c("5","15")
+
+#number of replications
+R <- 200 #500
+
+design.sim <- expand.grid("blocksize"=factor.blocksize, "keying"=factor.keying, "length"=factor.length, "intercepts"=factor.int,
+                          "loads"=factor.load,
+                          "constraints"=factor.constraints, "target"=factor.target, "ntraits"=factor.ntraits,
+                          "rep"=1:R)
+id.res.full <- paste(design.sim$blocksize, design.sim$target, design.sim$intercepts, design.sim$rep, sep="_")
+setdiff(id.res.full, id.res)
+which(id.res.full == setdiff(id.res.full, id.res))
 
 
 ####--------------- data preparation ----------------------####
@@ -159,7 +159,7 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_means_population.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/textable_means_population.tex")
 
 
 ####------------------ differences between algorithms -----------####
@@ -224,7 +224,10 @@ rownames(var.paper) <- c("Algorithm vs. Random", "Optimality vs. Means", "$R^2$ 
                          "Algorithm vs. Random $\\times$ Intercepts", 
                          "Target $\\times$ Intercepts",
                          "Algorithm vs. Random $\\times$ 2 vs. 3 and 4",
+                         "Optimality vs. Means $\\times$ 2 vs. 3 and 4",
+                         "$R^2$ vs. Mean Variances $\\times$ 2 vs. 3 and 4",
                          "2 vs. 3 and 4 $\\times$ Intercepts",
+                         "2 vs. 3 and 4 $\\times$ Target",
                          "Residuals")
 var.paper
 
@@ -241,7 +244,7 @@ print(xtable::xtable(var.paper, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_var_population.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/textable_var_population.tex")
 
 ####---------------- plots --------------####
 library(ggplot2)
@@ -275,7 +278,7 @@ plot.D <- plot.algo("D", "D-optimality", res.equal.ord)
 plot.T.opt <- plot.algo("T.opt", "T-optimality", res.equal.ord)
 plot.Frob <- plot.algo("Frob", "Frobenius Norm", res.equal.ord)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/plot_opt_recovery.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/plot_opt_recovery.pdf",
        grid.arrange(plot.rec, plot.MAB, plot.RMSE,
                     nrow=1, ncol=3),
        width=20, height=6, units="in")

@@ -119,9 +119,14 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       #floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_screening.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_means_screening.tex")
 
 # descriptives in text
+
+# specificity overall mean
+round(mean(res$spec), 2)
+round(sd(res$spec), 2)
+
 # sensitivity overall mean
 round(mean(res$sens), 2)
 
@@ -202,7 +207,7 @@ print(xtable::xtable(var.sens, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_var_screening.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/textable_var_screening.tex")
 
 
 # lm.algo.main <- calc.lms.main(dvs=c("fisherz.r","MAB","RMSE"), ivs=c("algorithm","target"), results=res)
@@ -249,7 +254,7 @@ plot.spec <- plot.algo("spec", "Specificity", res.b3)
 plot.D <- plot.algo("D", "D-optimality", res.b3)
 plot.Frob <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b3)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/plot_screening.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/plot_screening.pdf",
        grid.arrange(plot.sens, plot.spec,
                     nrow=1, ncol=2),
        width=14, height=4, units="in")
@@ -267,6 +272,3 @@ plot.RMSE <- plot.algo("RMSE", "RMSE", res.b3)
 ggsave("simulation/plot_opt_grid1_posterior_recovery.pdf",
        grid.arrange(plot.rec, plot.MAB, plot.RMSE, nrow=1, ncol=3),
        width=18, height=4, units="in")
-
-
-

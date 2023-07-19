@@ -88,7 +88,7 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       #floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_screening_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_means_screening_poskeyed.tex")
 
 # descriptives in text
 # sensitivity overall mean
@@ -171,7 +171,7 @@ print(xtable::xtable(var.sens, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_var_screening_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_var_screening_poskeyed.tex")
 
 
 # lm.algo.main <- calc.lms.main(dvs=c("fisherz.r","MAB","RMSE"), ivs=c("algorithm","target"), results=res)
@@ -218,7 +218,7 @@ plot.spec <- plot.algo("spec", "Specificity", res.b3)
 plot.D <- plot.algo("D", "D-optimality", res.b3)
 plot.Frob <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b3)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_screening_poskeyed.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/plot_screening_poskeyed.pdf",
        grid.arrange(plot.sens, plot.spec,
                     nrow=1, ncol=2),
        width=16, height=4, units="in")
@@ -236,6 +236,3 @@ plot.RMSE <- plot.algo("RMSE", "RMSE", res.b3)
 ggsave("simulation/plot_opt_grid1_posterior_recovery_poskeyed.pdf",
        grid.arrange(plot.rec, plot.MAB, plot.RMSE, nrow=1, ncol=3),
        width=20, height=4, units="in")
-
-
-

@@ -53,13 +53,17 @@ var.paper <- var.expl.algo.both
 var.paper <- rm.1rows(var.paper)
 colnames(var.paper) <- c("Variances", "Determinant", "Trace", "Frobenius Norm")
 rownames(var.paper) <- c("Algorithm vs. Random", "Info vs. Mean Loadings",
+                         "Optimality vs. Means", "$R^2$ vs. Mean Variances", 
                          "Population vs. Screening", "Weighted vs. Equal",
                          "2 vs. 3 and 4", "3 vs. 4",
                          "Intercepts",
-                         "Info vs. Mean Loadings $\\times$ Population vs. Screening",
                          "Algorithm vs. Random $\\times$ 2 vs. 3 and 4",
+                         "Optimality vs. Means $\\times$ 2 vs. 3 and 4",
+                         "$R^2$ vs. Mean Variances $\\times$ 2 vs. 3 and 4",
+                         
                          "Population vs. Screening $\\times$ 2 vs. 3 and 4",
                          "Weighted vs. Equal $\\times$ 2 vs. 3 and 4",
+                         
                          "Algorithm vs. Random $\\times$ Intercepts",
                          "Population vs. Screening $\\times$ Intercepts",
                          "Weighted vs. Equal $\\times$ Intercepts",
@@ -79,7 +83,7 @@ print(xtable::xtable(var.paper, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_var_optimization.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/textable_var_optimization.tex")
 
 
 
@@ -158,7 +162,7 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/textable_means_optimization.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/textable_means_optimization.tex")
 
 ####---------------- plots both ---------------------####
 
@@ -196,8 +200,8 @@ plot.D.scr <- plot.algo("D", "Determinant", res.b3.ordered.screening)
 plot.Topt.scr <- plot.algo("T.opt", "Trace", res.b3.ordered.screening)
 plot.Frob.scr <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b3.ordered.screening)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/manuscript_Psychometrika_Revision2/plot_optimality.pdf",
-       grid.arrange(plot.A.pop, plot.D.pop, plot.Topt.pop, plot.Frob.pop,
-                    plot.A.scr, plot.D.scr, plot.Topt.scr, plot.Frob.scr,
-                    nrow=2, ncol=4),
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/manuscript_Psychometrika_Revision3/plot_optimality.pdf",
+       grid.arrange(arrangeGrob(plot.A.pop, plot.D.pop, plot.Topt.pop, plot.Frob.pop, top = "Population", nrow = 1, ncol = 4),
+                    arrangeGrob(plot.A.scr, plot.D.scr, plot.Topt.scr, plot.Frob.scr, top = "Screening", nrow = 1, ncol = 4),
+                    nrow=2, ncol=1),
        width=26, height=8, units="in")

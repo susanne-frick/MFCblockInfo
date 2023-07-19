@@ -61,7 +61,6 @@ rownames(var.paper) <- c("Algorithm vs. Random", "Info vs. Mean Loadings",
                          "Algorithm vs. Random $\\times$ 2 vs. 3 and 4",
                          "Algorithm vs. Means $\\times$ 2 vs. 3 and 4",
                          "Population vs. Screening $\\times$ 2 vs. 3 and 4",
-                         "Algorithm vs. Random $\\times$ Intercepts",
                          "Info vs. Loadings $\\times$ Intercepts",
                          "Population vs. Screening $\\times$ Intercepts",
                          "2 vs. 3 and 4 $\\times$ Intercepts",
@@ -81,7 +80,7 @@ print(xtable::xtable(var.paper, digits=0,
       sanitize.text.function = function(x){x},
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_var_optimization_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_var_optimization_poskeyed.tex")
 
 
 
@@ -160,7 +159,7 @@ print(xtable::xtable(means.paper, digits=2,
       NA.string = "", table.placement = "htp", add.to.row = header,
       caption.placement = "top", latex.environments = NULL,
       floating = TRUE, floating.environment = "sidewaystable",
-      file="../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/textable_means_optimization_poskeyed.tex")
+      file="../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/textable_means_optimization_poskeyed.tex")
 
 ####---------------- plots both ---------------------####
 
@@ -198,7 +197,7 @@ plot.D.scr <- plot.algo("D", "Determinant", res.b3.ordered.screening)
 plot.Topt.scr <- plot.algo("T.opt", "Trace", res.b3.ordered.screening)
 plot.Frob.scr <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b3.ordered.screening)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_optimality_poskeyed.pdf",
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/plot_optimality_poskeyed.pdf",
        grid.arrange(plot.A.pop, plot.D.pop, plot.Topt.pop, plot.Frob.pop,
                     plot.A.scr, plot.D.scr, plot.Topt.scr, plot.Frob.scr,
                     nrow=2, ncol=4),
@@ -218,8 +217,8 @@ plot.b2.D.scr <- plot.algo("D", "Determinant", res.b2.ordered.screening)
 plot.b2.Topt.scr <- plot.algo("T.opt", "Trace", res.b2.ordered.screening)
 plot.b2.Frob.scr <- plot.algo("Frob", "Frobenius Norm Testinfo", res.b2.ordered.screening)
 
-ggsave("../../Projekte/MFC_blocks/paper/Revision2_Psychometrika/SOM/plot_optimality_poskeyed_B2.pdf",
-       grid.arrange(plot.b2.A.pop, plot.b2.D.pop, plot.b2.Topt.pop, plot.b2.Frob.pop,
-                    plot.b2.A.scr, plot.b2.D.scr, plot.b2.Topt.scr, plot.b2.Frob.scr,
+ggsave("../../Projekte/MFC_blocks/paper/Revision3_Psychometrika/SOM/plot_optimality_poskeyed_B2.pdf",
+       grid.arrange(arrangeGrob(plot.b2.A.pop, plot.b2.D.pop, plot.b2.Topt.pop, plot.b2.Frob.pop, top = "Population", nrow = 1, ncol = 4),
+                    arrangeGrob(plot.b2.A.scr, plot.b2.D.scr, plot.b2.Topt.scr, plot.b2.Frob.scr, top = "Screening", nrow = 1, ncol = 4),
                     nrow=2, ncol=4),
        width=26, height=8, units="in")
