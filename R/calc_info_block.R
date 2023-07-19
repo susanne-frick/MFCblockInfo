@@ -31,6 +31,7 @@ calc.info.block <- function(FUN, traits=NULL, int, loads, uni, K, nb, which.bloc
   
   perms <- permute(1:nb)
   perms_int <- create.perms.int(nb, perms)
+  perms <- apply(perms, 2, order)
   Tr <- create.tr(nb)
   bi <- create.block.ind(K,nb)
   bi_int <- create.blocks.int(K,nb)
@@ -47,8 +48,9 @@ calc.info.block <- function(FUN, traits=NULL, int, loads, uni, K, nb, which.bloc
     ib <- lapply(1:ncol(perms), function(perm, traits, int, loads, uni, perms, perms_int, Tr)
       calc.pattern.info(FUN=FUN, traits=traits, int=int, loads=loads, uni=uni, y_b=perm, perms=perms, perms_int=perms_int, Tr=Tr, ...),
       traits=traits, int=int, loads=loads, uni=uni, perms=perms, perms_int=perms_int, Tr=Tr)
-    ib <- abind::abind(ib, along=3)
-    return(list("expected" = rowSums(ib, dims=2), "observed" = ib[, , response]))
+    ib.exp <- abind::abind(lapply(ib, function(i) i$expected), along=3)
+    ib.obs <- abind::abind(lapply(ib, function(i) i$observed), along=3)
+    return(list("expected" = rowSums(ib.exp, dims=2), "observed" = ib.obs[, , response]))
   }
 
   all.infos.obs <- all.infos.exp <- vector("list", nrow(traits))

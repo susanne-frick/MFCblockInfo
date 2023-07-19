@@ -27,7 +27,7 @@ calc.info.pairs <- function(traits, int, loads, uni, design.mat, responses = NUL
     all.infos.exp[[n]] <- array(t(matrix(unlist(info.pairs.exp), ncol(loads)^2, npairs)), dim=c(npairs, ncol(loads), ncol(loads)))
     
     #observed information
-    inner.info.obs <- dnorm(inner.tirt)^2/(pnorm(inner.tirt)^responses[n,] * (1-pnorm(inner.tirt))^(1-responses[n,]) )
+    inner.info.obs <- dnorm(inner.tirt)^2/((pnorm(inner.tirt)^2)^responses[n,] * ((1-pnorm(inner.tirt))^2)^(1-responses[n,]) )
     inner.info.obs[is.infinite(inner.info.obs)] <- 1e-100
     info.pairs.obs <- lapply(1:npairs, function(ind, cuni, cload, iinfo) 1/cuni[ind] * cload[[ind]] * iinfo[ind],
                          cuni=comp.uni, cload=comp.load, iinfo=inner.info.obs)
