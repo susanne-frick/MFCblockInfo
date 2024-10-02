@@ -17,9 +17,6 @@ sim.items(design.load, K, nb, load.range, int.range)
 
 \item{int.range}{vector, giving the range for item intercepts}
 }
-\value{
-
-}
 \description{
 generate item parameters
 }

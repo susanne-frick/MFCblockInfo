@@ -13,6 +13,7 @@ calc.info.block(
   K,
   nb,
   which.blocks = NULL,
+  responses = NULL,
   ...
 )
 }
@@ -33,10 +34,14 @@ calc.info.block(
 
 \item{which.blocks}{vector, optional, indices of blocks to calculate info for, defaults to 1:K}
 
+\item{responses}{matrix of indices of observed rank orders, rows = persons, cols = blocks, defaults to NULL}
+
 \item{...}{other arguments passed to FUN}
 }
 \value{
-list of length N, with entries (block,trait,trait)
+list of length N, with entries (block,trait,trait) with Fisher (= expected) information; 
+if observed information is required: list with two elements: expected and observed information, 
+each is a list of length N, with entries (block,trait,trait)
 }
 \description{
 across persons and items
