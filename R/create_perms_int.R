@@ -1,7 +1,8 @@
 #' pair intercept indices for each permutation
 #'
 #' @param nb numeric, block size
-#' @param perms permutations as returned from permute(). computed internally if NULL.
+#' @param perms permutations as returned from permute(). computed internally if NULL. 
+#' The premutations are interpreted as ranks: A rank of 1 means that the item in the respective position was ranked first (i.e. highest).
 #'
 #' @return matrix: rows = intercepts, columns = permutations
 #' @export

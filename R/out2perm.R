@@ -1,8 +1,8 @@
 #' Outcomes to indices for permutations
 #'
-#' @param y matrix of outcomes, rows = participants, columns = pairwise outcomes
+#' @param y matrix of outcomes (1 = the first item was preferred), rows = participants, columns = pairwise outcomes
 #' @param blocks matrix, created with block.ind
-#' @param perms permutations
+#' @param perms permutations. The permutations are interpreted as ranks: A rank of 1 means that the item in the respective position was ranked first (i.e. highest).
 #' @param design.block block design
 #'
 #' @return matrix of permutation indices, rows = participants, columns = blocks

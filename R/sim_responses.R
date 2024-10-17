@@ -5,7 +5,8 @@
 #' @param design.load design matrix of questionnaire, rows=items, columns=traits, 1=positively keyed, -1=negatively keyed
 #' @param K scalar, number of blocks
 #' @param nb scalar, block size
-#' @param return.index logical, return index for rank order as in permute() (TRUE) or rank orders (FALSE)? defaults to TRUE
+#' @param return.index logical, return index for ranks as in permute() (TRUE) or ranks (FALSE)? defaults to TRUE. 
+#' The ranks (and their indices) are interpreted in the following way: A rank of 1 means that the item in the respective position was ranked first (i.e. highest).
 #'
 #' @return matrix of ranks, rows = persons, columns = items
 #' @export
