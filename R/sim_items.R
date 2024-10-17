@@ -10,7 +10,12 @@
 #' @return
 sim.items <- function(design.load, K, nb, load.range, int.range) {
   design.mat <- create.design.mat(K=K, nb=nb)
-
+  
+  stopifnot(
+    "All traits must be measured by at least one item." =
+    !any(apply(design.load, 2, function (x) all(x == 0)))
+  )
+  
   if(nb > 1) {
     repeat{
       loads <- runif(K*nb, min=min(load.range), max=max(load.range))
